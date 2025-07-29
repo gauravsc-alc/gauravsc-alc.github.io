@@ -9,19 +9,10 @@
 <body>
   <!-- Combined Sticky Header -->
   <div class="site-header">
-    <!-- Top Header -->
+    <!-- Top Header with logo left, menu right -->
     <div class="top-header">
-      <div class="container">
-        <div class="top-header-content">
-          <img src="images/logo.png" alt="Delta Publications Logo" class="logo-small" />
-          <span class="header-text">Delta Publications</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Navigation -->
-    <header>
-      <div class="container clearfix">
+      <div class="container header-flex">
+        <!-- Menu first (left) -->
         <nav>
           <ul class="menu">
             <li><a href="#">Home</a></li>
@@ -39,11 +30,16 @@
             <li><a href="#">Contact</a></li>
           </ul>
         </nav>
+        <!-- Logo and site name second (right) -->
+        <div class="top-header-content">
+          <img src="images/logo.png" alt="Delta Publications Logo" class="logo-small" />
+          <span class="header-text">Delta Publications</span>
+        </div>
       </div>
-    </header>
+    </div>
   </div>
 
-<!-- Slideshow Section -->
+  <!-- Slideshow Section -->
   <section class="slideshow">
     <div class="slides">
       <div class="slide active">
@@ -87,6 +83,11 @@
       <p>Discover the best books and authors from India’s leading publishing house.</p>
     </div>
   </section>
+
+  <!-- Decorative Dots Separator -->
+  <!-- <div class="section-separator">
+    <img src="images/dots2.png" alt="Section Dots" />
+  </div> -->
 
   <!-- Featured Books Section -->
   <section class="featured-books container">

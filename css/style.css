@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: #fafafa;
-  padding-top: 112px; /* Reserve space for fixed header (combined height) */
+  padding-top: 56px; /* Reduce padding to match header height */
 }
 
 .container {
@@ -44,10 +44,22 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+.header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .top-header-content {
   display: flex;
   align-items: center;
-  padding: 6px 0;
+  justify-content: flex-end;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .logo-small {
@@ -69,12 +81,17 @@ header {
   padding: 10px 0;
 }
 
-.menu {
-  list-style: none;
+nav {
   display: flex;
-  justify-content: center;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .menu li {
@@ -190,13 +207,13 @@ header {
 
 .book-author {
   color: #666;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .book-price {
   color: #CB9819;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.65rem;
   margin-top: 6px;
 }
 
@@ -293,6 +310,19 @@ footer {
 .prev { left: 10px; }
 .next { right: 10px; }
 .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+
+/* Section separator styles */
+.section-separator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+.section-separator img {
+  height: 40px;
+  width: auto;
+  opacity: 0.7;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
