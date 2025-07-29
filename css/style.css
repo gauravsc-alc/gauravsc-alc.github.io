@@ -152,6 +152,11 @@ header {
   padding: 20px;
   text-align: center;
   transition: box-shadow 0.3s ease;
+  height: 290px; /* Ensures enough space for two lines of title and all text */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .book-card:hover {
@@ -167,15 +172,25 @@ header {
 }
 
 .book-title {
-  font-size: 1.1rem;
+  font-size: .8rem;
   font-weight: bold;
   margin-bottom: 8px;
   color: #222;
+  text-align: center;
+  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* Show up to 2 lines */
+  -webkit-box-orient: vertical;
+  line-height: 1.2;
+  max-height: 5em;            /* 2 lines */
+  white-space: normal;          /* Allow wrapping */
+  text-overflow: ellipsis;      /* Show ... if too long */
 }
 
 .book-author {
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.7rem;
 }
 
 .book-price {
