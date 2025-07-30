@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delta Publications | The House of Bestsellers</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Header: Menu left, logo right -->
+  <header class="site-header">
+    <div class="header-flex">
+      <nav>
+        <ul class="menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/authors.html">Authors</a></li>
+          <li class="has-submenu">
+            <a href="#">Books &#9662;</a>
+            <ul class="submenu">
+              <li><a href="/self-help.html">Self Help</a></li>
+              <li><a href="/children.html">Children</a></li>
+              <li><a href="/parenting.html">Parenting</a></li>
+            </ul>
+          </li>
+          <li><a href="/blogs.html">Blogs</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="top-header-content">
+        <img src="/images/logo.png" alt="Delta Publications Logo" class="logo-small" />
+        <span class="header-text">Delta Publications</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Slideshow Section -->
+  <section class="slideshow">
+    {% include slideshow.html %}
+  </section>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Welcome to Delta Publications</h1>
+      <p>Discover the best books and authors from India’s leading publishing house.</p>
+    </div>
+  </section>
+
+  <!-- Decorative Dots Separator -->
+  <div class="section-separator">
+    <img src="images/dots2.png" alt="Section Dots" />
+  </div>
+
+  <!-- Featured Books Section -->
+  <section class="featured-books container">
+    <h2>Featured Books</h2>
+    <div class="books-slider">
+      <!-- Example book card -->
+      <div class="book-card">
+        <img src="books/book1.jpg" alt="Book 1" />
+        <div class="book-title">The New World</div>
+        <div class="book-author">by Author One</div>
+        <div class="book-price">₹299</div>
+      </div>
+      <!-- Add more book cards as needed -->
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Delta Publications. All rights reserved.
+  </footer>
+  <script src="js/slideshow.js"></script>
+</body>
+</html>

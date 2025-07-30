@@ -1,0 +1,364 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #fafafa;
+  padding-top: 56px; /* Reduce padding to match header height */
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Combined sticky header container */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top header inside sticky header *//* Add to css/style.css */
+.has-submenu:hover > .submenu,
+.has-submenu:focus-within > .submenu {
+  display: block;
+}
+.submenu {
+  display: none;
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  min-width: 160px;
+  z-index: 999;
+}
+.top-header {
+  background: #fffbe7;
+  border-bottom: 1px solid #eee;
+}
+
+.header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo-small {
+  height: 36px;
+  margin-right: 10px;
+}
+
+.header-text {
+  font-size: 1.1rem;
+  color: #CB9819;
+  font-weight: 600;
+}
+
+/* Main navigation inside sticky header */
+header {
+  background: #fff;
+  /* Remove box-shadow here to avoid duplicate; already on .site-header */
+  box-shadow: none;
+  padding: 10px 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu li {
+  margin: 0 15px;
+}
+
+.menu a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #CB9819;
+}
+
+/* Hero section */
+.hero {
+  background: #CB9819;
+  color: #fff;
+  text-align: center;
+  padding: 40px 0 30px 0;
+}
+
+.hero h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.2rem;
+}
+
+/* Featured books */
+.featured-books {
+  margin: 40px 0;
+}
+
+.featured-books h2 {
+  text-align: center;
+  color: #CB9819;
+  margin-bottom: 30px;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.books-slider {
+  display: flex;               /* Arrange tiles in a row */
+  overflow-x: auto;            /* Enable horizontal scrolling */
+  overflow-y: hidden;          /* Prevent vertical scrolling */
+  gap: 16px;                   /* Space between book tiles */
+  padding-bottom: 10px;        /* Space for scrollbar */
+  scroll-behavior: smooth;     /* Smooth scrolling */
+  scroll-snap-type: x mandatory; /* Optional: snap scroll horizontally */
+  white-space: nowrap;         /* Prevent tiles from wrapping */
+}
+
+.book-card {
+  flex: 0 0 auto;            /* Prevent shrinking */
+  width: 180px;              /* Fixed width to make tiles */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  scroll-snap-align: start;  /* Snap each card to start */
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.book-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 20px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+  height: 290px; /* Ensures enough space for two lines of title and all text */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.book-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.book-card img {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.book-title {
+  font-size: .8rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #222;
+  text-align: center;
+  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* Show up to 2 lines */
+  -webkit-box-orient: vertical;
+  line-height: 1.2;
+  max-height: 5em;            /* 2 lines */
+  white-space: normal;          /* Allow wrapping */
+  text-overflow: ellipsis;      /* Show ... if too long */
+}
+
+.book-author {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.book-price {
+  color: #CB9819;
+  font-weight: bold;
+  font-size: 0.65rem;
+  margin-top: 6px;
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  font-size: 0.9rem;
+}
+
+/* Slideshow styles */
+.slideshow {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;           /* Full viewport width */
+  max-width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 45vw;           /* Responsive height, e.g. 45% of viewport width */
+  max-height: 500px;      /* Optional: limit max height */
+  box-sizing: border-box;
+}
+
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.slide img {
+  width: 100vw;           /* Fill the container width */
+  height: 100%;           /* Fill the container height */
+  object-fit: cover;
+  display: block;
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  padding: 15px 25px;
+  border-radius: 8px;
+  max-width: 400px;
+  z-index: 3;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+.prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+
+/* Section separator styles */
+.section-separator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+.section-separator img {
+  height: 40px;
+  width: auto;
+  opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .top-header-content {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .logo-small {
+    margin: 0 0 6px 0;
+  }
+  .menu {
+    flex-wrap: wrap;
+  }
+  .menu li {
+    margin: 8px 10px;
+  }
+  .slide-text {
+    left: 20px;
+    max-width: 90%;
+    bottom: 20px;
+    padding: 15px 20px;
+  }
+  .slideshow {
+    height: 50vw;
+    max-height: 300px;
+  }
+  .slide img {
+    height: 100%;
+    width: 100vw;
+  }
+  .slide-text {
+    left: 10px;
+    bottom: 10px;
+    max-width: 90vw;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}

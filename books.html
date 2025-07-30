@@ -1,0 +1,18 @@
+---
+layout: default
+title: "Books"
+permalink: /books.html
+---
+<div class="container">
+  <h1>Books</h1>
+  <div class="books-grid">
+    {% for book in site.books %}
+      <div class="book-card">
+        <img src="{{ book.cover }}" alt="{{ book.title }}">
+        <div class="book-title">{{ book.title }}</div>
+        <div class="book-author">by {{ book.author }}</div>
+        <div class="book-price">{{ book.price }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
