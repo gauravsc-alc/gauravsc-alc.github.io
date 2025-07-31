@@ -4,6 +4,8 @@ body {
   margin: 0;
   background: #fafafa;
   padding-top: 56px; /* Reduce padding to match header height */
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
@@ -23,6 +25,7 @@ body {
   background: #fff;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 /* Top header inside sticky header *//* Add to css/style.css */
@@ -39,6 +42,24 @@ body {
   min-width: 160px;
   z-index: 999;
 }
+
+.submenu li {
+  padding: 8px 20px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 6px 10px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.submenu li a:hover {
+  background-color: #f5f5f5;
+  color: #CB9819;
+}
+
 .top-header {
   background: #fffbe7;
   border-bottom: 1px solid #eee;
@@ -217,14 +238,21 @@ nav {
   margin-top: 6px;
 }
 
+/* Main content area */
+.page-content {
+  flex: 1; /* Grow and fill available space pushing footer down */
+  padding: 1rem; /* Optional padding */
+}
+
 /* Footer */
 footer {
-  background: #222;
+  background: #CB9819;
   color: #fff;
   text-align: center;
   padding: 20px 0;
   margin-top: 40px;
   font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 /* Slideshow styles */
