@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<div class="container">
+  <h1>{{ page.title }}</h1>
+  <div class="books-grid">
+    {% assign category = page.book_category %}
+    {% for book in site.books %}
+      {% if book.book_category == category %}
+        <div class="book-card">
+          <img src="{{ book.cover }}" alt="{{ book.title }}">
+          <div class="book-title">{{ book.title }}</div>
+          <div class="book-author">by {{ book.author }}</div>
+          {% if book.price %}
+            <div class="book-price">{{ book.price }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

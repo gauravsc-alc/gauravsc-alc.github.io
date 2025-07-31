@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Delta Publications | The House of Bestsellers</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>{{ page.title }} | Delta Publications</title>
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <!-- Header: Menu left, logo right -->
+  <!-- Header: Logo left, menu right -->
   <header class="site-header">
     <div class="header-flex">
+      <div class="top-header-content">
+        <img src="/images/logo.png" alt="Delta Publications Logo" class="logo-small" />
+        <span class="header-text">Delta Publications</span>
+      </div>
       <nav>
         <ul class="menu">
           <li><a href="/">Home</a></li>
@@ -27,46 +31,15 @@
           <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
-      <div class="top-header-content">
-        <img src="/images/logo.png" alt="Delta Publications Logo" class="logo-small" />
-        <span class="header-text">Delta Publications</span>
-      </div>
     </div>
   </header>
 
-  <!-- Slideshow Section -->
-  <section class="slideshow">
-    {% include slideshow.html %}
-  </section>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h1>Welcome to Delta Publications</h1>
-      <p>Discover the best books and authors from India’s leading publishing house.</p>
-    </div>
-  </section>
-
-  <!-- Featured Books Section -->
-  <section class="featured-books container">
-    <h2>Featured Books</h2>
-    <div class="books-slider">
-      {% for book in site.books %}
-        <div class="book-card">
-          <img src="{{ book.cover }}" alt="{{ book.title }}" />
-          <div class="book-title">{{ book.title }}</div>
-          <div class="book-author">by {{ book.author }}</div>
-          {% if book.price %}
-            <div class="book-price">{{ book.price }}</div>
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
-  </section>
+  <!-- Main page content will be injected here -->
+  {{ content }}
 
   <footer>
     &copy; 2025 Delta Publications. All rights reserved.
   </footer>
-  <script src="js/slideshow.js"></script>
+  <script src="/js/slideshow.js"></script>
 </body>
 </html>
