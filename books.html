@@ -1,17 +1,30 @@
 ---
 layout: default
-title: "Books"
+title: "All Books"
 permalink: /books.html
 ---
+
 <div class="container">
-  <h1>Books</h1>
-  <div class="books-grid">
-    {% for book in site.books %}
-      <div class="book-card">
-        <img src="{{ book.cover }}" alt="{{ book.title }}">
-        <div class="book-title">{{ book.title }}</div>
-        <div class="book-author">by {{ book.author }}</div>
-        <div class="book-price">{{ book.price }}</div>
+  <h1>All Books</h1>
+  {% assign categories = site.books | map: "book_category" | uniq %}
+  <div class="book-categories">
+    {% for category in categories %}
+      <h2>{{ category }}</h2>
+      <div class="books-grid">
+        {% for book in site.books %}
+          {% if book.book_category == category %}
+            <div class="book-card">
+              <img src="{{ book.cover }}" alt="{{ book.title }}" />
+              <div class="book-info-tile">
+                <div class="book-title">{{ book.title }}</div>
+                <div class="book-author">by {{ book.author }}</div>
+                {% if book.amazon_link %}
+                  <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     {% endfor %}
   </div>

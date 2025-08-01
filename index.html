@@ -24,12 +24,28 @@ permalink: /
     {% for book in site.books %}
       <div class="book-card">
         <img src="{{ book.cover }}" alt="{{ book.title }}" />
-        <div class="book-title">{{ book.title }}</div>
-        <div class="book-author">by {{ book.author }}</div>
-        {% if book.price %}
-          <div class="book-price">{{ book.price }}</div>
-        {% endif %}
+        <div class="book-info-tile">
+          <div class="book-title">{{ book.title }}</div>
+          <div class="book-author">by {{ book.author }}</div>
+            {% if book.amazon_link %}
+              <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+            {% else %}
+              <div class="amazon-link-placeholder"></div>
+            {% endif %}
+        </div>
       </div>
     {% endfor %}
   </div>
 </section>
+
+<div id="bestseller-popup" class="bestseller-popup" style="display:none;">
+  <div class="bestseller-content">
+    <span class="bestseller-close" onclick="document.getElementById('bestseller-popup').style.display='none'">&times;</span>
+    <img id="bestseller-img" src="" alt="Best Seller Book" />
+    <div class="bestseller-title" id="bestseller-title"></div>
+    <div class="bestseller-author" id="bestseller-author"></div>
+    <a id="bestseller-amazon" href="#" class="amazon-link" target="_blank">Buy on Amazon</a>
+  </div>
+</div>
+
+<script src="/js/bestseller.js"></script>
