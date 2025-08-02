@@ -566,6 +566,8 @@ footer {
     content: " ▶";
     float: right;
     transition: transform 0.3s ease;
+    font-size: 1rem;
+    margin-left: 8px;
   }
 
   .has-submenu.open > a::after {
@@ -573,50 +575,110 @@ footer {
   }
 
   .submenu {
-    position: static;
-    display: none;
-    box-shadow: none;
-    border-radius: 0;
-    background: #f8f8f8;
-    width: 100%;
+    position: fixed;
+    top: 56px;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    width: 320px;
+    max-width: 90vw;
+    box-shadow: -3px 0 12px rgba(0,0,0,0.2);
     padding: 0;
     margin: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1002;
+    overflow-y: auto;
+    display: none;
+    list-style: none;
   }
 
   .has-submenu.open .submenu {
     display: block;
+    transform: translateX(0);
+  }
+
+  .submenu::before {
+    content: "Book Categories";
+    display: block;
+    padding: 20px 25px;
+    background: #CB9819;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+    border-bottom: 2px solid #a67c14;
+    text-align: center;
   }
 
   .submenu li {
     border-bottom: 1px solid #e0e0e0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .submenu li:last-child {
+    border-bottom: none;
   }
 
   .submenu li a {
-    padding: 12px 40px;
-    font-size: 0.9rem;
-    color: #666;
+    padding: 20px 30px;
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    min-height: 24px;
+    line-height: 1.4;
   }
 
   .submenu li a:hover {
-    background-color: #ececec;
+    background-color: #f8f4e6;
+    color: #CB9819;
+    border-left-color: #CB9819;
   }
 
-  /* Add overlay when menu is open */
-  .menu-overlay {
+  /* Special styling for back button */
+  .submenu-back {
+    background: #f8f8f8 !important;
+    color: #666 !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #e0e0e0 !important;
+    border-left: 4px solid #CB9819 !important;
+  }
+
+  .submenu-back:before {
+    content: "← ";
+    margin-right: 8px;
+    font-size: 1.1rem;
+  }
+
+  .submenu-back:hover {
+    background-color: #ececec !important;
+    color: #333 !important;
+  }
+
+  /* Add submenu overlay */
+  .submenu-overlay {
     position: fixed;
     top: 56px;
     left: 0;
-    right: 0;
+    right: 320px;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    z-index: 1001;
     display: none;
   }
 
-  .menu-overlay.active {
+  .has-submenu.open + .submenu-overlay,
+  .has-submenu.open .submenu-overlay {
     display: block;
   }
 
+  /* Books slider adjustments */
   .books-slider {
     gap: 8px;
   }
