@@ -3,17 +3,16 @@ layout: default
 title: "Authors"
 permalink: /authors.html
 ---
-<main class="page-content">
-  <div class="container">
-    <h1>Our Authors</h1>
-    <ul>
-      {% for author in site.authors %}
-        <li>
-          <img src="{{ author.image }}" alt="{{ author.name }}" style="height:60px;">
-          <strong>{{ author.name }}</strong><br>
-          {{ author.bio }}
-        </li>
-      {% endfor %}
-    </ul>
+
+<div class="container">
+  <h1>Our Authors</h1>
+  <div class="authors-slider">
+    {% for author in site.authors %}
+      <div class="author-card">
+        <img src="{{ author.image }}" alt="{{ author.name }}" />
+        <div class="author-name">{{ author.name }}</div>
+        <div class="author-bio">{{ author.bio }}</div>
+      </div>
+    {% endfor %}
   </div>
-</main>
+</div>

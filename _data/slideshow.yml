@@ -1,0 +1,13 @@
+slides:
+  - image: "/images/slide1.jpg"
+    title: "Welcome to Delta Publications"
+    description: "Discover amazing books and stories"
+    alt: "Welcome slide"
+  - image: "/images/slide2.jpg"
+    title: "Our Latest Releases"
+    description: "Fresh content from talented authors"
+    alt: "Latest releases"
+  - image: "/images/slide3.jpg"
+    title: "Award Winning Authors"
+    description: "Stories that inspire and educate"
+    alt: "Award winning authors"

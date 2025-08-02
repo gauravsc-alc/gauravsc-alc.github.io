@@ -2,21 +2,48 @@
 layout: default
 ---
 
-<div class="container">
-  <h1>{{ page.title }}</h1>
-  <div class="books-grid">
-    {% assign category = page.book_category %}
-    {% for book in site.books %}
-      {% if book.book_category == category %}
-        <div class="book-card">
-          <img src="{{ book.cover }}" alt="{{ book.title }}">
-          <div class="book-title">{{ book.title }}</div>
-          <div class="book-author">by {{ book.author }}</div>
-          {% if book.price %}
-            <div class="book-price">{{ book.price }}</div>
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endfor %}
+<div class="books-page-container">
+  <div class="sidebar">
+    <h3>Book Categories</h3>
+    <ul class="category-menu">
+      <li><a href="/books.html" class="category-link {% if page.url == '/books.html' %}active{% endif %}">All Books</a></li>
+      {% assign categories = site.books | map: "book_category" | uniq %}
+      {% for category in categories %}
+        <li>
+          <a href="/books/category/{{ category | slugify }}.html"
+             class="category-link {% if page.book_category == category %}active{% endif %}">
+            {{ category }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="category-header">
+      <h1>{{ page.category_title }}</h1>
+      <p class="category-description">Explore our collection of {{ page.category_title | downcase }}</p>
+    </div>
+
+    <div class="books-grid">
+      {% assign cat = page.book_category %}
+      {% for book in site.books %}
+        {% if book.book_category == cat %}
+          <div class="book-card">
+            <img src="{{ book.cover }}" alt="{{ book.title }}" />
+            <div class="book-info-tile">
+              <div class="book-title">{{ book.title }}</div>
+              <div class="book-author">by {{ book.author }}</div>
+              {% if book.price %}
+                <div class="book-price">{{ book.price }}</div>
+              {% endif %}
+              {% if book.amazon_link %}
+                <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </div>

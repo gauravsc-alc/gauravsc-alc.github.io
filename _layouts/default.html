@@ -3,16 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ page.title }} | Delta Publications</title>
+  <title>{% if page.title %}{{ page.title }} | {% endif %}Delta Publications</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
   <!-- Header: Logo left, menu right -->
   <header class="site-header">
     <div class="header-flex">
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="top-header-content">
-        <img src="/images/logo.png" alt="Delta Publications Logo" class="logo-small" />
-        <span class="header-text">Delta Publications</span>
+        <a href="/" class="logo-link" title="Go to Home">
+          <img src="/images/logo.png" alt="Delta Publications Logo" class="logo-small" />
+        </a>
+        <a href="/" class="header-text-link" title="Go to Home">
+          <span class="header-text">Delta Publications</span>
+        </a>
       </div>
       <nav>
         <ul class="menu">
@@ -20,18 +30,19 @@
           <li><a href="/about.html">About Us</a></li>
           <li><a href="/authors.html">Authors</a></li>
           <li class="has-submenu">
-            <a href="/books.html">Books &#9662;</a>
+            <a href="/books.html">Books</a>
             <ul class="submenu">
-              <li><a href="/self-help.html">Self Help</a></li>
-              <li><a href="/children.html">Children</a></li>
-              <li><a href="/parenting.html">Parenting</a></li>
+              <li class="mobile-only"><a href="#" class="submenu-back">← Back to Menu</a></li>
+              <li class="mobile-only"><a href="/books.html">All Books</a></li>
+              <li><a href="/books/category/self-help.html">Self Help</a></li>
+              <li><a href="/books/category/children.html">Children's</a></li>
+              <li><a href="/books/category/parenting.html">Parenting</a></li>
             </ul>
           </li>
           <li><a href="/blogs.html">Blogs</a></li>
           <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
-      <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
     </div>
   </header>
 
