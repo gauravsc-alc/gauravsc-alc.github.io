@@ -5,27 +5,163 @@ permalink: /books.html
 ---
 
 <div class="container">
-  <h1>All Books</h1>
+  <h1 id="page-title">All Books</h1>
+  
+  <!-- Category Filter Buttons -->
   {% assign categories = site.books | map: "book_category" | uniq %}
+  <div class="category-filters">
+    <button class="category-btn active" data-category="all">All Books</button>
+    {% for category in categories %}
+      <button class="category-btn" data-category="{{ category }}">{{ category }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- All Books Data (hidden, used by JavaScript) -->
+  <script id="books-data" type="application/json">
+  [
+    {% for book in site.books %}
+    {
+      "title": {{ book.title | jsonify }},
+      "author": {{ book.author | jsonify }},
+      "cover": {{ book.cover | jsonify }},
+      "category": {{ book.book_category | jsonify }},
+      "amazon_link": {{ book.amazon_link | jsonify }},
+      "price": {{ book.price | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+  </script>
+
+  <!-- Dynamic Book Display Area -->
   <div class="book-categories">
     {% for category in categories %}
-      <h2>{{ category }}</h2>
-      <div class="books-grid">
-        {% for book in site.books %}
-          {% if book.book_category == category %}
-            <div class="book-card">
-              <img src="{{ book.cover }}" alt="{{ book.title }}" />
-              <div class="book-info-tile">
-                <div class="book-title">{{ book.title }}</div>
-                <div class="book-author">by {{ book.author }}</div>
-                {% if book.amazon_link %}
-                  <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
-                {% endif %}
+      <div class="category-section" data-category="{{ category }}">
+        <h2>{{ category }}</h2>
+        <div class="books-grid">
+          {% for book in site.books %}
+            {% if book.book_category == category %}
+              <div class="book-card">
+                <img src="{{ book.cover }}" alt="{{ book.title }}" />
+                <div class="book-info-tile">
+                  <div class="book-title">{{ book.title }}</div>
+                  <div class="book-author">by {{ book.author }}</div>
+                  {% if book.amazon_link %}
+                    <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+                  {% endif %}
+                </div>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     {% endfor %}
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get URL parameters
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+    
+    // Update URL without reloading page
+    function updateUrl(category) {
+        const url = new URL(window.location);
+        if (category === 'all') {
+            url.searchParams.delete('category');
+        } else {
+            url.searchParams.set('category', category);
+        }
+        window.history.pushState({}, '', url);
+    }
+    
+    // Filter books by category
+    function filterBooks(category) {
+        const categorySections = document.querySelectorAll('.category-section');
+        const pageTitle = document.getElementById('page-title');
+        
+        if (category === 'all' || !category) {
+            // Show all categories
+            categorySections.forEach(section => {
+                section.style.display = 'block';
+            });
+            pageTitle.textContent = 'All Books';
+        } else {
+            // Show only selected category
+            categorySections.forEach(section => {
+                if (section.dataset.category === category) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+            pageTitle.textContent = category + ' Books';
+        }
+        
+        // Update active button
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        const activeBtn = document.querySelector(`[data-category="${category || 'all'}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
+    }
+    
+    // Handle category button clicks
+    document.querySelectorAll('.category-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.dataset.category;
+            filterBooks(category);
+            updateUrl(category);
+        });
+    });
+    
+    // Initialize page based on URL parameter
+    const initialCategory = getUrlParameter('category');
+    filterBooks(initialCategory);
+});
+</script>
+
+<style>
+.category-filters {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.category-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    margin: 0 5px 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.category-btn.active {
+    background-color: #007cba;
+    color: white;
+    border-color: #007cba;
+}
+
+.category-section {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .category-btn {
+        display: block;
+        margin: 5px auto;
+        width: 200px;
+    }
+}
+</style>
