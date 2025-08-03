@@ -3,39 +3,8 @@ layout: default
 ---
 
 <div class="books-page-container">
-  <div class="main-content">
-    <div class="category-header">
-      <h1>{{ page.category_title }}</h1>
-      <p class="category-description">Explore our collection of {{ page.category_title | downcase }}</p>
-    </div>
-
-    <div class="books-grid">
-      {% assign cat = page.book_category %}
-      {% for book in site.books %}
-        {% if book.book_category == cat %}
-          <a href="{{ book.url }}" class="book-card-link">
-            <div class="book-card">
-              <div class="book-image-wrapper">
-                <img src="{{ book.cover }}" alt="{{ book.title }}" />
-                <div class="book-overlay">
-                  <span class="view-details">View Details</span>
-                </div>
-              </div>
-              <div class="book-info-tile">
-                <div class="book-title">{{ book.title }}</div>
-                <div class="book-author">by {{ book.author }}</div>
-                {% if book.price %}
-                  <div class="book-price">{{ book.price }}</div>
-                {% endif %}
-              </div>
-            </div>
-          </a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <div class="sidebar">
+  <!-- Category Sidebar on Left -->
+  <div class="category-sidebar">
     <h3>Book Categories</h3>
     <ul class="category-menu">
       <li><a href="/books.html" class="category-link {% if page.url == '/books.html' %}active{% endif %}">All Books</a></li>
@@ -44,6 +13,83 @@ layout: default
         <li>
           <a href="/books/category/{{ category | slugify }}.html"
              class="category-link {% if page.book_category == category %}active{% endif %}">
+            {{ category }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Category Header -->
+    <div class="category-header">
+      <h1>{{ page.category_title }}</h1>
+      <p class="category-description">Explore our collection of {{ page.category_title | downcase }}</p>
+      {% assign cat = page.book_category %}
+      {% assign book_count = site.books | where: "book_category", cat | size %}
+      <span class="book-count">{{ book_count }} {% if book_count == 1 %}book{% else %}books{% endif %} available</span>
+    </div>
+
+    <!-- Expanded Books Grid -->
+    <div class="books-grid-optimized">
+      {% assign cat = page.book_category %}
+      {% for book in site.books %}
+        {% if book.book_category == cat %}
+          <a href="{{ book.url }}" class="book-card-link">
+            <div class="book-card book-card-category">
+              <div class="book-image-wrapper">
+                <img src="{{ book.cover }}" alt="{{ book.title }}" />
+                <div class="book-overlay">
+                  <span class="view-details">View Details</span>
+                </div>
+                {% if book.featured %}
+                  <div class="book-badge-corner">
+                    <span class="badge featured">Featured</span>
+                  </div>
+                {% endif %}
+                {% if book.bestseller %}
+                  <div class="book-badge-corner">
+                    <span class="badge bestseller">Bestseller</span>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="book-info-tile">
+                <div class="book-title">{{ book.title }}</div>
+                <div class="book-author">by {{ book.author }}</div>
+                {% if book.price %}
+                  <div class="book-price">{{ book.price }}</div>
+                {% endif %}
+                {% if book.amazon_link %}
+                  <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
+                    <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Floating Category Menu for Mobile -->
+<div class="floating-category-menu">
+  <button class="floating-menu-toggle" aria-label="Open category menu">
+    📚
+  </button>
+  <div class="floating-menu-content">
+    <div class="floating-menu-header">
+      <h4>Categories</h4>
+    </div>
+    <ul class="floating-category-list">
+      <li><a href="/books.html" class="{% if page.url == '/books.html' %}active{% endif %}">All Books</a></li>
+      {% assign categories = site.books | map: "book_category" | uniq | sort %}
+      {% for category in categories %}
+        <li>
+          <a href="/books/category/{{ category | slugify }}.html"
+             class="{% if page.book_category == category %}active{% endif %}">
             {{ category }}
           </a>
         </li>

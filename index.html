@@ -10,15 +10,15 @@ permalink: /
 <!-- Hero Section -->
 <section class="hero">
   <div class="container">
-    <h1>Editor's Picks</h1>
-    <p>Handpicked titles you won't want to miss.</p>
+    <h1>Delta Publications</h1>
+    <p>Discover the best books and authors from India's leading publishing house.</p>
   </div>
 </section>
 
 <!-- Section Separator -->
-<div class="section-separator">
+<!-- <div class="section-separator">
   <img src="/images/logo.png" alt="Delta Publications" />
-</div>
+</div> -->
 
 <!-- Featured Books Section -->
 <section class="featured-books">
@@ -26,28 +26,31 @@ permalink: /
     <h2>Featured Books</h2>
     <div class="books-slider">
       {% for book in site.books %}
-        <a href="{{ book.url }}" class="book-card-link">
+        <div class="book-card-link">
           <div class="book-card">
-            <div class="book-image-wrapper">
-              <img src="{{ book.cover }}" alt="{{ book.title }}" />
-              <div class="book-overlay">
-                <span class="view-details">View Details</span>
+            <a href="{{ book.url }}" class="book-card-link">
+              <div class="book-image-wrapper" style="height: 320px; width: 220px;">
+                <img src="{{ book.cover }}" alt="{{ book.title }}" style="height: 100%; width: 100%; object-fit: cover;" />
+                <div class="book-overlay">
+                  <!-- <span class="view-details">View Details</span> -->
+                </div>
               </div>
-            </div>
-            <div class="book-info-tile">
+            </a>
+            <div class="book-info-tile" style="min-height: 120px; font-size: 1.1em;">
               <div class="book-title">{{ book.title }}</div>
               <div class="book-author">by {{ book.author }}</div>
-              {% if book.price %}
-                <div class="book-price">{{ book.price }}</div>
-              {% endif %}
               {% if book.amazon_link %}
                 <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
-                  <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+                  <button type="button" onclick="window.open('{{ book.amazon_link }}', '_blank'); event.stopPropagation();" class="amazon-link">Buy on Amazon</button>
+                </div>
+              {% elsif book.amazon_link == nil or book.amazon_link == "" %}
+                <div class="amazon-link-wrapper">
+                  <button class="no-amazon-link" disabled>not on Amazon</button>
                 </div>
               {% endif %}
             </div>
           </div>
-        </a>
+        </div>
       {% endfor %}
     </div>
   </div>

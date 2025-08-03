@@ -5,36 +5,8 @@ permalink: /books.html
 ---
 
 <div class="books-page-container">
-  <div class="main-content">
-    <div class="category-header">
-      <h1>All Books</h1>
-      <p class="category-description">Discover our complete collection of books across all categories</p>
-    </div>
-
-    <div class="books-grid">
-      {% for book in site.books %}
-        <a href="{{ book.url }}" class="book-card-link">
-          <div class="book-card">
-            <div class="book-image-wrapper">
-              <img src="{{ book.cover }}" alt="{{ book.title }}" />
-              <div class="book-overlay">
-                <span class="view-details">View Details</span>
-              </div>
-            </div>
-            <div class="book-info-tile">
-              <div class="book-title">{{ book.title }}</div>
-              <div class="book-author">by {{ book.author }}</div>
-              {% if book.price %}
-                <div class="book-price">{{ book.price }}</div>
-              {% endif %}
-            </div>
-          </div>
-        </a>
-      {% endfor %}
-    </div>
-  </div>
-
-  <div class="sidebar">
+  <!-- Category Sidebar on Left -->
+  <div class="category-sidebar">
     <h3>Book Categories</h3>
     <ul class="category-menu">
       <li><a href="/books.html" class="category-link active">All Books</a></li>
@@ -42,6 +14,77 @@ permalink: /books.html
       {% for category in categories %}
         <li>
           <a href="/books/category/{{ category | slugify }}.html" class="category-link">
+            {{ category }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Category Header -->
+    <div class="category-header">
+      <h1>All Books</h1>
+      <p class="category-description">Discover our complete collection of books across all categories</p>
+      <span class="book-count">{{ site.books.size }} {% if site.books.size == 1 %}book{% else %}books{% endif %} available</span>
+    </div>
+
+    <!-- Expanded Books Grid -->
+    <div class="books-grid-optimized">
+      {% for book in site.books %}
+        <a href="{{ book.url }}" class="book-card-link">
+          <div class="book-card book-card-category">
+            <div class="book-image-wrapper">
+              <img src="{{ book.cover }}" alt="{{ book.title }}" />
+              <div class="book-overlay">
+                <span class="view-details">View Details</span>
+              </div>
+              {% if book.featured %}
+                <div class="book-badge-corner">
+                  <span class="badge featured">Featured</span>
+                </div>
+              {% endif %}
+              {% if book.bestseller %}
+                <div class="book-badge-corner">
+                  <span class="badge bestseller">Bestseller</span>
+                </div>
+              {% endif %}
+            </div>
+            <div class="book-info-tile">
+              <div class="book-title">{{ book.title }}</div>
+              <div class="book-author">by {{ book.author }}</div>
+              {% if book.price %}
+                <div class="book-price">{{ book.price }}</div>
+              {% endif %}
+              {% if book.amazon_link %}
+                <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
+                  <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Floating Category Menu for Mobile -->
+<div class="floating-category-menu">
+  <button class="floating-menu-toggle" aria-label="Open category menu">
+    📚
+  </button>
+  <div class="floating-menu-content">
+    <div class="floating-menu-header">
+      <h4>Categories</h4>
+    </div>
+    <ul class="floating-category-list">
+      <li><a href="/books.html" class="active">All Books</a></li>
+      {% assign categories = site.books | map: "book_category" | uniq | sort %}
+      {% for category in categories %}
+        <li>
+          <a href="/books/category/{{ category | slugify }}.html">
             {{ category }}
           </a>
         </li>

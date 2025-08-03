@@ -97,13 +97,12 @@
   }
 
   .logo-small {
-    height: 32px;
-    margin: 0;
+    height: 40px;
+    margin-right: 8px;
   }
 
   .header-text {
-    font-size: 1rem;
-    margin-left: 8px;
+    font-size: 1.2rem;
   }
 
   .header-text-link {
@@ -115,7 +114,7 @@
     display: block;
     order: 1;
     position: absolute;
-    left: 15px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -169,7 +168,7 @@
 
   /* Mobile submenu styles */
   .has-submenu > a::after {
-    content: " ▶";
+    /* content: " ▶"; */
     float: right;
     transition: transform var(--transition-fast);
     font-size: 0.8rem;
@@ -280,7 +279,7 @@
   }
 
   .header-text {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 }
 
@@ -295,11 +294,15 @@
   }
 
   .header-text {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
   }
 
   .logo-small {
-    height: 28px;
+    height: 36px;
+  }
+
+  .menu-toggle {
+    right: 10px;
   }
 
   .menu {
@@ -321,6 +324,14 @@
     width: 260px;
   }
 
+  .header-text {
+    font-size: 1rem;
+  }
+
+  .logo-small {
+    height: 32px;
+  }
+}
   .header-text {
     font-size: 0.8rem;
   }
