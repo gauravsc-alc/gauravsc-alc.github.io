@@ -1013,3 +1013,44 @@ footer {
 .menu-overlay.active {
   display: block;
 }
+
+/* Submenu arrow styles */
+.submenu-arrow {
+  font-size: 0.7rem;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+/* Desktop hover effect */
+@media (min-width: 769px) {
+  .has-submenu:hover .submenu-arrow {
+    transform: rotate(180deg);
+  }
+}
+
+/* Mobile submenu arrow styles */
+@media (max-width: 768px) {
+  /* Remove the existing ::after pseudo-element and use our new arrow */
+  .has-submenu > a::after {
+    display: none;
+  }
+
+  .submenu-arrow {
+    float: right;
+    margin-left: auto;
+    margin-right: 0;
+    font-size: 0.8rem;
+    transform: rotate(-90deg); /* Point right on mobile initially */
+    transition: transform 0.3s ease;
+  }
+
+  .has-submenu.open .submenu-arrow {
+    transform: rotate(0deg); /* Point down when open */
+  }
+
+  /* Hide the arrow on desktop in submenu */
+  .submenu .submenu-arrow {
+    display: none;
+  }
+}
