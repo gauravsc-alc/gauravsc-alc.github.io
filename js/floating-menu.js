@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let isMenuOpen = false;
 
+  // Set initial icon with enhanced styling - using book emoji as fallback
+  menuToggle.innerHTML = '<span class="floating-icon">📖</span>';
+  menuToggle.setAttribute('aria-label', 'Open category menu');
+
   // Toggle floating menu
   function toggleFloatingMenu() {
     isMenuOpen = !isMenuOpen;
@@ -14,12 +18,12 @@ document.addEventListener("DOMContentLoaded", function() {
     if (isMenuOpen) {
       menuToggle.classList.add('active');
       menuContent.classList.add('active');
-      menuToggle.innerHTML = '✕';
+      menuToggle.innerHTML = '<span class="floating-icon">✕</span>';
       menuToggle.setAttribute('aria-label', 'Close category menu');
     } else {
       menuToggle.classList.remove('active');
       menuContent.classList.remove('active');
-      menuToggle.innerHTML = '📚';
+      menuToggle.innerHTML = '<span class="floating-icon">📖</span>';
       menuToggle.setAttribute('aria-label', 'Open category menu');
     }
   }
