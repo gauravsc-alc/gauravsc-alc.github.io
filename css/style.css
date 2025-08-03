@@ -160,7 +160,7 @@ nav {
   background: #CB9819;
   color: #fff;
   text-align: center;
-  padding: 40px 0 30px 0;
+  padding: 25px 0 30px 0;
 }
 
 .hero h1 {
@@ -168,16 +168,29 @@ nav {
   font-size: 2.2rem;
 }
 
+.hero p {
+  font-size: 1.6rem;
+  margin: 0;
+  color: #f8f4e6;
+  line-height: 1.6;
+  letter-spacing: 4px;
+}
+
 /* Featured books */
 .featured-books {
   margin: 40px 0;
+  font-size: 18px;
 }
 
 .featured-books h2 {
   text-align: center;
   color: #CB9819;
   margin-bottom: 30px;
+  text-align: center !important;
+  font-family: "Frank Ruhl Libre", serif;
+  font-weight: 700;
 }
+
 
 .books-grid {
   display: grid;
