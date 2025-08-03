@@ -1,0 +1,331 @@
+/* Mobile Navigation Styles */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+  order: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: var(--primary-color);
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.menu-toggle span:nth-child(1) {
+  top: 0px;
+}
+
+.menu-toggle span:nth-child(2),
+.menu-toggle span:nth-child(3) {
+  top: 10px;
+}
+
+.menu-toggle span:nth-child(4) {
+  top: 20px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  top: 10px;
+  width: 0%;
+  left: 50%;
+}
+
+.menu-toggle.active span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.menu-toggle.active span:nth-child(4) {
+  top: 10px;
+  width: 0%;
+  left: 50%;
+}
+
+/* Menu overlay for mobile */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.menu-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .header-flex {
+    justify-content: center;
+    position: relative;
+    gap: 15px;
+  }
+
+  .top-header-content {
+    justify-content: center;
+    order: 2;
+    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo-small {
+    height: 32px;
+    margin: 0;
+  }
+
+  .header-text {
+    font-size: 1rem;
+    margin-left: 8px;
+  }
+
+  .header-text-link {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: block;
+    order: 1;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .menu {
+    flex-direction: column;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    background: var(--background-primary);
+    width: 280px;
+    max-width: 85vw;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    display: none;
+    padding: 20px 0;
+    transform: translateX(-100%);
+    transition: transform var(--transition-fast);
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .menu.active {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .menu li {
+    margin: 0;
+    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+  }
+
+  .menu li a {
+    padding: 15px 25px;
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    text-align: left;
+  }
+
+  .menu li a:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+  }
+
+  /* Show mobile-only elements */
+  .mobile-only {
+    display: block !important;
+  }
+
+  /* Mobile submenu styles */
+  .has-submenu > a::after {
+    content: " ▶";
+    float: right;
+    transition: transform var(--transition-fast);
+    font-size: 0.8rem;
+    margin-left: 8px;
+  }
+
+  .has-submenu.open > a::after {
+    transform: rotate(90deg);
+  }
+
+  .submenu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    background: var(--background-primary);
+    width: 300px;
+    max-width: 90vw;
+    box-shadow: 3px 0 12px rgba(0,0,0,0.2);
+    padding: 0;
+    margin: 0;
+    transform: translateX(-100%);
+    transition: transform var(--transition-fast);
+    z-index: 1002;
+    overflow-y: auto;
+    display: none;
+    list-style: none;
+    border: none;
+  }
+
+  .has-submenu.open .submenu {
+    display: block;
+    transform: translateX(0);
+  }
+
+  .submenu::before {
+    content: "Book Categories";
+    display: block;
+    padding: 20px 25px;
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+    border-bottom: 2px solid var(--primary-hover);
+    text-align: left;
+  }
+
+  .submenu li {
+    border-bottom: 1px solid #e0e0e0;
+    margin: 0;
+  }
+
+  .submenu li:last-child {
+    border-bottom: none;
+  }
+
+  .submenu li a {
+    padding: 18px 25px;
+    font-size: 1rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    min-height: 24px;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .submenu li a:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+  }
+
+  .submenu-back {
+    background: #f8f8f8 !important;
+    color: #666 !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #e0e0e0 !important;
+    border-left: 4px solid var(--primary-color) !important;
+  }
+
+  .submenu-back:hover {
+    background-color: #ececec !important;
+    color: #333 !important;
+  }
+
+  .mobile-only a[href="/books.html"] {
+    background: var(--primary-lighter) !important;
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    border-left: 4px solid var(--primary-color) !important;
+  }
+
+  .mobile-only a[href="/books.html"]:hover {
+    background-color: #fff0d6 !important;
+    color: var(--primary-hover) !important;
+  }
+}
+
+/* Tablet and larger mobile devices */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .header-flex {
+    gap: 15px;
+  }
+
+  .menu li {
+    margin: 0 10px;
+  }
+
+  .header-text {
+    font-size: 1rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .header-flex {
+    padding: 8px 10px;
+  }
+
+  .top-header-content {
+    gap: 6px;
+  }
+
+  .header-text {
+    font-size: 0.85rem;
+  }
+
+  .logo-small {
+    height: 28px;
+  }
+
+  .menu {
+    width: 260px;
+  }
+
+  .submenu {
+    width: 280px;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 360px) {
+  .menu {
+    width: 240px;
+  }
+
+  .submenu {
+    width: 260px;
+  }
+
+  .header-text {
+    font-size: 0.8rem;
+  }
+
+  .logo-small {
+    height: 26px;
+  }
+}

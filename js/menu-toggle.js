@@ -61,12 +61,13 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    // Handle submenu navigation - auto close and navigate
+    // Handle submenu navigation - navigate to page
     const submenuLinks = document.querySelectorAll('.submenu a:not(.submenu-back)');
     submenuLinks.forEach(link => {
       link.addEventListener('click', function(e) {
-        // Allow navigation but close mobile menu
+        // Allow navigation and close mobile menu after a short delay
         if (window.innerWidth <= 768) {
+          // Don't prevent default - let the navigation happen
           setTimeout(() => {
             toggleMenu();
           }, 100);
@@ -105,6 +106,35 @@ document.addEventListener("DOMContentLoaded", function() {
         });
       }
     });
+
+    // Handle swipe gestures for mobile menu
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const swipeDistance = touchEndX - touchStartX;
+
+      if (window.innerWidth <= 768) {
+        // Swipe right to open menu (only if menu is closed and swipe starts from left edge)
+        if (swipeDistance > swipeThreshold && touchStartX < 50 && !menu.classList.contains('active')) {
+          toggleMenu();
+        }
+        // Swipe left to close menu (only if menu is open)
+        else if (swipeDistance < -swipeThreshold && menu.classList.contains('active')) {
+          toggleMenu();
+        }
+      }
+    }
   }
 
   // Add click handlers for book cards to ensure they work

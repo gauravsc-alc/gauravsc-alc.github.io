@@ -5,36 +5,73 @@ permalink: /
 ---
 
 <!-- Slideshow Section -->
-<section class="slideshow">
-  {% include slideshow.html %}
-</section>
+{% include slideshow.html %}
 
 <!-- Hero Section -->
 <section class="hero">
   <div class="container">
     <h1>Editor's Picks</h1>
-    <p>Handpicked titles you won’t want to miss.</p>
+    <p>Handpicked titles you won't want to miss.</p>
   </div>
 </section>
+
+<!-- Section Separator -->
+<div class="section-separator">
+  <img src="/images/logo.png" alt="Delta Publications" />
+</div>
 
 <!-- Featured Books Section -->
-<section class="featured-books container">
-  <!-- <h2>Featured Books</h2> -->
-  <div class="books-slider">
-    {% for book in site.books %}
-      <a href="{{ book.url }}" class="book-card-link">
-        <div class="book-card">
-          <img src="{{ book.cover }}" alt="{{ book.title }}" />
-          <div class="book-info-tile">
-            <div class="book-title">{{ book.title }}</div>
-            <div class="book-author">by {{ book.author }}</div>
+<section class="featured-books">
+  <div class="container">
+    <h2>Featured Books</h2>
+    <div class="books-slider">
+      {% for book in site.books %}
+        <a href="{{ book.url }}" class="book-card-link">
+          <div class="book-card">
+            <div class="book-image-wrapper">
+              <img src="{{ book.cover }}" alt="{{ book.title }}" />
+              <div class="book-overlay">
+                <span class="view-details">View Details</span>
+              </div>
+            </div>
+            <div class="book-info-tile">
+              <div class="book-title">{{ book.title }}</div>
+              <div class="book-author">by {{ book.author }}</div>
+              {% if book.price %}
+                <div class="book-price">{{ book.price }}</div>
+              {% endif %}
+              {% if book.amazon_link %}
+                <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
+                  <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
+                </div>
+              {% endif %}
+            </div>
           </div>
-        </div>
-      </a>
-    {% endfor %}
+        </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
+<!-- Authors Section -->
+{% if site.authors and site.authors.size > 0 %}
+<section class="featured-books">
+  <div class="container">
+    <h2>Our Authors</h2>
+    <div class="authors-slider">
+      {% for author in site.authors %}
+        <div class="author-card">
+          <img src="{{ author.image | default: '/images/default-author.jpg' }}" alt="{{ author.name }}" />
+          <div class="author-name">{{ author.name }}</div>
+          <div class="author-bio">{{ author.bio | truncate: 80 }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Bestseller Popup -->
 <div id="bestseller-popup" class="bestseller-popup" style="display:none;">
   <div class="bestseller-content">
     <span class="bestseller-close" onclick="document.getElementById('bestseller-popup').style.display='none'">&times;</span>
@@ -42,8 +79,13 @@ permalink: /
     <div class="bestseller-title" id="bestseller-title"></div>
     <div class="bestseller-author" id="bestseller-author"></div>
     <div class="bestseller-actions">
-      <a id="bestseller-amazon" href="#" class="amazon-link" target="_blank">Buy on Amazon</a>
-      <a id="bestseller-view-details" href="#" class="amazon-link">View Details</a>
+      <a id="bestseller-amazon" href="#" class="btn btn-primary" target="_blank">
+        <span class="btn-icon">🛒</span>
+        <span class="btn-text">Buy on Amazon</span>
+      </a>
+      <a id="bestseller-view-details" href="#" class="btn btn-secondary">
+        <span class="btn-text">View Details</span>
+      </a>
     </div>
   </div>
 </div>

@@ -3,14 +3,92 @@ layout: default
 title: "Blogs"
 permalink: /blogs.html
 ---
-<div class="container">
-  <h1>Blogs</h1>
-  <ul>
-    {% for blog in site.blogs %}
-      <li>
-        <a href="{{ blog.url }}">{{ blog.title }}</a>
-        <span>{{ blog.date | date: "%b %d, %Y" }}</span>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+
+<main class="page-content">
+  <div class="container">
+    <div class="hero bg-light text-center rounded-large shadow">
+      <h1 class="text-primary">Our Blog</h1>
+      <p>Stay updated with the latest news, book reviews, and literary insights.</p>
+    </div>
+
+    {% if site.blogs and site.blogs.size > 0 %}
+    <div class="content-section" style="margin-top: 40px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        {% for blog in site.blogs %}
+          <article style="background: white; border-radius: 15px; box-shadow: var(--shadow-medium); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            {% if blog.image %}
+              <img src="{{ blog.image }}" alt="{{ blog.title }}" style="width: 100%; height: 200px; object-fit: cover;" />
+            {% endif %}
+
+            <div style="padding: 25px;">
+              <h2 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.5rem; line-height: 1.3;">
+                <a href="{{ blog.url }}" style="color: inherit; text-decoration: none; transition: color 0.3s ease;">
+                  {{ blog.title }}
+                </a>
+              </h2>
+
+              {% if blog.date %}
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+                  {{ blog.date | date: "%B %d, %Y" }}
+                </p>
+              {% endif %}
+
+              {% if blog.excerpt %}
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                  {{ blog.excerpt | truncate: 150 }}
+                </p>
+              {% endif %}
+
+              <a href="{{ blog.url }}" class="btn btn-secondary btn-animated">
+                <span class="btn-text">Read More</span>
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="content-section" style="margin-top: 40px;">
+      <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-medium); text-align: center;">
+        <h2 style="color: var(--text-muted); margin-bottom: 20px;">Coming Soon</h2>
+        <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 25px;">
+          We're working on exciting blog content for you. Stay tuned for the latest updates, book reviews, and literary insights.
+        </p>
+
+        <div style="margin-top: 30px;">
+          <a href="/books.html" class="btn btn-primary btn-animated" style="margin-right: 15px;">
+            <span class="btn-text">Browse Books</span>
+          </a>
+          <a href="/contact.html" class="btn btn-secondary btn-animated">
+            <span class="btn-text">Contact Us</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</main>
+
+<style>
+/* Blog card hover effects */
+article:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: var(--shadow-heavy) !important;
+}
+
+article h2 a:hover {
+  color: var(--primary-hover) !important;
+}
+
+/* Responsive adjustments for blog grid */
+@media (max-width: 768px) {
+  .content-section > div {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  article > div {
+    padding: 20px !important;
+  }
+}
+</style>

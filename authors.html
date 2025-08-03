@@ -4,15 +4,44 @@ title: "Authors"
 permalink: /authors.html
 ---
 
-<div class="container">
-  <h1>Our Authors</h1>
-  <div class="authors-slider">
-    {% for author in site.authors %}
-      <div class="author-card">
-        <img src="{{ author.image }}" alt="{{ author.name }}" />
-        <div class="author-name">{{ author.name }}</div>
-        <div class="author-bio">{{ author.bio }}</div>
+<main class="page-content">
+  <div class="container">
+    <div class="hero bg-light text-center rounded-large shadow">
+      <h1 class="text-primary">Our Authors</h1>
+      <p>Meet the talented writers behind our exceptional books.</p>
+    </div>
+
+    {% if site.authors and site.authors.size > 0 %}
+    <div class="content-section" style="margin-top: 40px;">
+      <div class="authors-slider">
+        {% for author in site.authors %}
+          <div class="author-card">
+            <img src="{{ author.image | default: '/images/default-author.jpg' }}" alt="{{ author.name }}" />
+            <div class="author-name">{{ author.name }}</div>
+            <div class="author-bio">{{ author.bio }}</div>
+            {% if author.books %}
+              <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+                  <strong>Books:</strong> {{ author.books | join: ', ' }}
+                </p>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
+    {% else %}
+    <div class="content-section" style="margin-top: 40px;">
+      <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-medium); text-align: center;">
+        <h2 style="color: var(--text-muted); margin-bottom: 20px;">Coming Soon</h2>
+        <p style="color: var(--text-secondary); font-size: 1.1rem;">
+          We're currently updating our authors page. Please check back soon to meet our talented writers.
+        </p>
+        <a href="/books.html" class="btn btn-primary btn-animated" style="margin-top: 20px;">
+          <span class="btn-text">View Our Books</span>
+        </a>
+      </div>
+    </div>
+    {% endif %}
   </div>
-</div>
+</main>
