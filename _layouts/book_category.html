@@ -3,9 +3,9 @@ layout: default
 ---
 
 <div class="books-page-container">
-  <!-- Category Sidebar on Left -->
+  <!-- Compact Category Sidebar on Far Left -->
   <div class="category-sidebar">
-    <h3>Book Categories</h3>
+    <h3>Categories</h3>
     <ul class="category-menu">
       <li><a href="/books.html" class="category-link {% if page.url == '/books.html' %}active{% endif %}">All Books</a></li>
       {% assign categories = site.books | map: "book_category" | uniq | sort %}
@@ -31,7 +31,7 @@ layout: default
       <span class="book-count">{{ book_count }} {% if book_count == 1 %}book{% else %}books{% endif %} available</span>
     </div>
 
-    <!-- Expanded Books Grid -->
+    <!-- Simplified Books Grid -->
     <div class="books-grid-optimized">
       {% assign cat = page.book_category %}
       {% for book in site.books %}
@@ -64,6 +64,8 @@ layout: default
                   <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
                     <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
                   </div>
+                {% else %}
+                  <div class="no-amazon-link">Not Available</div>
                 {% endif %}
               </div>
             </div>

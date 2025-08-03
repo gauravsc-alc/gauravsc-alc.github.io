@@ -46,6 +46,32 @@ body {
   flex-direction: column;
   min-height: 100vh;
   line-height: 1.6;
+  position: relative;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Prevent scrolling when mobile menu is open */
+body.menu-open {
+  overflow: hidden !important;
+}
+
+/* Fix for mobile menu overlay */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.menu-overlay.active {
+  display: block;
+  opacity: 1;
 }
 
 .container {

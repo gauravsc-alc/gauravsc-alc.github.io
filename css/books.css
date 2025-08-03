@@ -35,6 +35,15 @@
   padding: 20px 0;
 }
 
+/* Enhanced Books slider for homepage with more visible tiles on desktop */
+.books-slider {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+  overflow: visible;
+}
+
 /* Books slider for homepage */
 .books-slider {
   display: flex;
@@ -324,5 +333,90 @@
   .featured-books h2 {
     font-size: 1.8rem;
     margin-bottom: 25px;
+  }
+}
+
+/* Large desktop adjustments for homepage */
+@media (min-width: 1200px) {
+  .books-slider {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+  }
+
+  .book-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  .book-card img {
+    height: 240px;
+  }
+
+  .book-info-tile {
+    padding: 18px 15px;
+    min-height: 120px;
+  }
+
+  .book-title {
+    font-size: 1rem;
+  }
+
+  .book-author {
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra large screens for homepage */
+@media (min-width: 1400px) {
+  .books-slider {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+  }
+
+  .book-card img {
+    height: 260px;
+  }
+
+  .book-info-tile {
+    padding: 20px 18px;
+    min-height: 130px;
+  }
+
+  .book-title {
+    font-size: 1.1rem;
+  }
+
+  .book-author {
+    font-size: 0.9rem;
+  }
+}
+
+/* Ultra-wide screens for homepage */
+@media (min-width: 1600px) {
+  .books-slider {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 35px;
+  }
+
+  .book-card img {
+    height: 280px;
+  }
+
+  .book-info-tile {
+    padding: 22px 20px;
+    min-height: 140px;
+  }
+
+  .book-title {
+    font-size: 1.2rem;
+  }
+
+  .book-author {
+    font-size: 1rem;
+  }
+
+  .amazon-link {
+    font-size: 0.85rem;
+    padding: 8px 16px;
   }
 }

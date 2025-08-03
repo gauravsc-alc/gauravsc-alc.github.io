@@ -21,51 +21,91 @@
 }
 
 .top-header-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  order: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    order: 1;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
 }
 
 .logo-small {
-  height: 48px;
-  transition: transform var(--transition-fast);
+    height: 48px;
+    min-width: 32px;
+    max-width: 100%;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    will-change: transform;
 }
 
 .logo-link {
-  display: inline-block;
-  text-decoration: none;
+    display: inline-block;
+    text-decoration: none;
+    overflow: hidden;
+    max-width: 48px;
+    transition: max-width var(--transition-fast);
 }
 
-.logo-link:hover .logo-small {
-  transform: scale(1.05);
+.logo-link:hover .logo-small,
+.logo-link:focus .logo-small {
+    transform: scale(1.15) translateY(-10px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    z-index: 10;
+}
+
+.logo-link:hover,
+.logo-link:focus {
+    max-width: 64px;
 }
 
 .header-text-link {
-  text-decoration: none;
-  color: inherit;
-  transition: color var(--transition-fast);
-  display: flex;
-  align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
 }
 
-.header-text-link:hover {
-  color: var(--primary-hover);
+.header-text-link:hover .header-text,
+.header-text-link:focus .header-text {
+    color: var(--primary-hover);
+    transform: translateY(-8px) scale(1.07);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    z-index: 10;
 }
 
 .header-text {
-  font-size: 1.4rem;
-  color: var(--primary-color);
-  font-weight: 600;
-  transition: color var(--transition-fast);
-  white-space: nowrap;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition:
+        color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 180px;
 }
 
-/* Main navigation */
+@media (max-width: 600px) {
+    .header-text {
+        max-width: 100px;
+        font-size: 1rem;
+    }
+    .logo-small {
+        height: 36px;
+    }
+}
+
 nav {
-  display: flex;
-  align-items: center;
-  order: 2;
+    display: flex;
+    align-items: center;
+    order: 2;
 }
 
 .menu {
