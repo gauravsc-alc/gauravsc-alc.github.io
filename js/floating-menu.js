@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // Handle scroll behavior - hide menu when scrolling up, show when scrolling down
+  // Enhanced scroll behavior - hide when scrolling to footer
   let lastScrollTop = 0;
   let scrollTimeout;
 
@@ -59,15 +59,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     scrollTimeout = setTimeout(() => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const footer = document.querySelector('footer');
 
-      if (scrollTop > lastScrollTop && scrollTop > 200) {
-        // Scrolling down and past header
-        floatingMenu.style.opacity = '0.7';
-        floatingMenu.style.transform = 'scale(0.9)';
-      } else {
-        // Scrolling up or at top
-        floatingMenu.style.opacity = '1';
-        floatingMenu.style.transform = 'scale(1)';
+      // Hide menu when near footer or on error pages with long content
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+        const isErrorPage = window.location.pathname === '/404.html' || document.querySelector('.error-page-container');
+
+        if (footerRect.top < windowHeight || (isErrorPage && scrollTop > windowHeight)) {
+          floatingMenu.style.opacity = '0.3';
+          floatingMenu.style.transform = 'scale(0.8) translateY(10px)';
+        } else if (scrollTop > lastScrollTop && scrollTop > 200) {
+          // Scrolling down - subtle hide effect
+          floatingMenu.style.opacity = '0.7';
+          floatingMenu.style.transform = 'scale(0.9) translateY(10px)';
+        } else {
+          // Scrolling up - show with bounce
+          floatingMenu.style.opacity = '1';
+          floatingMenu.style.transform = 'scale(1) translateY(0)';
+        }
       }
 
       lastScrollTop = scrollTop;

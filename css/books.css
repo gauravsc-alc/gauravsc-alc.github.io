@@ -248,26 +248,27 @@
     box-shadow: 0 6px 18px rgba(255, 153, 0, 0.22);
 }
 
-/* No Amazon link style (disabled look) */
+/* No Amazon link style (disabled look, small size) */
 .no-amazon-link {
-    display: inline-block;
-    margin-top: 8px;
-    background: linear-gradient(135deg, #bdbdbd, #757575);
-    color: #f3f3f3;
-    padding: 6px 16px;
-    border-radius: 18px;
-    text-decoration: none;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    opacity: 0.7;
-    cursor: not-allowed;
-    pointer-events: none;
-    box-shadow: none;
-    transition: none;
+  display: inline-block;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #bdbdbd, #757575);
+  color: #f3f3f3;
+  padding: 6px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  transition: none;
 }
 
+/* Amazon link hover fix */
 .amazon-link:hover {
   background: linear-gradient(135deg, #e47911, #cc6600);
   transform: translateY(-1px);

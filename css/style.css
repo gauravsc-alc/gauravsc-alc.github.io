@@ -14,17 +14,40 @@
 /* Legacy compatibility styles - these will be overridden by modular CSS */
 /* Keep only essential overrides here */
 
-/* Ensure proper body layout */
+/* Ensure proper body layout with sticky footer */
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-/* Main content area compatibility */
-.page-content {
-  flex: 1;
-  padding: 1rem;
+/* Header stays at top */
+.site-header {
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Main content area takes available space */
+.page-content,
+main,
+.books-page-container,
+.book-detail-container {
+  flex: 1 0 auto;
+  margin-bottom: 0;
+}
+
+/* Footer sticks to bottom */
+footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  position: relative;
+  z-index: 10;
 }
 
 /* Slideshow compatibility for existing pages */
@@ -102,4 +125,20 @@ body, .btn, .menu, .book-title, .book-author {
   .header-flex {
     padding: 10px 0;
   }
+}
+
+/* Additional layout fixes */
+.hero {
+  margin-bottom: 0;
+}
+
+.featured-books {
+  margin-bottom: 20px; /* Reduce bottom margin to prevent extra space */
+}
+
+/* Ensure content doesn't overlap footer */
+.page-content:last-child,
+.books-page-container:last-child,
+.book-detail-container:last-child {
+  padding-bottom: 40px;
 }

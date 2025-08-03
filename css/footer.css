@@ -4,11 +4,13 @@ footer {
   color: white;
   text-align: center;
   padding: 25px 0;
-  margin-top: 50px;
+  margin-top: auto; /* Push footer to bottom */
   font-size: 0.95rem;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent footer from shrinking */
   position: relative;
   overflow: hidden;
+  width: 100%;
+  z-index: 10;
 }
 
 footer::before {
@@ -37,5 +39,6 @@ footer p {
   footer {
     padding: 20px 15px;
     font-size: 0.9rem;
+    margin-top: auto;
   }
 }
