@@ -6,10 +6,90 @@ permalink: /contact.html
 
 <main class="page-content">
   <div class="container">
-    <h1>Contact Us</h1>
-    <p>Email: {{ site.email }}</p>
-    <p>Fill out the form below to get in touch.</p>
-    <!-- Add your contact form here -->
+    <div class="hero bg-light text-center rounded-large shadow">
+      <h1 class="text-primary">Contact Us</h1>
+      <p>We'd love to hear from you. Get in touch with Delta Publications.</p>
+    </div>
+
+    <div class="content-section" style="margin-top: 40px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+
+        <!-- Contact Information -->
+        <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-medium);">
+          <h2 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.8rem;">Get In Touch</h2>
+
+          <div style="margin-bottom: 25px;">
+            <h3 style="color: var(--text-primary); margin-bottom: 10px; font-size: 1.2rem;">Email</h3>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; margin: 0;">
+              <a href="mailto:{{ site.email }}" style="color: var(--primary-color); text-decoration: none;">{{ site.email }}</a>
+            </p>
+          </div>
+
+          <div style="margin-bottom: 25px;">
+            <h3 style="color: var(--text-primary); margin-bottom: 10px; font-size: 1.2rem;">Business Hours</h3>
+            <p style="color: var(--text-secondary); margin: 0;">Monday - Friday: 9:00 AM - 6:00 PM</p>
+            <p style="color: var(--text-secondary); margin: 0;">Saturday: 10:00 AM - 4:00 PM</p>
+            <p style="color: var(--text-secondary); margin: 0;">Sunday: Closed</p>
+          </div>
+
+          <div>
+            <h3 style="color: var(--text-primary); margin-bottom: 10px; font-size: 1.2rem;">Follow Us</h3>
+            <p style="color: var(--text-secondary); margin: 0;">Stay updated with our latest releases and news on social media.</p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-medium);">
+          <h2 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.8rem;">Send us a Message</h2>
+
+          <form style="display: flex; flex-direction: column; gap: 20px;">
+            <div>
+              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Name *</label>
+              <input type="text" required style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
+            </div>
+
+            <div>
+              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Email *</label>
+              <input type="email" required style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
+            </div>
+
+            <div>
+              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Subject</label>
+              <input type="text" style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
+            </div>
+
+            <div>
+              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Message *</label>
+              <textarea required rows="5" style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; resize: vertical; transition: border-color 0.3s ease;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-animated" style="align-self: flex-start; margin-top: 10px;">
+              <span class="btn-text">Send Message</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
-</div>
+
+<style>
+/* Form input focus styles */
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(203, 152, 25, 0.1);
+}
+
+/* Responsive layout for contact page */
+@media (max-width: 768px) {
+  .content-section > div {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .content-section div > div {
+    padding: 30px 20px !important;
+  }
+}
+</style>

@@ -5,46 +5,91 @@ permalink: /
 ---
 
 <!-- Slideshow Section -->
-<section class="slideshow">
-  {% include slideshow.html %}
-</section>
+{% include slideshow.html %}
 
 <!-- Hero Section -->
 <section class="hero">
   <div class="container">
-    <h1>Welcome to Delta Publications</h1>
-    <p>Discover the best books and authors from India’s leading publishing house.</p>
+    <h1>Delta Publications</h1>
+    <p>Discover the best books and authors from India's leading publishing house.</p>
   </div>
 </section>
+
+<!-- Section Separator -->
+<!-- <div class="section-separator">
+  <img src="/images/logo.png" alt="Delta Publications" />
+</div> -->
 
 <!-- Featured Books Section -->
-<section class="featured-books container">
-  <h2>Featured Books</h2>
-  <div class="books-slider">
-    {% for book in site.books %}
-      <div class="book-card">
-        <img src="{{ book.cover }}" alt="{{ book.title }}" />
-        <div class="book-info-tile">
-          <div class="book-title">{{ book.title }}</div>
-          <div class="book-author">by {{ book.author }}</div>
-            {% if book.amazon_link %}
-              <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
-            {% else %}
-              <div class="amazon-link-placeholder"></div>
-            {% endif %}
+<section class="featured-books">
+  <div class="container">
+    <h2>Featured Books</h2>
+    <div class="books-slider">
+      {% for book in site.books %}
+        <div class="book-card-link">
+          <div class="book-card">
+            <a href="{{ book.url }}" class="book-card-link">
+              <div class="book-image-wrapper" style="height: 320px; width: 220px;">
+                <img src="{{ book.cover }}" alt="{{ book.title }}" style="height: 100%; width: 100%; object-fit: cover;" />
+                <div class="book-overlay">
+                  <!-- <span class="view-details">View Details</span> -->
+                </div>
+              </div>
+            </a>
+            <div class="book-info-tile" style="min-height: 120px; font-size: 1.1em;">
+              <div class="book-title">{{ book.title }}</div>
+              <div class="book-author">by {{ book.author }}</div>
+              {% if book.amazon_link %}
+                <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
+                  <button type="button" onclick="window.open('{{ book.amazon_link }}', '_blank'); event.stopPropagation();" class="amazon-link">Buy on Amazon</button>
+                </div>
+              {% elsif book.amazon_link == nil or book.amazon_link == "" %}
+                <div class="amazon-link-wrapper">
+                  <button class="no-amazon-link" disabled>not on Amazon</button>
+                </div>
+              {% endif %}
+            </div>
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
+<!-- Authors Section -->
+{% if site.authors and site.authors.size > 0 %}
+<section class="featured-books">
+  <div class="container">
+    <h2>Our Authors</h2>
+    <div class="authors-slider">
+      {% for author in site.authors %}
+        <div class="author-card">
+          <img src="{{ author.image | default: '/images/default-author.jpg' }}" alt="{{ author.name }}" />
+          <div class="author-name">{{ author.name }}</div>
+          <div class="author-bio">{{ author.bio | truncate: 80 }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Bestseller Popup -->
 <div id="bestseller-popup" class="bestseller-popup" style="display:none;">
   <div class="bestseller-content">
     <span class="bestseller-close" onclick="document.getElementById('bestseller-popup').style.display='none'">&times;</span>
     <img id="bestseller-img" src="" alt="Best Seller Book" />
     <div class="bestseller-title" id="bestseller-title"></div>
     <div class="bestseller-author" id="bestseller-author"></div>
-    <a id="bestseller-amazon" href="#" class="amazon-link" target="_blank">Buy on Amazon</a>
+    <div class="bestseller-actions">
+      <a id="bestseller-amazon" href="#" class="btn btn-primary" target="_blank">
+        <span class="btn-icon">🛒</span>
+        <span class="btn-text">Buy on Amazon</span>
+      </a>
+      <a id="bestseller-view-details" href="#" class="btn btn-secondary">
+        <span class="btn-text">View Details</span>
+      </a>
+    </div>
   </div>
 </div>
 
