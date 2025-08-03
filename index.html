@@ -13,7 +13,7 @@ permalink: /
 <section class="hero">
   <div class="container">
     <h1>Welcome to Delta Publications</h1>
-    <p>Discover the best books and authors from India’s leading publishing house.</p>
+    <p>Discover the best books and authors from India's leading publishing house.</p>
   </div>
 </section>
 
@@ -22,18 +22,15 @@ permalink: /
   <h2>Featured Books</h2>
   <div class="books-slider">
     {% for book in site.books %}
-      <div class="book-card">
-        <img src="{{ book.cover }}" alt="{{ book.title }}" />
-        <div class="book-info-tile">
-          <div class="book-title">{{ book.title }}</div>
-          <div class="book-author">by {{ book.author }}</div>
-            {% if book.amazon_link %}
-              <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
-            {% else %}
-              <div class="amazon-link-placeholder"></div>
-            {% endif %}
+      <a href="{{ book.url }}" class="book-card-link">
+        <div class="book-card">
+          <img src="{{ book.cover }}" alt="{{ book.title }}" />
+          <div class="book-info-tile">
+            <div class="book-title">{{ book.title }}</div>
+            <div class="book-author">by {{ book.author }}</div>
+          </div>
         </div>
-      </div>
+      </a>
     {% endfor %}
   </div>
 </section>
@@ -44,7 +41,10 @@ permalink: /
     <img id="bestseller-img" src="" alt="Best Seller Book" />
     <div class="bestseller-title" id="bestseller-title"></div>
     <div class="bestseller-author" id="bestseller-author"></div>
-    <a id="bestseller-amazon" href="#" class="amazon-link" target="_blank">Buy on Amazon</a>
+    <div class="bestseller-actions">
+      <a id="bestseller-amazon" href="#" class="amazon-link" target="_blank">Buy on Amazon</a>
+      <a id="bestseller-view-details" href="#" class="amazon-link">View Details</a>
+    </div>
   </div>
 </div>
 

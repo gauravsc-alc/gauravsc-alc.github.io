@@ -5,21 +5,6 @@ permalink: /books.html
 ---
 
 <div class="books-page-container">
-  <div class="sidebar">
-    <h3>Book Categories</h3>
-    <ul class="category-menu">
-      <li><a href="/books.html" class="category-link active">All Books</a></li>
-      {% assign categories = site.books | map: "book_category" | uniq %}
-      {% for category in categories %}
-        <li>
-          <a href="/books/category/{{ category | slugify }}.html" class="category-link">
-            {{ category }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-
   <div class="main-content">
     <div class="category-header">
       <h1>All Books</h1>
@@ -28,20 +13,39 @@ permalink: /books.html
 
     <div class="books-grid">
       {% for book in site.books %}
-        <div class="book-card">
-          <img src="{{ book.cover }}" alt="{{ book.title }}" />
-          <div class="book-info-tile">
-            <div class="book-title">{{ book.title }}</div>
-            <div class="book-author">by {{ book.author }}</div>
-            {% if book.price %}
-              <div class="book-price">{{ book.price }}</div>
-            {% endif %}
-            {% if book.amazon_link %}
-              <a href="{{ book.amazon_link }}" class="amazon-link" target="_blank">Buy on Amazon</a>
-            {% endif %}
+        <a href="{{ book.url }}" class="book-card-link">
+          <div class="book-card">
+            <div class="book-image-wrapper">
+              <img src="{{ book.cover }}" alt="{{ book.title }}" />
+              <div class="book-overlay">
+                <span class="view-details">View Details</span>
+              </div>
+            </div>
+            <div class="book-info-tile">
+              <div class="book-title">{{ book.title }}</div>
+              <div class="book-author">by {{ book.author }}</div>
+              {% if book.price %}
+                <div class="book-price">{{ book.price }}</div>
+              {% endif %}
+            </div>
           </div>
-        </div>
+        </a>
       {% endfor %}
     </div>
+  </div>
+
+  <div class="sidebar">
+    <h3>Book Categories</h3>
+    <ul class="category-menu">
+      <li><a href="/books.html" class="category-link active">All Books</a></li>
+      {% assign categories = site.books | map: "book_category" | uniq | sort %}
+      {% for category in categories %}
+        <li>
+          <a href="/books/category/{{ category | slugify }}.html" class="category-link">
+            {{ category }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>

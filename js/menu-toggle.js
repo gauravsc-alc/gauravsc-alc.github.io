@@ -35,62 +35,43 @@ document.addEventListener("DOMContentLoaded", function() {
     toggle.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // Handle submenu toggle on mobile with double-click for Books
+    // Handle submenu toggle on mobile
     const submenus = document.querySelectorAll('.has-submenu');
     submenus.forEach(submenu => {
       const link = submenu.querySelector('a');
       if (link) {
-        let clickTimeout;
-        let clickCount = 0;
-
         link.addEventListener('click', function(e) {
-          if (window.innerWidth <= 768) {
+          // Only prevent default on mobile when menu is active
+          if (window.innerWidth <= 768 && menu.classList.contains('active')) {
             e.preventDefault();
+            e.stopPropagation();
 
-            clickCount++;
+            // Close other open submenus
+            const otherSubmenus = document.querySelectorAll('.has-submenu.open');
+            otherSubmenus.forEach(other => {
+              if (other !== submenu) {
+                other.classList.remove('open');
+              }
+            });
 
-            if (clickCount === 1) {
-              clickTimeout = setTimeout(() => {
-                // Single click - toggle submenu
-                const isOpen = submenu.classList.contains('open');
-
-                // Close all other submenus first
-                submenus.forEach(otherSubmenu => {
-                  if (otherSubmenu !== submenu) {
-                    otherSubmenu.classList.remove('open');
-                  }
-                });
-
-                if (isOpen) {
-                  submenu.classList.remove('open');
-                } else {
-                  submenu.classList.add('open');
-                }
-
-                clickCount = 0;
-              }, 300);
-            } else if (clickCount === 2) {
-              // Double click - navigate to the page
-              clearTimeout(clickTimeout);
-              clickCount = 0;
-
-              // Close menu first
-              menu.classList.remove('active');
-              toggle.classList.remove('active');
-              overlay.classList.remove('active');
-              document.body.style.overflow = '';
-
-              // Close any open submenus
-              submenus.forEach(openSubmenu => {
-                openSubmenu.classList.remove('open');
-              });
-
-              // Navigate to the page
-              window.location.href = link.href;
-            }
+            // Toggle current submenu
+            submenu.classList.toggle('open');
           }
         });
       }
+    });
+
+    // Handle submenu navigation - auto close and navigate
+    const submenuLinks = document.querySelectorAll('.submenu a:not(.submenu-back)');
+    submenuLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        // Allow navigation but close mobile menu
+        if (window.innerWidth <= 768) {
+          setTimeout(() => {
+            toggleMenu();
+          }, 100);
+        }
+      });
     });
 
     // Handle back button in submenu
@@ -98,26 +79,43 @@ document.addEventListener("DOMContentLoaded", function() {
     backButtons.forEach(backButton => {
       backButton.addEventListener('click', function(e) {
         e.preventDefault();
-        const submenu = this.closest('.has-submenu');
-        if (submenu) {
-          submenu.classList.remove('open');
+        e.stopPropagation();
+
+        // Close the submenu and go back to main menu
+        const parentSubmenu = this.closest('.has-submenu');
+        if (parentSubmenu) {
+          parentSubmenu.classList.remove('open');
         }
       });
     });
 
-    // Close menu when window is resized to desktop
+    // Close menus when window is resized to desktop
     window.addEventListener('resize', function() {
       if (window.innerWidth > 768) {
+        // Close mobile menu
         menu.classList.remove('active');
         toggle.classList.remove('active');
         overlay.classList.remove('active');
         document.body.style.overflow = '';
 
         // Close all submenus
-        submenus.forEach(submenu => {
+        const openSubmenus = document.querySelectorAll('.has-submenu.open');
+        openSubmenus.forEach(submenu => {
           submenu.classList.remove('open');
         });
       }
     });
   }
+
+  // Add click handlers for book cards to ensure they work
+  document.addEventListener('click', function(e) {
+    const bookCardLink = e.target.closest('.book-card-link');
+    if (bookCardLink && !e.target.closest('.amazon-link-wrapper')) {
+      // If clicking on book card but not on amazon link, navigate to book page
+      const href = bookCardLink.getAttribute('href');
+      if (href && href !== '#') {
+        window.location.href = href;
+      }
+    }
+  });
 });

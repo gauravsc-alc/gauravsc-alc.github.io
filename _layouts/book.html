@@ -1,0 +1,182 @@
+---
+layout: default
+---
+
+<div class="book-detail-container">
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>›</span>
+    <a href="/books.html">Books</a>
+    <span>›</span>
+    <a href="/books/category/{{ page.book_category | slugify }}.html">{{ page.book_category }}</a>
+    <span>›</span>
+    <span>{{ page.title }}</span>
+  </div>
+
+  <div class="book-detail-content">
+    <div class="book-image-section">
+      <div class="book-image-container">
+        <img src="{{ page.cover }}" alt="{{ page.title }}" class="book-detail-image" />
+        <div class="book-badge">
+          {% if page.featured %}
+            <span class="badge featured">Featured</span>
+          {% endif %}
+          {% if page.bestseller %}
+            <span class="badge bestseller">Bestseller</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="book-quick-actions">
+        {% if page.amazon_link %}
+          <a href="{{ page.amazon_link }}" class="btn btn-primary btn-animated" target="_blank">
+            <span class="btn-icon">🛒</span>
+            <span class="btn-text">Buy on Amazon</span>
+          </a>
+        {% endif %}
+
+        <button class="btn btn-secondary btn-animated" onclick="shareBook()">
+          <span class="btn-icon">📤</span>
+          <span class="btn-text">Share Book</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="book-info-section">
+      <div class="book-header">
+        <h1 class="book-detail-title">{{ page.title }}</h1>
+        <p class="book-detail-author">by <strong>{{ page.author }}</strong></p>
+
+        {% if page.rating %}
+          <div class="book-rating">
+            <div class="stars">
+              {% assign full_stars = page.rating | floor %}
+              {% assign half_star = page.rating | modulo: 1 %}
+              {% for i in (1..5) %}
+                {% if i <= full_stars %}
+                  <span class="star filled">★</span>
+                {% elsif i == full_stars | plus: 1 and half_star >= 0.5 %}
+                  <span class="star half">★</span>
+                {% else %}
+                  <span class="star">☆</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <span class="rating-text">({{ page.rating }}/5)</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="book-meta">
+        {% if page.book_category %}
+          <div class="meta-item">
+            <span class="meta-label">Category:</span>
+            <a href="/books/category/{{ page.book_category | slugify }}.html" class="category-link">{{ page.book_category }}</a>
+          </div>
+        {% endif %}
+
+        {% if page.price %}
+          <div class="meta-item">
+            <span class="meta-label">Price:</span>
+            <span class="book-price-display">{{ page.price }}</span>
+          </div>
+        {% endif %}
+
+        {% if page.isbn %}
+          <div class="meta-item">
+            <span class="meta-label">ISBN:</span>
+            <span>{{ page.isbn }}</span>
+          </div>
+        {% endif %}
+
+        {% if page.pages %}
+          <div class="meta-item">
+            <span class="meta-label">Pages:</span>
+            <span>{{ page.pages }}</span>
+          </div>
+        {% endif %}
+
+        {% if page.publication_date %}
+          <div class="meta-item">
+            <span class="meta-label">Published:</span>
+            <span>{{ page.publication_date }}</span>
+          </div>
+        {% endif %}
+
+        {% if page.language %}
+          <div class="meta-item">
+            <span class="meta-label">Language:</span>
+            <span>{{ page.language }}</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="book-description">
+        <h3>About This Book</h3>
+        <div class="description-content">
+          {{ content }}
+        </div>
+      </div>
+
+      {% if page.key_features %}
+        <div class="book-features">
+          <h3>Key Features</h3>
+          <ul class="features-list">
+            {% for feature in page.key_features %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="book-actions">
+        <a href="/books/category/{{ page.book_category | slugify }}.html" class="btn btn-secondary btn-animated">
+          <span class="btn-text">More {{ page.book_category }} Books</span>
+        </a>
+
+        <a href="/books.html" class="btn btn-secondary btn-animated">
+          <span class="btn-text">All Books</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Books Section -->
+  <div class="related-books">
+    <h3>You Might Also Like</h3>
+    <div class="related-books-grid">
+      {% assign related_books = site.books | where: "book_category", page.book_category | limit: 4 %}
+      {% for book in related_books %}
+        {% unless book.url == page.url %}
+          <a href="{{ book.url }}" class="related-book-card">
+            <img src="{{ book.cover }}" alt="{{ book.title }}" />
+            <div class="related-book-info">
+              <h4>{{ book.title }}</h4>
+              <p>by {{ book.author }}</p>
+              {% if book.price %}
+                <span class="price">{{ book.price }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+function shareBook() {
+  if (navigator.share) {
+    navigator.share({
+      title: '{{ page.title }}',
+      text: 'Check out this book: {{ page.title }} by {{ page.author }}',
+      url: window.location.href
+    });
+  } else {
+    // Fallback for browsers that don't support Web Share API
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('Book link copied to clipboard!');
+    });
+  }
+}
+</script>

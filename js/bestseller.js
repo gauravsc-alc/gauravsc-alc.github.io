@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", function() {
         title: "{{ book.title | escape }}",
         author: "{{ book.author | escape }}",
         cover: "{{ book.cover }}",
-        amazon: "{{ book.amazon_link }}"
+        amazon: "{{ book.amazon_link }}",
+        url: "{{ book.url }}"
       }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];
+
   if (books.length > 0) {
     setTimeout(function() {
       const idx = Math.floor(Math.random() * books.length);
@@ -18,7 +20,15 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById('bestseller-title').textContent = book.title;
       document.getElementById('bestseller-author').textContent = "by " + book.author;
       document.getElementById('bestseller-amazon').href = book.amazon;
+      document.getElementById('bestseller-view-details').href = book.url;
       document.getElementById('bestseller-popup').style.display = 'flex';
     }, 3000); // Show after 3 seconds
   }
+
+  // Close popup when clicking outside
+  document.getElementById('bestseller-popup').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
 });
