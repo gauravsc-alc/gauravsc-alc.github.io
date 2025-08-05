@@ -79,10 +79,51 @@
   opacity: 1;
 }
 
+/* Mobile "Publish With Us" button at left corner */
+.mobile-publish-cta {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  z-index: 1001;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}
+
+.mobile-publish-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  padding: 12px 8px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-medium);
+  box-shadow: 0 2px 8px rgba(203, 152, 25, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  min-height: 80px;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}
+
+.mobile-publish-btn:hover {
+  transform: translateX(2px) scale(1.05);
+  box-shadow: 0 4px 15px rgba(203, 152, 25, 0.4);
+}
+
 /* Mobile responsive styles */
 @media (max-width: 768px) {
   .header-flex {
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
     gap: 15px;
   }
@@ -91,9 +132,8 @@
     justify-content: center;
     order: 2;
     flex: 1;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
   }
 
   .logo-small {
@@ -112,18 +152,29 @@
 
   .menu-toggle {
     display: block;
-    order: 1;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+    order: 3;
+    position: relative;
+    right: 0;
+    top: 0;
+    transform: none;
+  }
+
+  /* Show mobile publish CTA */
+  .mobile-publish-cta {
+    display: block;
+  }
+
+  /* Hide desktop publish CTA on mobile */
+  .publish-cta {
+    display: none;
   }
 
   .menu {
     flex-direction: column;
     position: fixed;
     top: var(--header-height);
-    left: 0;
+    left: auto;
+    right: 0;
     bottom: 0;
     background: var(--background-primary);
     width: 280px;
@@ -131,7 +182,7 @@
     box-shadow: 2px 0 8px rgba(0,0,0,0.15);
     display: none;
     padding: 20px 0;
-    transform: translateX(-100%);
+    transform: translateX(100%);
     transition: transform var(--transition-fast);
     z-index: 1000;
     overflow-y: auto;
@@ -150,10 +201,16 @@
 
   .menu li a {
     padding: 15px 25px;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     width: 100%;
     border-radius: 0;
     text-align: left;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-fast);
   }
 
   .menu li a:hover {
@@ -168,7 +225,7 @@
 
   /* Mobile submenu styles */
   .has-submenu > a::after {
-    /* content: " ▶"; */
+    content: " ▶";
     float: right;
     transition: transform var(--transition-fast);
     font-size: 0.8rem;
@@ -182,7 +239,8 @@
   .submenu {
     position: fixed;
     top: var(--header-height);
-    left: 0;
+    left: auto;
+    right: 0;
     bottom: 0;
     background: var(--background-primary);
     width: 300px;
@@ -190,7 +248,7 @@
     box-shadow: 3px 0 12px rgba(0,0,0,0.2);
     padding: 0;
     margin: 0;
-    transform: translateX(-100%);
+    transform: translateX(100%);
     transition: transform var(--transition-fast);
     z-index: 1002;
     overflow-y: auto;
@@ -266,6 +324,25 @@
     background-color: #fff0d6 !important;
     color: var(--primary-hover) !important;
   }
+
+  /* Remove publish CTA boundary on mobile */
+  .publish-cta {
+    display: block;
+    margin: 10px 25px;
+  }
+
+  .btn-publish-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  /* Hide publish CTA on mobile for space */
+  .publish-cta {
+    display: none;
+  }
 }
 
 /* Tablet and larger mobile devices */
@@ -336,6 +413,18 @@
     font-size: 0.8rem;
   }
 
+  .logo-small {
+    height: 26px;
+  }
+}
+  .header-text {
+    font-size: 0.8rem;
+  }
+
+  .logo-small {
+    height: 26px;
+  }
+}
   .logo-small {
     height: 26px;
   }

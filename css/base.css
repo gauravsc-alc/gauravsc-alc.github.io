@@ -46,13 +46,50 @@ body {
   flex-direction: column;
   min-height: 100vh;
   line-height: 1.6;
+  position: relative;
 }
 
-.container {
-  width: 90%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 15px;
+/* Ensure navigation works properly */
+.menu {
+  display: flex !important;
+}
+
+/* Desktop menu visibility */
+@media (min-width: 769px) {
+  .menu {
+    display: flex !important;
+    position: static !important;
+    transform: none !important;
+    background: transparent !important;
+    width: auto !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .menu-toggle {
+    display: none !important;
+  }
+
+  .menu-overlay {
+    display: none !important;
+  }
+}
+
+/* Mobile menu fixes */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+  }
+
+  .menu.active {
+    display: flex !important;
+  }
+
+  .menu-toggle {
+    display: block !important;
+  }
 }
 
 /* Main content area */
@@ -122,5 +159,35 @@ body {
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+/* Ensure proper z-index stacking */
+.site-header {
+  z-index: 1000;
+}
+
+.category-sidebar {
+  z-index: 900;
+}
+
+.mobile-publish-cta {
+  z-index: 1001;
+}
+
+.floating-category-menu {
+  z-index: 1000;
+}
+
+/* Mobile layout adjustments */
+@media (max-width: 768px) {
+  body {
+    padding-top: var(--header-height);
+    position: relative;
+  }
+
+  /* Ensure mobile buttons don't interfere */
+  .mobile-publish-cta {
+    pointer-events: auto;
   }
 }

@@ -11,14 +11,9 @@ permalink: /
 <section class="hero">
   <div class="container">
     <h1>Delta Publications</h1>
-    <p>Discover the best books and authors from India's leading publishing house.</p>
+    <p>Discover the best books and authors from India's leading x`ing house.</p>
   </div>
 </section>
-
-<!-- Section Separator -->
-<!-- <div class="section-separator">
-  <img src="/images/logo.png" alt="Delta Publications" />
-</div> -->
 
 <!-- Featured Books Section -->
 <section class="featured-books">
@@ -41,11 +36,11 @@ permalink: /
               <div class="book-author">by {{ book.author }}</div>
               {% if book.amazon_link %}
                 <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
-                  <button type="button" onclick="window.open('{{ book.amazon_link }}', '_blank'); event.stopPropagation();" class="amazon-link">Buy on Amazon</button>
+                  <button type="button" onclick="window.open('{{ book.amazon_link }}', '_blank'); event.stopPropagation();" class="amazon-link">🛒 Buy on Amazon</button>
                 </div>
               {% elsif book.amazon_link == nil or book.amazon_link == "" %}
                 <div class="amazon-link-wrapper">
-                  <button class="no-amazon-link" disabled>not on Amazon</button>
+                  <button class="no-amazon-link" disabled>❌ Not on Amazon</button>
                 </div>
               {% endif %}
             </div>
@@ -56,23 +51,91 @@ permalink: /
   </div>
 </section>
 
-<!-- Authors Section -->
-{% if site.authors and site.authors.size > 0 %}
-<section class="featured-books">
+<!-- Author Spotlight Section -->
+<section class="author-spotlight">
   <div class="container">
-    <h2>Our Authors</h2>
-    <div class="authors-slider">
-      {% for author in site.authors %}
-        <div class="author-card">
-          <img src="{{ author.image | default: '/images/default-author.jpg' }}" alt="{{ author.name }}" />
-          <div class="author-name">{{ author.name }}</div>
-          <div class="author-bio">{{ author.bio | truncate: 80 }}</div>
+    <h2>✍️ Author Spotlight</h2>
+    <div class="author-spotlight-slider">
+      {% if site.authors and site.authors.size > 0 %}
+        {% for author in site.authors limit: 6 %}
+          <div class="spotlight-card">
+            <div class="spotlight-image">
+              <img src="{{ author.image | default: '/images/default-author.jpg' }}" alt="{{ author.name }}" />
+              <div class="spotlight-overlay">
+                <a href="{{ author.url | default: '/authors.html' }}" class="spotlight-btn">📖 View Profile</a>
+              </div>
+            </div>
+            <div class="spotlight-info">
+              <h3>{{ author.name }}</h3>
+              <p>{{ author.bio | truncate: 120 }}</p>
+              {% if author.books %}
+                <div class="author-books">
+                  <strong>📚 Books:</strong> {{ author.books | join: ', ' | truncate: 80 }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <!-- Placeholder authors for demonstration -->
+        <div class="spotlight-card">
+          <div class="spotlight-image">
+            <img src="/images/default-author.jpg" alt="Featured Author" />
+            <div class="spotlight-overlay">
+              <a href="/authors.html" class="spotlight-btn">📖 View Profile</a>
+            </div>
+          </div>
+          <div class="spotlight-info">
+            <h3>Featured Author</h3>
+            <p>Meet our talented writers who bring stories to life with their exceptional creativity and expertise.</p>
+            <div class="author-books">
+              <strong>📚 Specializes in:</strong> Fiction, Non-fiction, Self-help
+            </div>
+          </div>
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>
-{% endif %}
+
+<!-- Meet Our Authors Section -->
+<section class="meet-authors">
+  <div class="container">
+    <div class="authors-cta">
+      <div class="authors-cta-content">
+        <h2>🤝 Meet Our Authors</h2>
+        <p>Discover the talented writers behind our exceptional books. From bestselling novelists to expert non-fiction authors, our diverse community of writers brings unique perspectives and expertise to every page.</p>
+        <div class="authors-stats">
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">📝 Published Authors</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">200+</span>
+            <span class="stat-label">📚 Books Published</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">🏆 Awards Won</span>
+          </div>
+        </div>
+        <div class="authors-actions">
+          <a href="/authors.html" class="btn btn-primary btn-animated">
+            <span class="btn-icon">✍️</span>
+            <span class="btn-text">Meet Our Authors</span>
+          </a>
+          <a href="/publish-with-us.html" class="btn btn-secondary btn-animated">
+            <span class="btn-icon">📝</span>
+            <span class="btn-text">Publish With Us</span>
+          </a>
+        </div>
+      </div>
+      <div class="authors-cta-image">
+        <img src="/images/authors-banner.jpg" alt="Our Authors" />
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Bestseller Popup -->
 <div id="bestseller-popup" class="bestseller-popup" style="display:none;">

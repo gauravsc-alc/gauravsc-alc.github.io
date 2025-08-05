@@ -11,37 +11,232 @@ permalink: /authors.html
       <p>Meet the talented writers behind our exceptional books.</p>
     </div>
 
-    {% if site.authors and site.authors.size > 0 %}
     <div class="content-section" style="margin-top: 40px;">
-      <div class="authors-slider">
-        {% for author in site.authors %}
-          <div class="author-card">
-            <img src="{{ author.image | default: '/images/default-author.jpg' }}" alt="{{ author.name }}" />
-            <div class="author-name">{{ author.name }}</div>
-            <div class="author-bio">{{ author.bio }}</div>
-            {% if author.books %}
-              <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
-                  <strong>Books:</strong> {{ author.books | join: ', ' }}
-                </p>
+      <!-- Debug information - remove in production -->
+      {% comment %}
+      <div style="background: #f0f0f0; padding: 20px; margin-bottom: 20px; border-radius: 10px;">
+        <p><strong>Debug Info:</strong></p>
+        <p>Total authors found: {{ site.authors.size }}</p>
+        <p>Authors collection exists: {% if site.authors %}Yes{% else %}No{% endif %}</p>
+      </div>
+      {% endcomment %}
+
+      {% if site.authors and site.authors.size > 0 %}
+        <div class="authors-grid">
+          {% for author in site.authors %}
+            <div class="author-profile-card">
+              <a href="{{ author.url }}" class="author-card-link">
+                <div class="author-image-container">
+                  <img src="{{ author.image | default: '/images/default-author.jpg' }}" alt="{{ author.name }}" />
+                  <div class="author-overlay">
+                    <span class="view-profile">View Profile</span>
+                  </div>
+                </div>
+                <div class="author-info">
+                  <h3 class="author-name">{{ author.name }}</h3>
+                  {% if author.specialty %}
+                    <p class="author-specialty">{{ author.specialty | split: ',' | first }}</p>
+                  {% endif %}
+                  <p class="author-bio">{{ author.bio | truncate: 120 }}</p>
+                  {% if author.books %}
+                    <div class="author-stats">
+                      <span class="stat">{{ author.books.size }} Books</span>
+                      {% if author.experience_years %}
+                        <span class="stat">{{ author.experience_years }}+ Years</span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% if author.location %}
+                    <p class="author-location">{{ author.location }}</p>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <!-- Fallback content when no authors are found -->
+        <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-medium); text-align: center;">
+          <h2 style="color: var(--text-muted); margin-bottom: 20px;">Authors Coming Soon</h2>
+          <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 25px;">
+            We're currently updating our authors page with detailed profiles. Please check back soon to meet our talented writers.
+          </p>
+
+          <!-- Static author previews while collection loads -->
+          <div style="margin-top: 30px;">
+            <h3 style="color: var(--primary-color); margin-bottom: 20px;">Featured Authors</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+
+              <div style="background: var(--primary-light); padding: 20px; border-radius: 15px; text-align: left;">
+                <h4 style="color: var(--primary-color); margin-bottom: 10px;">Michael Stevens</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Self-Help, Personal Development</p>
+                <p style="color: var(--text-secondary); font-size: 0.85rem;">Renowned author and motivational speaker with over 15 years of experience in personal development.</p>
               </div>
-            {% endif %}
+
+              <div style="background: var(--primary-light); padding: 20px; border-radius: 15px; text-align: left;">
+                <h4 style="color: var(--primary-color); margin-bottom: 10px;">Dr. Sarah Johnson</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Child Psychology, Parenting</p>
+                <p style="color: var(--text-secondary); font-size: 0.85rem;">Pediatric psychologist and child development expert with over 20 years of clinical experience.</p>
+              </div>
+
+              <div style="background: var(--primary-light); padding: 20px; border-radius: 15px; text-align: left;">
+                <h4 style="color: var(--primary-color); margin-bottom: 10px;">Rajesh Kumar</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Children's Literature</p>
+                <p style="color: var(--text-secondary); font-size: 0.85rem;">Celebrated children's author with over 12 years of experience creating engaging stories for young minds.</p>
+              </div>
+
+            </div>
           </div>
-        {% endfor %}
-      </div>
+
+          <div style="margin-top: 30px;">
+            <a href="/books.html" class="btn btn-primary btn-animated" style="margin-right: 15px;">
+              <span class="btn-text">View Our Books</span>
+            </a>
+            <a href="/contact.html" class="btn btn-secondary btn-animated">
+              <span class="btn-text">Contact Us</span>
+            </a>
+          </div>
+        </div>
+      {% endif %}
     </div>
-    {% else %}
-    <div class="content-section" style="margin-top: 40px;">
-      <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-medium); text-align: center;">
-        <h2 style="color: var(--text-muted); margin-bottom: 20px;">Coming Soon</h2>
-        <p style="color: var(--text-secondary); font-size: 1.1rem;">
-          We're currently updating our authors page. Please check back soon to meet our talented writers.
-        </p>
-        <a href="/books.html" class="btn btn-primary btn-animated" style="margin-top: 20px;">
-          <span class="btn-text">View Our Books</span>
-        </a>
-      </div>
-    </div>
-    {% endif %}
   </div>
 </main>
+
+<style>
+.authors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.author-profile-card {
+  background: var(--background-primary);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+  transition: all var(--transition-medium);
+  border: 1px solid #f0f0f0;
+}
+
+.author-profile-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-heavy);
+  border-color: var(--primary-color);
+}
+
+.author-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.author-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.author-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-medium);
+}
+
+.author-profile-card:hover .author-image-container img {
+  transform: scale(1.1);
+}
+
+.author-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(203, 152, 25, 0.9), rgba(166, 124, 20, 0.9));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.author-profile-card:hover .author-overlay {
+  opacity: 1;
+}
+
+.view-profile {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border: 2px solid white;
+  border-radius: 25px;
+  background: transparent;
+  transition: all var(--transition-fast);
+}
+
+.view-profile:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+.author-info {
+  padding: 25px;
+}
+
+.author-name {
+  margin: 0 0 10px 0;
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.author-specialty {
+  margin: 0 0 15px 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.author-bio {
+  margin: 0 0 15px 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.author-stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.stat {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.author-location {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .authors-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .author-profile-card {
+    margin: 0 auto;
+    max-width: 400px;
+  }
+}
+</style>

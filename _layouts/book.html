@@ -164,6 +164,29 @@ layout: default
   </div>
 </div>
 
+<!-- Floating Category Menu for Mobile -->
+<div class="floating-category-menu">
+  <button class="floating-menu-toggle" aria-label="Open category menu">
+    📚
+  </button>
+  <div class="floating-menu-content">
+    <div class="floating-menu-header">
+      <h4>Categories</h4>
+    </div>
+    <ul class="floating-category-list">
+      <li><a href="/books.html">All Books</a></li>
+      {% assign categories = site.books | map: "book_category" | uniq | sort %}
+      {% for category in categories %}
+        <li>
+          <a href="/books/category/{{ category | slugify }}.html">
+            {{ category }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
 <script>
 function shareBook() {
   if (navigator.share) {
