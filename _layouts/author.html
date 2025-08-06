@@ -1,4 +1,3 @@
-/* filepath: c:\Guarav_dev\Delta_Publish\gauravsc-alc.github.io\_layouts\author.html */
 ---
 layout: default
 ---
@@ -22,7 +21,6 @@ layout: default
           {% endif %}
         </div>
       </div>
-
       <div class="author-quick-info">
         <h1 class="author-detail-name">✍️ {{ page.name }}</h1>
         {% if page.specialty %}
@@ -31,14 +29,29 @@ layout: default
         {% if page.location %}
           <p class="author-location">📍 <strong>Location:</strong> {{ page.location }}</p>
         {% endif %}
-
+        {% if page.experience_years %}
+          <p class="author-experience">🗓️ <strong>Experience:</strong> {{ page.experience_years }} years</p>
+        {% endif %}
+        {% if page.education %}
+          <p class="author-education">🎓 <strong>Education:</strong> {{ page.education }}</p>
+        {% endif %}
+        {% if page.certifications %}
+          <div class="author-certifications">
+            <strong>📜 Certifications:</strong>
+            <ul>
+              {% for cert in page.certifications %}
+                <li>{{ cert }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
         {% if page.social_links %}
           <div class="author-social-quick">
             <h4>🔗 Connect</h4>
             <div class="social-links-grid">
               {% for link in page.social_links %}
                 <a href="{{ link.url }}" target="_blank" class="social-link-quick">
-                  {% if link.platform contains 'Twitter' %}🐦{% elsif link.platform contains 'LinkedIn' %}💼{% elsif link.platform contains 'Instagram' %}📸{% elsif link.platform contains 'YouTube' %}📺{% elsif link.platform contains 'Website' %}🌐{% else %}🔗{% endif %}
+                  {% if link.platform contains 'Twitter' %}🐦{% elsif link.platform contains 'LinkedIn' %}💼{% elsif link.platform contains 'Instagram' %}📸{% elsif link.platform contains 'YouTube' %}📺{% elsif link.platform contains 'Website' or link.platform contains 'Author Website' or link.platform contains 'Professional Website' %}🌐{% elsif link.platform contains 'Facebook' %}📘{% else %}🔗{% endif %}
                   {{ link.platform }}
                 </a>
               {% endfor %}
@@ -82,10 +95,12 @@ layout: default
               <span class="stat-label">🏆 Major Achievements</span>
             </div>
           {% endif %}
-          <div class="stat-card">
-            <span class="stat-number">20+</span>
-            <span class="stat-label">⭐ Years Experience</span>
-          </div>
+          {% if page.experience_years %}
+            <div class="stat-card">
+              <span class="stat-number">{{ page.experience_years }}+</span>
+              <span class="stat-label">⭐ Years Experience</span>
+            </div>
+          {% endif %}
         </div>
       {% endif %}
     </div>
@@ -101,7 +116,7 @@ layout: default
         {% if book %}
           <a href="{{ book.url }}" class="author-book-card">
             <div class="book-image-wrapper">
-              <img src="{{ book.cover }}" alt="{{ book.title }}" />
+              <img src="{{ book.cover | default: '/images/default-book.jpg' }}" alt="{{ book.title }}" />
               <div class="book-overlay">
                 <span class="view-book">📖 View Details</span>
               </div>
@@ -119,6 +134,16 @@ layout: default
               {% endif %}
             </div>
           </a>
+        {% else %}
+          <div class="author-book-card">
+            <div class="book-image-wrapper">
+              <img src="/images/default-book.jpg" alt="{{ book_title }}" />
+            </div>
+            <div class="author-book-info">
+              <h4>{{ book_title }}</h4>
+              <p class="book-category">Book details coming soon</p>
+            </div>
+          </div>
         {% endif %}
       {% endfor %}
     </div>
@@ -209,6 +234,25 @@ layout: default
   margin-bottom: 15px;
   font-size: 1rem;
   line-height: 1.4;
+}
+
+.author-experience, .author-education {
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.author-certifications ul {
+  margin: 0 0 10px 0;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.author-certifications li {
+  margin-bottom: 4px;
+  list-style: disc inside;
 }
 
 .author-social-quick h4 {

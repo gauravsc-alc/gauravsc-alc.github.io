@@ -1,9 +1,8 @@
-/* filepath: c:\Guarav_dev\Delta_Publish\gauravsc-alc.github.io\_authors\sarah-johnson.md */
 ---
 name: "Dr. Sarah Johnson"
 layout: author
 permalink: /authors/sarah-johnson/
-image: "/images/authors/sarah-johnson.jpg"
+image: "/images/authors/sarah-johnson.jpg" # or "/images/default-author.jpg" if missing
 bio: "Dr. Sarah Johnson is a pediatric psychologist and child development expert with over 20 years of clinical experience. She specializes in helping parents navigate the challenges of raising children in the modern world."
 specialty: "Child Psychology, Parenting, Child Development"
 location: "Delhi, India"

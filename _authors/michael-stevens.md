@@ -1,44 +1,43 @@
-/* filepath: c:\Guarav_dev\Delta_Publish\gauravsc-alc.github.io\_authors\michael-stevens.md */
 ---
-name: "Michael Stevens"
+name: "Rajesh Kumar"
 layout: author
-permalink: /authors/michael-stevens/
-image: "/images/authors/michael-stevens.jpg"
-bio: "Michael Stevens is a renowned self-help author and motivational speaker with over 15 years of experience in personal development. His practical approach to self-improvement has helped thousands of readers transform their lives."
-specialty: "Self-Help, Personal Development, Motivation"
-location: "Mumbai, India"
+permalink: /authors/rajesh-kumar/
+image: "/images/authors/rajesh-kumar.jpg" # or "/images/default-author.jpg" if missing
+bio: "Rajesh Kumar is an acclaimed technology author and speaker, known for his expertise in software development and project management. With over 20 years in the tech industry, he shares his knowledge to help others excel in their careers."
+specialty: "Technology, Software Development, Project Management"
+location: "Bangalore, India"
 books:
-  - "The Path to Self Improvement"
-  - "Mastering Your Mind"
-  - "Success Habits"
+  - "Mastering JavaScript"
+  - "The Pragmatic Programmer's Guide"
+  - "Agile Project Management in Action"
 achievements:
-  - "Bestselling author with over 100,000 copies sold"
-  - "Featured speaker at TEDx Mumbai 2023"
-  - "Winner of the Self-Help Author Award 2024"
-  - "Regular contributor to major lifestyle magazines"
+  - "Authored over 10 bestselling books on technology and management"
+  - "Keynote speaker at global tech conferences like Web Summit and TechCrunch Disrupt"
+  - "Recipient of the 'Best Technology Author' award at the Global Book Awards 2023"
+  - "Contributed articles and papers to major tech journals and magazines"
 social_links:
   - platform: "Twitter"
-    url: "https://twitter.com/michaelstevens"
+    url: "https://twitter.com/rajeshkumar"
   - platform: "LinkedIn"
-    url: "https://linkedin.com/in/michaelstevens"
+    url: "https://linkedin.com/in/rajeshkumar"
   - platform: "Website"
-    url: "https://michaelstevens.com"
+    url: "https://rajeshkumar.com"
 ---
 
-Michael Stevens began his journey as a personal development coach after overcoming his own struggles with self-doubt and lack of direction in his early twenties. His transformational experience led him to dedicate his life to helping others achieve their full potential.
+Rajesh Kumar is a prominent figure in the technology writing space, celebrated for his ability to distill complex technical concepts into accessible and engaging content. His journey from a software engineer to a sought-after author and speaker is a testament to his passion for technology and education.
 
 ## Professional Background
 
-With a Master's degree in Psychology and certifications in life coaching, Michael combines scientific research with practical wisdom in his writing. His evidence-based approach to self-improvement has made him a trusted voice in the personal development community.
+Holding a Bachelor's degree in Computer Science and a Master's in Business Administration, Rajesh has a unique blend of technical and managerial expertise. His professional experience spans across various roles in software development, system architecture, and project management, providing him with a holistic understanding of the tech industry.
 
 ## Writing Philosophy
 
-Michael believes that true change comes from consistent small actions rather than dramatic overnight transformations. His books focus on building sustainable habits and developing a growth mindset that leads to lasting success.
+Rajesh's writing is driven by the desire to educate and empower tech professionals at all stages of their careers. He emphasizes practical knowledge and real-world applications, ensuring that his readers can immediately benefit from his insights and advice.
 
 ## Recent Projects
 
-Currently working on his fourth book, "The Science of Success," which explores the psychological principles behind achievement and fulfillment. He also runs online workshops and coaching programs for aspiring entrepreneurs and professionals.
+He is currently working on a new book titled "Cloud Computing Demystified," aimed at helping professionals understand and leverage cloud technologies effectively. Additionally, he offers online courses and webinars on software development best practices and agile project management.
 
 ## Impact and Recognition
 
-Michael's work has been translated into 8 languages and has reached readers in over 25 countries. His practical frameworks for goal setting and habit formation have been adopted by corporations and educational institutions worldwide.
+With a readership that spans the globe, Rajesh's books and articles have inspired countless individuals to pursue careers in technology and improve their professional skills. His contributions to the field have been recognized with several awards, and he continues to be a leading voice in technology writing.

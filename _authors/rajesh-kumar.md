@@ -1,4 +1,3 @@
-/* filepath: c:\Guarav_dev\Delta_Publish\gauravsc-alc.github.io\_authors\rajesh-kumar.md */
 ---
 name: "Rajesh Kumar"
 layout: author
