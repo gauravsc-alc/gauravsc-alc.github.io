@@ -64,8 +64,53 @@
   <!-- Main page content will be injected here -->
   {{ content }}
 
-  <footer>
-    <p>&copy; 2025 Delta Publications. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <!-- <div class="footer-col">
+        <h4>About</h4>
+        <p>Delta Publications is dedicated to bringing you the best books and authors from India and beyond. Inspiring, educating, and entertaining readers worldwide.</p>
+      </div> -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/authors.html">Authors</a></li>
+          <li><a href="/books.html">Books</a></li>
+          <!-- <li><a href="/blogs.html">Blogs</a></li> -->
+          <li><a href="/publish-with-us.html">Publish With Us</a></li>
+          <!-- <li><a href="/contact.html">Contact</a></li> -->
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><a href="/media.html">Media</a></li>
+          <li><a href="/events.html">Events</a></li>
+          <li><a href="/blogs.html">Blogs</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms-and-conditions.html">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>
+          Delta Publications<br>
+          123 Book Lane, Bangalore, India<br>
+          Phone: <a href="tel:+911234567890">+91 12345 67890</a><br>
+          Email: <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        </p>
+        <!-- <a href="/contact.html" class="footer-contact-btn">Contact With Us</a> -->
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Delta Publications. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="/js/slideshow.js"></script>
