@@ -4,9 +4,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (toggle && menu) {
     // Create overlay for mobile menu
-    const overlay = document.createElement('div');
-    overlay.className = 'menu-overlay';
-    document.body.appendChild(overlay);
+    let overlay = document.querySelector('.menu-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'menu-overlay';
+      document.body.appendChild(overlay);
+    }
 
     // Toggle menu function
     function toggleMenu() {
@@ -32,8 +35,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Event listeners
-    toggle.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      e.preventDefault();
+      toggleMenu();
+    });
 
     // Handle submenu toggle on mobile
     const submenus = document.querySelectorAll('.has-submenu');
@@ -67,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
       link.addEventListener('click', function(e) {
         // Allow navigation and close mobile menu after a short delay
         if (window.innerWidth <= 768) {
-          // Don't prevent default - let the navigation happen
           setTimeout(() => {
             toggleMenu();
           }, 100);
@@ -107,45 +117,34 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    // Handle swipe gestures for mobile menu
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    document.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const swipeDistance = touchEndX - touchStartX;
-
-      if (window.innerWidth <= 768) {
-        // Swipe right to open menu (only if menu is closed and swipe starts from left edge)
-        if (swipeDistance > swipeThreshold && touchStartX < 50 && !menu.classList.contains('active')) {
-          toggleMenu();
-        }
-        // Swipe left to close menu (only if menu is open)
-        else if (swipeDistance < -swipeThreshold && menu.classList.contains('active')) {
-          toggleMenu();
-        }
+    // Close menu when clicking anywhere outside
+    document.addEventListener('click', function(e) {
+      // Don't close if clicking on menu toggle, menu, or submenu
+      if (!e.target.closest('.menu-toggle') &&
+          !e.target.closest('.menu') &&
+          !e.target.closest('.submenu') &&
+          menu.classList.contains('active')) {
+        toggleMenu();
       }
-    }
+    });
   }
 
-  // Add click handlers for book cards to ensure they work
-  document.addEventListener('click', function(e) {
-    const bookCardLink = e.target.closest('.book-card-link');
-    if (bookCardLink && !e.target.closest('.amazon-link-wrapper')) {
-      // If clicking on book card but not on amazon link, navigate to book page
-      const href = bookCardLink.getAttribute('href');
-      if (href && href !== '#') {
-        window.location.href = href;
+  // Ensure submenu hover works on desktop
+  if (window.innerWidth > 768) {
+    const hasSubmenu = document.querySelectorAll('.has-submenu');
+    hasSubmenu.forEach(item => {
+      const submenu = item.querySelector('.submenu');
+      if (submenu) {
+        item.addEventListener('mouseenter', function() {
+          submenu.style.display = 'block';
+        });
+
+        item.addEventListener('mouseleave', function() {
+          submenu.style.display = 'none';
+        });
       }
-    }
-  });
+    });
+  }
 });
+
+//# sourceMappingURL=menu-toggle.js.map
