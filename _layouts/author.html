@@ -127,11 +127,16 @@ layout: default
               {% if book.price %}
                 <span class="price">💰 {{ book.price }}</span>
               {% endif %}
-              {% if book.amazon_link %}
-                <a href="{{ book.amazon_link }}" class="amazon-link-small" target="_blank" onclick="event.stopPropagation();">
-                  🛒 Buy on Amazon
+              <div class="book-actions-row">
+                {% if book.amazon_link %}
+                  <a href="{{ book.amazon_link }}" class="amazon-link-small" target="_blank" onclick="event.stopPropagation();">
+                    🛒 Buy
+                  </a>
+                {% endif %}
+                <a href="{{ book.url }}" class="view-details-btn">
+                  📖 Details
                 </a>
-              {% endif %}
+              </div>
             </div>
           </a>
         {% else %}
@@ -142,6 +147,9 @@ layout: default
             <div class="author-book-info">
               <h4>{{ book_title }}</h4>
               <p class="book-category">Book details coming soon</p>
+              <div class="book-actions-row">
+                <span class="coming-soon-badge">Coming Soon</span>
+              </div>
             </div>
           </div>
         {% endif %}
@@ -494,6 +502,48 @@ layout: default
   gap: 15px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.book-actions-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.amazon-link-small, .view-details-btn {
+  flex: 1;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-weight: 600;
+  display: inline-block;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.view-details-btn {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.view-details-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.coming-soon-badge {
+  background: #f0f0f0;
+  color: #777;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

@@ -27,6 +27,36 @@ layout: default
         </div>
       </div>
 
+      <div class="book-meta compact-meta">
+        {% if page.price %}
+          <div class="meta-item highlight-meta">
+            <span class="meta-label">Price:</span>
+            <span class="book-price-display">{{ page.price }}</span>
+          </div>
+        {% endif %}
+
+        {% if page.book_category %}
+          <div class="meta-item">
+            <span class="meta-label">Category:</span>
+            <a href="/books/category/{{ page.book_category | slugify }}.html" class="category-link">{{ page.book_category }}</a>
+          </div>
+        {% endif %}
+
+        {% if page.isbn %}
+          <div class="meta-item">
+            <span class="meta-label">ISBN:</span>
+            <span>{{ page.isbn }}</span>
+          </div>
+        {% endif %}
+
+        {% if page.pages %}
+          <div class="meta-item">
+            <span class="meta-label">Pages:</span>
+            <span>{{ page.pages }}</span>
+          </div>
+        {% endif %}
+      </div>
+
       <div class="book-quick-actions">
         {% if page.amazon_link %}
           <a href="{{ page.amazon_link }}" class="btn btn-primary btn-animated" target="_blank">
@@ -39,13 +69,28 @@ layout: default
           <span class="btn-icon">📤</span>
           <span class="btn-text">Share Book</span>
         </button>
+
+        {% assign author_page = site.authors | where: "name", page.author | first %}
+        {% if author_page %}
+          <a href="{{ author_page.url }}" class="btn btn-secondary btn-animated author-link-btn">
+            <span class="btn-icon">✍️</span>
+            <span class="btn-text">About {{ page.author }}</span>
+          </a>
+        {% endif %}
       </div>
     </div>
 
     <div class="book-info-section">
       <div class="book-header">
         <h1 class="book-detail-title">{{ page.title }}</h1>
-        <p class="book-detail-author">by <strong>{{ page.author }}</strong></p>
+        <p class="book-detail-author">by
+          {% assign author_page = site.authors | where: "name", page.author | first %}
+          {% if author_page %}
+            <a href="{{ author_page.url }}" class="author-link"><strong>{{ page.author }}</strong></a>
+          {% else %}
+            <strong>{{ page.author }}</strong>
+          {% endif %}
+        </p>
 
         {% if page.rating %}
           <div class="book-rating">
@@ -65,69 +110,95 @@ layout: default
             <span class="rating-text">({{ page.rating }}/5)</span>
           </div>
         {% endif %}
+
+        <div class="book-meta-secondary">
+          {% if page.publication_date %}
+            <div class="meta-item">
+              <span class="meta-label">Published:</span>
+              <span>{{ page.publication_date }}</span>
+            </div>
+          {% endif %}
+
+          {% if page.language %}
+            <div class="meta-item">
+              <span class="meta-label">Language:</span>
+              <span>{{ page.language }}</span>
+            </div>
+          {% endif %}
+        </div>
       </div>
 
-      <div class="book-meta">
-        {% if page.book_category %}
-          <div class="meta-item">
-            <span class="meta-label">Category:</span>
-            <a href="/books/category/{{ page.book_category | slugify }}.html" class="category-link">{{ page.book_category }}</a>
-          </div>
+      <!-- Tab Navigation System -->
+      <div class="book-tabs">
+        <button class="tab-btn active" data-tab="description">Description</button>
+        {% if page.key_features %}
+          <button class="tab-btn" data-tab="features">Key Features</button>
         {% endif %}
-
-        {% if page.price %}
-          <div class="meta-item">
-            <span class="meta-label">Price:</span>
-            <span class="book-price-display">{{ page.price }}</span>
-          </div>
-        {% endif %}
-
-        {% if page.isbn %}
-          <div class="meta-item">
-            <span class="meta-label">ISBN:</span>
-            <span>{{ page.isbn }}</span>
-          </div>
-        {% endif %}
-
-        {% if page.pages %}
-          <div class="meta-item">
-            <span class="meta-label">Pages:</span>
-            <span>{{ page.pages }}</span>
-          </div>
-        {% endif %}
-
-        {% if page.publication_date %}
-          <div class="meta-item">
-            <span class="meta-label">Published:</span>
-            <span>{{ page.publication_date }}</span>
-          </div>
-        {% endif %}
-
-        {% if page.language %}
-          <div class="meta-item">
-            <span class="meta-label">Language:</span>
-            <span>{{ page.language }}</span>
-          </div>
-        {% endif %}
+        <button class="tab-btn" data-tab="details">Details</button>
       </div>
 
-      <div class="book-description">
-        <h3>About This Book</h3>
-        <div class="description-content">
-          {{ content }}
+      <div class="tab-content active" id="description-tab">
+        <div class="book-description">
+          <div class="description-content">
+            {{ content }}
+          </div>
         </div>
       </div>
 
       {% if page.key_features %}
+      <div class="tab-content" id="features-tab">
         <div class="book-features">
-          <h3>Key Features</h3>
           <ul class="features-list">
             {% for feature in page.key_features %}
               <li>{{ feature }}</li>
             {% endfor %}
           </ul>
         </div>
+      </div>
       {% endif %}
+
+      <div class="tab-content" id="details-tab">
+        <table class="book-details-table">
+          <tr>
+            <th>Title</th>
+            <td>{{ page.title }}</td>
+          </tr>
+          <tr>
+            <th>Author</th>
+            <td>{{ page.author }}</td>
+          </tr>
+          {% if page.isbn %}
+          <tr>
+            <th>ISBN</th>
+            <td>{{ page.isbn }}</td>
+          </tr>
+          {% endif %}
+          {% if page.pages %}
+          <tr>
+            <th>Pages</th>
+            <td>{{ page.pages }}</td>
+          </tr>
+          {% endif %}
+          {% if page.publication_date %}
+          <tr>
+            <th>Publication Date</th>
+            <td>{{ page.publication_date }}</td>
+          </tr>
+          {% endif %}
+          {% if page.language %}
+          <tr>
+            <th>Language</th>
+            <td>{{ page.language }}</td>
+          </tr>
+          {% endif %}
+          {% if page.book_category %}
+          <tr>
+            <th>Category</th>
+            <td>{{ page.book_category }}</td>
+          </tr>
+          {% endif %}
+        </table>
+      </div>
 
       <div class="book-actions">
         <a href="/books/category/{{ page.book_category | slugify }}.html" class="btn btn-secondary btn-animated">
@@ -202,4 +273,149 @@ function shareBook() {
     });
   }
 }
+
+// Tab functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons and contents
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      // Add active class to clicked button and corresponding content
+      button.classList.add('active');
+      const tabId = button.getAttribute('data-tab') + '-tab';
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+});
 </script>
+
+<style>
+/* New styles for the optimized book layout */
+.book-meta.compact-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  padding: 15px;
+  background: var(--background-accent);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+}
+
+.book-meta-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.highlight-meta {
+  grid-column: 1 / -1;
+  font-size: 1.1rem;
+}
+
+.author-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.author-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.author-link-btn {
+  margin-top: 10px;
+}
+
+/* Tab System */
+.book-tabs {
+  display: flex;
+  margin: 25px 0 15px 0;
+  border-bottom: 2px solid var(--primary-light);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.book-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--primary-color);
+}
+
+.tab-btn.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.book-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.book-details-table th,
+.book-details-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.book-details-table th {
+  width: 35%;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .tab-btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .book-details-table th {
+    width: 40%;
+  }
+
+  .book-meta.compact-meta {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+</style>
