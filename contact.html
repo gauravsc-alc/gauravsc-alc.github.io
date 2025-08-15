@@ -42,25 +42,32 @@ permalink: /contact.html
         <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-medium);">
           <h2 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.8rem;">Send us a Message</h2>
 
-          <form style="display: flex; flex-direction: column; gap: 20px;">
-            <div>
-              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Name *</label>
-              <input type="text" required style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
+          <form id="contact-form" style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="form-group">
+              <label for="contact-name" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Name *</label>
+              <input type="text" id="contact-name" required style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
             </div>
 
-            <div>
-              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Email *</label>
-              <input type="email" required style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
+            <div class="form-group">
+              <label for="contact-email" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Email *</label>
+              <input type="email" id="contact-email" required style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
             </div>
 
-            <div>
-              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Subject</label>
-              <input type="text" style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
+            <div class="form-group">
+              <label for="contact-subject" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Subject</label>
+              <input type="text" id="contact-subject" style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" />
             </div>
 
-            <div>
-              <label style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Message *</label>
-              <textarea required rows="5" style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; resize: vertical; transition: border-color 0.3s ease;"></textarea>
+            <div class="form-group">
+              <label for="contact-message" style="display: block; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Message *</label>
+              <textarea id="contact-message" required rows="5" style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; resize: vertical; transition: border-color 0.3s ease;"></textarea>
+            </div>
+
+            <div class="form-privacy">
+              <p style="font-size: 0.9rem; color: var(--text-muted);">
+                By submitting this form, you agree to our <a href="/privacy-policy.html">Privacy Policy</a>.
+                We'll never share your information with third parties.
+              </p>
             </div>
 
             <button type="submit" class="btn btn-primary btn-animated" style="align-self: flex-start; margin-top: 10px;">
@@ -72,6 +79,10 @@ permalink: /contact.html
     </div>
   </div>
 </main>
+
+<!-- Add EmailJS library -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="/js/contact-form.js"></script>
 
 <style>
 /* Form input focus styles */
@@ -91,5 +102,68 @@ input:focus, textarea:focus {
   .content-section div > div {
     padding: 30px 20px !important;
   }
+}
+
+/* Form validation styles */
+input.valid, textarea.valid {
+  border-color: #28a745 !important;
+}
+
+input.invalid, textarea.invalid {
+  border-color: #dc3545 !important;
+}
+
+.field-error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Form message styles */
+.form-message {
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+
+.form-message.success {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-left: 4px solid #28a745;
+  color: #28a745;
+}
+
+.form-message.error {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-left: 4px solid #dc3545;
+  color: #dc3545;
+}
+
+.form-message-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-message-icon {
+  font-size: 1.2rem;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 </style>

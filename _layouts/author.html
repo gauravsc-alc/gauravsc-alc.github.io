@@ -12,22 +12,24 @@ layout: default
   </div>
 
   <div class="author-detail-content">
-    <div class="author-image-section">
+    <div class="author-image-section animate-fade-in">
       <div class="author-image-container">
         <img src="{{ page.image | default: '/images/default-author.jpg' }}" alt="{{ page.name }}" class="author-detail-image" />
+        <div class="author-image-glow"></div>
         <div class="author-badges">
           {% if page.specialty %}
-            <span class="specialty-badge">📚 {{ page.specialty | split: ',' | first }}</span>
+            <span class="specialty-badge animate-pop">📚 {{ page.specialty | split: ',' | first }}</span>
           {% endif %}
         </div>
       </div>
-      <div class="author-quick-info">
-        <h1 class="author-detail-name">✍️ {{ page.name }}</h1>
+      <div class="author-quick-info animate-slide-up">
+        <!-- <h1 class="author-detail-name">✍️ {{ page.name }}</h1> -->
+        <h1 class="author-detail-name">{{ page.name }}</h1>
         {% if page.specialty %}
-          <p class="author-specialty">🎯 <strong>Specializes in:</strong> {{ page.specialty }}</p>
+          <p class="author-specialty"><strong>Specializes in:</strong> {{ page.specialty }}</p>
         {% endif %}
         {% if page.location %}
-          <p class="author-location">📍 <strong>Location:</strong> {{ page.location }}</p>
+          <p class="author-location"><strong>Location:</strong> {{ page.location }}</p>
         {% endif %}
         {% if page.experience_years %}
           <p class="author-experience">🗓️ <strong>Experience:</strong> {{ page.experience_years }} years</p>
@@ -63,7 +65,8 @@ layout: default
 
     <div class="author-info-section">
       <div class="author-bio-section">
-        <h2>👨‍💼 About {{ page.name | split: ' ' | first }}</h2>
+        <h2>About {{ page.name | split: ' ' | first }}</h2>
+        <!-- <h2>👨‍💼 About {{ page.name | split: ' ' | first }}</h2> -->
         <div class="author-bio-highlight">
           <p class="bio-summary">{{ page.bio }}</p>
         </div>
@@ -74,7 +77,8 @@ layout: default
 
       {% if page.achievements %}
         <div class="author-achievements">
-          <h3>🏆 Achievements & Recognition</h3>
+          <h3>Achievements & Recognition</h3>
+          <!-- <h3>🏆 Achievements & Recognition</h3> -->
           <ul class="achievements-list">
             {% for achievement in page.achievements %}
               <li>{{ achievement }}</li>
@@ -87,18 +91,21 @@ layout: default
         <div class="author-stats">
           <div class="stat-card">
             <span class="stat-number">{{ page.books.size }}</span>
-            <span class="stat-label">📚 Published Books</span>
+            <span class="stat-label">Published Books</span>
+            <!-- <span class="stat-label">📚 Published Books</span> -->
           </div>
           {% if page.achievements %}
             <div class="stat-card">
               <span class="stat-number">{{ page.achievements.size }}+</span>
-              <span class="stat-label">🏆 Major Achievements</span>
+              <span class="stat-label">Major Achievements</span>
+              <!-- <span class="stat-label">🏆 Major Achievements</span> -->
             </div>
           {% endif %}
           {% if page.experience_years %}
             <div class="stat-card">
               <span class="stat-number">{{ page.experience_years }}+</span>
-              <span class="stat-label">⭐ Years Experience</span>
+              <span class="stat-label">Years Experience</span>
+              <!-- <span class="stat-label">⭐ Years Experience</span> -->
             </div>
           {% endif %}
         </div>
@@ -108,15 +115,15 @@ layout: default
 
   <!-- Author's Books Section -->
   {% if page.books %}
-  <div class="author-books-section">
-    <h2>📚 Books by {{ page.name }}</h2>
+  <div class="author-books-section animate-fade-in">
+    <h2 class="section-heading">📚 Books by {{ page.name }}</h2>
     <div class="author-books-grid">
       {% for book_title in page.books %}
         {% assign book = site.books | where: "title", book_title | first %}
         {% if book %}
-          <a href="{{ book.url }}" class="author-book-card">
+          <a href="{{ book.url }}" class="author-book-card animate-pop">
             <div class="book-image-wrapper">
-              <img src="{{ book.cover | default: '/images/default-book.jpg' }}" alt="{{ book.title }}" />
+              <img src="{{ book.cover | default: '/images/default-book.jpg' }}" alt="{{ book.title }}" loading="lazy" />
               <div class="book-overlay">
                 <span class="view-book">📖 View Details</span>
               </div>
@@ -127,11 +134,16 @@ layout: default
               {% if book.price %}
                 <span class="price">💰 {{ book.price }}</span>
               {% endif %}
-              {% if book.amazon_link %}
-                <a href="{{ book.amazon_link }}" class="amazon-link-small" target="_blank" onclick="event.stopPropagation();">
-                  🛒 Buy on Amazon
+              <div class="book-actions-row">
+                {% if book.amazon_link %}
+                  <a href="{{ book.amazon_link }}" class="amazon-link-small" target="_blank" onclick="event.stopPropagation();">
+                    🛒 Buy
+                  </a>
+                {% endif %}
+                <a href="{{ book.url }}" class="view-details-btn">
+                  📖 Details
                 </a>
-              {% endif %}
+              </div>
             </div>
           </a>
         {% else %}
@@ -193,18 +205,46 @@ layout: default
 }
 
 .author-detail-image {
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   object-fit: cover;
   border-radius: 50%;
   box-shadow: var(--shadow-heavy);
   margin-bottom: 20px;
   border: 4px solid var(--primary-color);
-  transition: transform var(--transition-fast);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 1;
+}
+
+.author-image-container {
+  position: relative;
+  margin: 0 auto;
+  width: 230px;
+  height: 230px;
+}
+
+.author-image-glow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary-color), transparent, var(--primary-hover));
+  opacity: 0.7;
+  z-index: 0;
+  animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .author-detail-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
 .author-badges {
@@ -312,7 +352,7 @@ layout: default
 }
 
 .achievements-list li::before {
-  content: '🏆';
+  /* content: '🏆'; */
   margin-right: 8px;
 }
 
@@ -382,7 +422,7 @@ layout: default
 }
 
 .author-book-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px) scale(1.02);
   box-shadow: var(--shadow-medium);
   border-color: var(--primary-color);
 }
@@ -394,7 +434,7 @@ layout: default
 
 .author-book-card img {
   width: 100%;
-  height: 160px;
+  height: 240px;
   object-fit: cover;
   transition: transform var(--transition-fast);
 }
@@ -496,6 +536,49 @@ layout: default
   flex-wrap: wrap;
 }
 
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease forwards;
+}
+
+.animate-pop {
+  animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 768px) {
   .author-detail-content {
     grid-template-columns: 1fr;
@@ -522,3 +605,32 @@ layout: default
   }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Add staggered animation delay to book cards
+  const bookCards = document.querySelectorAll('.author-book-card');
+  bookCards.forEach((card, index) => {
+    card.style.animationDelay = `${0.1 * index}s`;
+  });
+
+  // Add scroll-triggered animations
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.author-books-section, .author-achievements, .author-cta-section').forEach(section => {
+    observer.observe(section);
+  });
+});
+</script>

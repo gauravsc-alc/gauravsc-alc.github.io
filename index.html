@@ -21,30 +21,33 @@ permalink: /
     <h2>Featured Books</h2>
     <div class="books-slider">
       {% for book in site.books %}
-        <div class="book-card-link">
-          <div class="book-card">
-            <a href="{{ book.url }}" class="book-card-link">
-              <div class="book-image-wrapper" style="height: 320px; width: 220px;">
-                <img src="{{ book.cover }}" alt="{{ book.title }}" style="height: 100%; width: 100%; object-fit: cover;" />
-                <div class="book-overlay">
-                  <!-- <span class="view-details">View Details</span> -->
-                </div>
+        <div class="featured-book-card">
+          <a href="{{ book.url }}" class="featured-book-link">
+            <div class="featured-book-image">
+              <img src="{{ book.cover }}" alt="{{ book.title }}" />
+              <div class="featured-book-overlay">
+                <span class="view-details">View Details</span>
               </div>
-            </a>
-            <div class="book-info-tile" style="min-height: 120px; font-size: 1.1em;">
-              <div class="book-title">{{ book.title }}</div>
-              <div class="book-author">by {{ book.author }}</div>
+              {% if book.featured %}
+                <div class="featured-badge">Featured</div>
+              {% endif %}
+            </div>
+            <div class="featured-book-info">
+              <h3 class="featured-book-title">{{ book.title }}</h3>
+              <p class="featured-book-author">by {{ book.author }}</p>
               {% if book.amazon_link %}
-                <div class="amazon-link-wrapper" onclick="event.stopPropagation();">
-                  <button type="button" onclick="window.open('{{ book.amazon_link }}', '_blank'); event.stopPropagation();" class="amazon-link">🛒 Buy on Amazon</button>
+                <div class="featured-book-actions">
+                  <button type="button" onclick="window.open('{{ book.amazon_link }}', '_blank'); event.stopPropagation();" class="amazon-button">
+                    <span class="amazon-icon">🛒</span> Buy on Amazon
+                  </button>
                 </div>
-              {% elsif book.amazon_link == nil or book.amazon_link == "" %}
-                <div class="amazon-link-wrapper">
-                  <button class="no-amazon-link" disabled>❌ Not on Amazon</button>
+              {% else %}
+                <div class="featured-book-actions">
+                  <button class="not-available" disabled>Coming Soon</button>
                 </div>
               {% endif %}
             </div>
-          </div>
+          </a>
         </div>
       {% endfor %}
     </div>
@@ -157,3 +160,4 @@ permalink: /
 </div>
 
 <script src="/js/bestseller.js"></script>
+
