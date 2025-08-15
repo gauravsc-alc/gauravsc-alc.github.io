@@ -3,11 +3,13 @@ title: "11 Effective Ways of Parenting"
 author: "Harshada Tichkule"
 cover: "/books/11_Effective_Ways_of_Parenting.jpeg"
 book_category: "Parenting"
-# isbn: "978-81-980353-3-2"
+isbn: "978-8197656903"
 publication_date: "2024"
 language: "English"
 layout: book
+pages: 218
 permalink: /books/11-effective-ways-of-parenting/
+amazon_link: https://amzn.in/d/ipmbHKn
 key_features:
   - "Heartfelt reflection on transformation as a mother and individual"
   - "Insights from children Akshaj and Ankaj"
