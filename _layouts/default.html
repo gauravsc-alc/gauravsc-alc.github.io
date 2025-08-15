@@ -117,5 +117,17 @@
   <script src="/js/slideshow.js"></script>
   <script src="/js/menu-toggle.js"></script>
   <script src="/js/floating-menu.js"></script>
+
+  <!-- Initialize EmailJS if on contact page -->
+  {% if page.permalink == '/contact.html' %}
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      // Replace with your EmailJS public key
+      emailjs.init("YOUR_PUBLIC_KEY");
+    })();
+  </script>
+  <script src="/js/contact-form.js"></script>
+  {% endif %}
 </body>
 </html>
