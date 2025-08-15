@@ -22,12 +22,15 @@ layout: default
         </div>
       </div>
       <div class="author-quick-info">
-        <h1 class="author-detail-name">✍️ {{ page.name }}</h1>
+        <!-- <h1 class="author-detail-name">✍️ {{ page.name }}</h1> -->
+        <h1 class="author-detail-name">{{ page.name }}</h1>
         {% if page.specialty %}
-          <p class="author-specialty">🎯 <strong>Specializes in:</strong> {{ page.specialty }}</p>
+          <p class="author-specialty"><strong>Specializes in:</strong> {{ page.specialty }}</p>
+          <!-- <p class="author-specialty">🎯 <strong>Specializes in:</strong> {{ page.specialty }}</p> -->
         {% endif %}
         {% if page.location %}
-          <p class="author-location">📍 <strong>Location:</strong> {{ page.location }}</p>
+          <p class="author-location"><strong>Location:</strong> {{ page.location }}</p>
+          <!-- <p class="author-location">📍 <strong>Location:</strong> {{ page.location }}</p> -->
         {% endif %}
         {% if page.experience_years %}
           <p class="author-experience">🗓️ <strong>Experience:</strong> {{ page.experience_years }} years</p>
@@ -63,7 +66,8 @@ layout: default
 
     <div class="author-info-section">
       <div class="author-bio-section">
-        <h2>👨‍💼 About {{ page.name | split: ' ' | first }}</h2>
+        <h2>About {{ page.name | split: ' ' | first }}</h2>
+        <!-- <h2>👨‍💼 About {{ page.name | split: ' ' | first }}</h2> -->
         <div class="author-bio-highlight">
           <p class="bio-summary">{{ page.bio }}</p>
         </div>
@@ -74,7 +78,8 @@ layout: default
 
       {% if page.achievements %}
         <div class="author-achievements">
-          <h3>🏆 Achievements & Recognition</h3>
+          <h3>Achievements & Recognition</h3>
+          <!-- <h3>🏆 Achievements & Recognition</h3> -->
           <ul class="achievements-list">
             {% for achievement in page.achievements %}
               <li>{{ achievement }}</li>
@@ -87,18 +92,21 @@ layout: default
         <div class="author-stats">
           <div class="stat-card">
             <span class="stat-number">{{ page.books.size }}</span>
-            <span class="stat-label">📚 Published Books</span>
+            <span class="stat-label">Published Books</span>
+            <!-- <span class="stat-label">📚 Published Books</span> -->
           </div>
           {% if page.achievements %}
             <div class="stat-card">
               <span class="stat-number">{{ page.achievements.size }}+</span>
-              <span class="stat-label">🏆 Major Achievements</span>
+              <span class="stat-label">Major Achievements</span>
+              <!-- <span class="stat-label">🏆 Major Achievements</span> -->
             </div>
           {% endif %}
           {% if page.experience_years %}
             <div class="stat-card">
               <span class="stat-number">{{ page.experience_years }}+</span>
-              <span class="stat-label">⭐ Years Experience</span>
+              <span class="stat-label">Years Experience</span>
+              <!-- <span class="stat-label">⭐ Years Experience</span> -->
             </div>
           {% endif %}
         </div>
@@ -312,7 +320,7 @@ layout: default
 }
 
 .achievements-list li::before {
-  content: '🏆';
+  /* content: '🏆'; */
   margin-right: 8px;
 }
 
