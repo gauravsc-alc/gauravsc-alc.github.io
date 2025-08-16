@@ -7,9 +7,22 @@ document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contact-form');
   if (!contactForm) return;
 
-  // Initialize EmailJS with your public key
-  // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
-  emailjs.init("YOUR_PUBLIC_KEY");
+  // Read EmailJS config from centralized file
+  const cfg = window.EMAILJS_CONFIG || {};
+  const EMAILJS_PUBLIC_KEY = cfg.PUBLIC_KEY || '';
+  const EMAILJS_SERVICE_ID = cfg.SERVICE_ID || '';
+  const EMAILJS_TEMPLATE_ID = cfg.TEMPLATE_ID || '';
+
+    // gather extra context from page/form
+    const siteEmail = contactForm.dataset.siteEmail || '';
+    const pageTitle = contactForm.dataset.pageTitle || document.title || 'Contact Us';
+    const pageUrl = window.location.href;
+    const time = new Date().toLocaleString();
+
+  // Initialize EmailJS if SDK present
+  if (window.emailjs && EMAILJS_PUBLIC_KEY) {
+    try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (e) { /* noop */ }
+  }
 
   // Form validation and submission
   contactForm.addEventListener('submit', async function(e) {
@@ -31,14 +44,19 @@ document.addEventListener('DOMContentLoaded', function() {
       from_name: document.getElementById('contact-name').value.trim(),
       from_email: document.getElementById('contact-email').value.trim(),
       subject: document.getElementById('contact-subject').value.trim() || "Contact Form Submission",
-      message: document.getElementById('contact-message').value.trim()
+      message: document.getElementById('contact-message').value.trim(),
+      page_title: pageTitle,
+      page_url: pageUrl,
+      site_email: siteEmail,
+      time: time,
+      title: 'Contact Us' // <-- added static title field for {{title}}
     };
 
     try {
-      // Send email using EmailJS
+      // Send email using EmailJS (use centralized config values)
       await emailjs.send(
-        'YOUR_SERVICE_ID',    // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID',   // Replace with your EmailJS template ID
+        EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID',
+        EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
         formData
       );
 

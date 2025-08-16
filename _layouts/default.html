@@ -118,15 +118,16 @@
   <script src="/js/menu-toggle.js"></script>
   <script src="/js/floating-menu.js"></script>
 
+  <!-- Load centralized EmailJS config so all pages/scripts can read keys -->
+  <script src="/js/emailjs-config.js"></script>
+  <!-- Sets global BESTSELLER_BOOKS for use in client-side scripts (use a small filtered list) -->
+  {% comment %}Inject a small, safe list (bestsellers) to avoid large memory/serialization during build{% endcomment %}
+  {% assign bestseller_books = site.books | where: "bestseller", true | sort: "title" | limit: 12 %}
+  <script>window.BESTSELLER_BOOKS = {{ bestseller_books | jsonify | replace: '</script>', '<\\/script>' }};</script>
+
   <!-- Initialize EmailJS if on contact page -->
   {% if page.permalink == '/contact.html' %}
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    (function() {
-      // Replace with your EmailJS public key
-      emailjs.init("YOUR_PUBLIC_KEY");
-    })();
-  </script>
   <script src="/js/contact-form.js"></script>
   {% endif %}
 </body>
