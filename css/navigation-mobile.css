@@ -343,6 +343,11 @@
   .publish-cta {
     display: none;
   }
+
+  /* Hide the desktop arrow element on mobile to avoid duplicate arrows */
+  .submenu-arrow {
+    display: none !important;
+  }
 }
 
 /* Tablet and larger mobile devices */
