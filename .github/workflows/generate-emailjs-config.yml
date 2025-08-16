@@ -37,20 +37,22 @@ jobs:
         with:
           name: runtime-emailjs-config
           path: _site/js/emailjs-config.js
+
+      # Optional: Deploy to gh-pages branch
+      - name: Push config to gh-pages branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git checkout --orphan gh-pages || true
           git rm -rf .
           # Copy runtime config into branch
           mkdir -p js
-          cp js/emailjs-config.js js/emailjs-config.js
+          cp _site/js/emailjs-config.js js/
           # force-add ignored runtime config to new branch
           git add -f js/emailjs-config.js
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: deploy EmailJS runtime config" || echo "no changes to commit"
           git push --force origin gh-pages
 
-      # If you build and deploy your site in CI (Jekyll/Pages), integrate the config file into build output (_site/js/...)
-      # and run your normal deployment step instead of pushing gh-pages here.
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # If you build and deploy your site in CI (Jekyll/Pages), integrate the config file into build output (_site/js/...)
-      # and run your normal deployment step instead of pushing gh-pages here.
+      # Note: If you use the deploy-pages.yml workflow instead, it will handle this automatically
