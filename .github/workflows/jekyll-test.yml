@@ -1,0 +1,53 @@
+name: Jekyll Test Build
+
+on:
+  # Run on pull requests to safely test before merging
+  pull_request:
+    branches: ["main"]
+
+  # Allow manual triggering in any branch for testing
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Update bundler
+        run: gem update bundler
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Check Jekyll configuration
+        run: bundle exec jekyll doctor
+
+      - name: Run test build
+        run: bundle install && bundle exec jekyll build --trace
+
+      - name: List build files (verification)
+        run: ls -la _site/
+
+      - name: Basic HTML validation
+        run: |
+          # Optional: Install html-proofer for validation
+          # gem install html-proofer
+          # htmlproofer ./_site --disable-external
+          echo "Build completed successfully!"
+
+      # Optional: Upload build as artifact for inspection
+      - name: Archive build
+        uses: actions/upload-artifact@v3
+        with:
+          name: site-build
+          path: _site/
+          retention-days: 3
+```

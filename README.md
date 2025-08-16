@@ -78,6 +78,54 @@ The website uses consistent iconography throughout:
 - ✅ Edge 79+
 - ✅ Mobile browsers
 
+## Jekyll Build & Test Guide
+
+### Local Development & Testing
+
+1. **Install dependencies first:**
+   ```bash
+   gem install bundler
+   bundle install
+   ```
+
+2. **Test build locally to catch errors:**
+   ```bash
+   bundle exec jekyll build --safe
+   ```
+   Check the output for any error messages.
+
+3. **Run local server with live reload:**
+   ```bash
+   bundle exec jekyll serve --livereload
+   ```
+   Visit http://localhost:4000 to preview your site.
+
+4. **Debug build with verbose output:**
+   ```bash
+   bundle exec jekyll build --verbose
+   ```
+   This shows detailed information about the build process.
+
+5. **Check for specific errors:**
+   ```bash
+   bundle exec jekyll doctor
+   ```
+   This runs diagnostics on your site.
+
+### Common Jekyll Build Errors
+
+* **Liquid syntax errors** - Check for mismatched quotes, filters, or tags in templates
+* **Front matter issues** - Ensure proper YAML format with correct indentation
+* **Missing dependencies** - Run `bundle install` to ensure all gems are installed
+* **Path problems** - Verify file paths are correct (case-sensitive on some systems)
+* **Plugin errors** - Test without plugins using `--safe` flag if issues persist
+
+### Testing in GitHub Safely
+
+1. **Use feature branches** - Never push directly to main
+2. **Check Actions logs** - After push, check Actions tab for build errors
+3. **Create a test workflow** - Use the workflow below to test without deploying
+
 ### License
 
 © 2025 Delta Publications. All rights reserved.
