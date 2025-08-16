@@ -3,3 +3,5 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+# prevent committing runtime EmailJS config
+/js/emailjs-config.js
