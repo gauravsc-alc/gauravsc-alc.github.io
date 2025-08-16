@@ -19,12 +19,12 @@ jobs:
       - name: Set up Ruby (for Jekyll)
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # adjust if needed
+          ruby-version: '3.2.2' # updated to match bundler requirement (>= 3.2.0)
           bundler-cache: true
 
       - name: Install dependencies
         run: |
-          gem install bundler
+          gem install bundler -v 2.7.1 --no-document || true
           bundle install --jobs 4 --retry 3
 
       - name: Build site
