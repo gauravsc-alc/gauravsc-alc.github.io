@@ -35,22 +35,22 @@ jobs:
 
       # Option B (recommended): deploy or push generated config only to deployment branch (gh-pages)
       - name: Push config to gh-pages branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git checkout --orphan gh-pages || true
           git rm -rf .
-          # Copy site files if you build site here; for simplicity we commit only the runtime config
+          # Copy runtime config into branch
           mkdir -p js
           cp js/emailjs-config.js js/emailjs-config.js
           # force-add ignored runtime config to new branch
           git add -f js/emailjs-config.js
           git commit -m "chore: deploy EmailJS runtime config" || echo "no changes to commit"
           git push --force origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # If you build and deploy your site in CI (Jekyll/Pages), integrate the config file into build output (_site/js/...)
       # and run your normal deployment step instead of pushing gh-pages here.
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # If you build and deploy your site in CI (Jekyll/Pages), integrate the config file into build output (_site/js/...)
       # and run your normal deployment step instead of pushing gh-pages here.
