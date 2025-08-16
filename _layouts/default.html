@@ -118,9 +118,29 @@
   <script src="/js/menu-toggle.js"></script>
   <script src="/js/floating-menu.js"></script>
 
-  <!-- Load centralized EmailJS config so all pages/scripts can read keys -->
+  <!-- First set EmailJS configuration from environment variables -->
+  <script>
+    // Securely inject EmailJS config from environment variables
+    window.EMAILJS_CONFIG = {
+      PUBLIC_KEY: "{{ site.env.EMAILJS_PUBLIC_KEY | default: '' }}",
+      SERVICE_ID: "{{ site.env.EMAILJS_SERVICE_ID | default: '' }}",
+      TEMPLATE_ID: "{{ site.env.EMAILJS_TEMPLATE_ID | default: '' }}"
+    };
+
+    // If in production with GitHub Pages, the config may be present inline
+    {% if jekyll.environment == "production" and site.github %}
+      // Production build with GitHub - values set by GitHub Actions
+      console.log("Using production EmailJS configuration");
+    {% else %}
+      // Development build - empty values expected
+      console.log("Using development EmailJS configuration");
+    {% endif %}
+  </script>
+
+  <!-- Then load EmailJS config script (which checks for existing values) -->
   <script src="/js/emailjs-config.js"></script>
-  <!-- Sets global BESTSELLER_BOOKS for use in client-side scripts (use a small filtered list) -->
+
+  <!-- Sets global BESTSELLER_BOOKS for use in client-side scripts -->
   {% comment %}Inject a small, safe list (bestsellers) to avoid large memory/serialization during build{% endcomment %}
   {% assign bestseller_books = site.books | where: "bestseller", true | sort: "title" | limit: 12 %}
   <script>window.BESTSELLER_BOOKS = {{ bestseller_books | jsonify | replace: '</script>', '<\\/script>' }};</script>

@@ -58,3 +58,9 @@ defaults:
     values:
       layout: "default"
 
+# Environment variable access
+env:
+  EMAILJS_PUBLIC_KEY: <%= ENV['EMAILJS_PUBLIC_KEY'] %>
+  EMAILJS_SERVICE_ID: <%= ENV['EMAILJS_SERVICE_ID'] %>
+  EMAILJS_TEMPLATE_ID: <%= ENV['EMAILJS_TEMPLATE_ID'] %>
+
