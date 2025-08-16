@@ -16,11 +16,11 @@ layout: default
       <div class="author-image-container">
         <img src="{{ page.image | default: '/images/default-author.jpg' }}" alt="{{ page.name }}" class="author-detail-image" />
         <div class="author-image-glow"></div>
-        <div class="author-badges">
+        <!-- <div class="author-badges">
           {% if page.specialty %}
             <span class="specialty-badge animate-pop">📚 {{ page.specialty | split: ',' | first }}</span>
           {% endif %}
-        </div>
+        </div> -->
       </div>
       <div class="author-quick-info animate-slide-up">
         <!-- <h1 class="author-detail-name">✍️ {{ page.name }}</h1> -->
@@ -137,12 +137,12 @@ layout: default
               <div class="book-actions-row">
                 {% if book.amazon_link %}
                   <a href="{{ book.amazon_link }}" class="amazon-link-small" target="_blank" onclick="event.stopPropagation();">
-                    🛒 Buy
+                    🛒 Buy on Amazon
                   </a>
                 {% endif %}
-                <a href="{{ book.url }}" class="view-details-btn">
+                <!-- <a href="{{ book.url }}" class="view-details-btn">
                   📖 Details
-                </a>
+                </a> -->
               </div>
             </div>
           </a>
