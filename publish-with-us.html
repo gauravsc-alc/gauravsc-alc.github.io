@@ -175,19 +175,45 @@ permalink: /publish-with-us.html
       <h3 style="color: var(--primary-color); margin-bottom: 18px; text-align: center;">Submit a Publishing Enquiry</h3>
       <!-- expose site email and page title to JS via data attributes -->
       <form id="publish-form" data-site-email="{{ site.email }}" data-page-title="{{ page.title }}" style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; max-width:900px; margin:0 auto;">
-        <input type="text" id="pub-name" name="name" placeholder="Your name *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
-        <input type="email" id="pub-email" name="email" placeholder="Email *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
-        <input type="tel" id="pub-phone" name="phone" placeholder="Phone (optional)" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
-        <select id="pub-package" name="package" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;">
-          <option value="">Interested package (optional)</option>
-          <option>Basic Package</option>
-          <option>Professional Package</option>
-          <option>Premium Package</option>
-        </select>
-        <textarea id="pub-synopsis" name="synopsis" placeholder="Short manuscript synopsis (optional)" rows="3" style="grid-column: 1 / -1; padding:10px; border-radius:8px; border:1px solid #e0e0e0;"></textarea>
-        <textarea id="pub-message" name="message" placeholder="Message / Additional details *" rows="4" required style="grid-column: 1 / -1; padding:10px; border-radius:8px; border:1px solid #e0e0e0;"></textarea>
 
-        <div id="publish-form-msg" style="grid-column:1 / -1; text-align:center;"></div>
+        <div class="form-group" style="grid-column: 1;">
+          <label for="pub-name">Full Name *</label>
+          <input type="text" id="pub-name" name="name" placeholder="Your name *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
+        </div>
+
+        <div class="form-group" style="grid-column: 2;">
+          <label for="pub-email">Email Address *</label>
+          <input type="email" id="pub-email" name="email" placeholder="Email *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
+        </div>
+
+        <div class="form-group" style="grid-column: 1;">
+          <label for="pub-phone">Phone Number</label>
+          <input type="tel" id="pub-phone" name="phone" placeholder="Phone (optional)" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
+        </div>
+
+        <div class="form-group" style="grid-column: 2;">
+          <label for="pub-package">Publishing Package</label>
+          <select id="pub-package" name="package" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;">
+            <option value="">Select Package</option>
+            <option value="basic">Basic Publishing</option>
+            <option value="premium">Premium Publishing</option>
+            <option value="deluxe">Deluxe Publishing</option>
+            <option value="consultation">Consultation Only</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="grid-column: 1 / span 2;">
+          <label for="pub-synopsis">Book Synopsis</label>
+          <textarea id="pub-synopsis" name="synopsis" placeholder="Brief description of your book" rows="3" style="grid-column: 1 / -1; padding:10px; border-radius:8px; border:1px solid #e0e0e0;"></textarea>
+        </div>
+
+        <div class="form-group" style="grid-column: 1 / span 2;">
+          <label for="pub-message">Message *</label>
+          <textarea id="pub-message" name="message" placeholder="Tell us about your publishing goals and any questions you have" rows="4" required style="grid-column: 1 / -1; padding:10px; border-radius:8px; border:1px solid #e0e0e0;"></textarea>
+        </div>
+
+        <!-- Message display area -->
+        <div id="publish-form-msg" style="grid-column: 1 / span 2;"></div>
 
         <button type="submit" id="publish-submit" class="btn btn-primary btn-animated" style="grid-column: auto / span 1; justify-self:center; padding:10px 18px;">
           <span class="btn-text">Send Enquiry</span>
@@ -204,9 +230,85 @@ permalink: /publish-with-us.html
 <script src="/js/publish-form.js"></script>
 
 <style>
-/* small responsive fix for the form grid */
+/* Form styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(203, 152, 25, 0.1);
+}
+
+/* Form messages */
+.form-message {
+  padding: 12px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.form-message.success {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-left: 4px solid #28a745;
+  color: #28a745;
+}
+
+.form-message.error {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-left: 4px solid #dc3545;
+  color: #dc3545;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Small responsive fix for the form grid */
 @media (max-width: 720px) {
-  #publish-form { grid-template-columns: 1fr !important; }
-  #publish-form button { width: 100%; }
+  #publish-form {
+    grid-template-columns: 1fr !important;
+  }
+
+  #publish-form .form-group {
+    grid-column: 1 !important;
+  }
+
+  #publish-form button {
+    width: 100%;
+    grid-column: 1 !important;
+  }
 }
 </style>

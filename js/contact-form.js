@@ -1,11 +1,24 @@
 /**
  * Contact Form Handler with EmailJS Integration
- * Secure client-side email sending without server setup
+ * Secure client-side email sending with domain validation
  */
 
 document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contact-form');
   if (!contactForm) return;
+
+  // Domain validation - prevent unauthorized usage
+  const allowedDomains = ['gauravsc-alc.github.io', 'localhost', '127.0.0.1'];
+  const currentDomain = window.location.hostname;
+  const isDomainAllowed = allowedDomains.some(domain =>
+    currentDomain === domain || currentDomain.endsWith('.' + domain)
+  );
+
+  if (!isDomainAllowed) {
+    console.warn('Contact form: Domain not authorized');
+    showFormMessage('error', 'Contact form is not available on this domain.');
+    return;
+  }
 
   // Read EmailJS config from centralized file
   const cfg = window.EMAILJS_CONFIG || {};
@@ -13,11 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const EMAILJS_SERVICE_ID = cfg.SERVICE_ID || '';
   const EMAILJS_TEMPLATE_ID = cfg.TEMPLATE_ID || '';
 
-    // gather extra context from page/form
-    const siteEmail = contactForm.dataset.siteEmail || '';
-    const pageTitle = contactForm.dataset.pageTitle || document.title || 'Contact Us';
-    const pageUrl = window.location.href;
-    const time = new Date().toLocaleString();
+  // Check if EmailJS configuration is available
+  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
+    console.warn('Contact form: EmailJS configuration not available');
+    showFormMessage('error', 'Contact form is temporarily unavailable. Please email us directly.');
+    return;
+  }
+
+  // gather extra context from page/form
+  const siteEmail = contactForm.dataset.siteEmail || '';
+  const pageTitle = contactForm.dataset.pageTitle || document.title || 'Contact Us';
+  const pageUrl = window.location.href;
+  const time = new Date().toLocaleString();
 
   // Initialize EmailJS if SDK present
   if (window.emailjs && EMAILJS_PUBLIC_KEY) {
@@ -27,6 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Form validation and submission
   contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Additional domain check before sending
+    if (!isDomainAllowed) {
+      showFormMessage('error', 'Form submission not allowed from this domain.');
+      return;
+    }
 
     // Validate form
     if (!validateForm()) {
@@ -49,16 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
       page_url: pageUrl,
       site_email: siteEmail,
       time: time,
-      title: 'Contact Us' // <-- added static title field for {{title}}
+      title: 'Contact Us'
     };
 
     try {
       // Send email using EmailJS (use centralized config values)
-      await emailjs.send(
-        EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID',
-        EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
-        formData
-      );
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData);
 
       // Show success message
       showFormMessage('success', 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
