@@ -6,7 +6,7 @@ image: "/images/authors/Dr_Sanjay_Jindal.jpg"
 bio: "Dr. Sanjay Jindal is a renowned Laparoscopic Surgeon and lifelong learner. He acts as a mentor and passionate advocate of intentional living, combining medical wisdom, philosophy, and design thinking to inspire mindfulness, authenticity, and balance."
 specialty: "Consulting laparoscopic surgeon"
 location: "Raipur, India"
-experience_years: 14
+# experience_years: 14
 book_category: "Self Help"
 education: "M. Tech"
 books:
