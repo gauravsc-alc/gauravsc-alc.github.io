@@ -1,24 +1,11 @@
 /**
  * Contact Form Handler with EmailJS Integration
- * Secure client-side email sending with domain validation
+ * Secure client-side email sending without domain restrictions
  */
 
 document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contact-form');
   if (!contactForm) return;
-
-  // Domain validation - prevent unauthorized usage
-  const allowedDomains = ['gauravsc-alc.github.io', 'localhost', '127.0.0.1'];
-  const currentDomain = window.location.hostname;
-  const isDomainAllowed = allowedDomains.some(domain =>
-    currentDomain === domain || currentDomain.endsWith('.' + domain)
-  );
-
-  if (!isDomainAllowed) {
-    console.warn('Contact form: Domain not authorized');
-    showFormMessage('error', 'Contact form is not available on this domain.');
-    return;
-  }
 
   // Read EmailJS config from centralized file
   const cfg = window.EMAILJS_CONFIG || {};
@@ -47,12 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Form validation and submission
   contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-
-    // Additional domain check before sending
-    if (!isDomainAllowed) {
-      showFormMessage('error', 'Form submission not allowed from this domain.');
-      return;
-    }
 
     // Validate form
     if (!validateForm()) {
@@ -143,12 +124,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Show field error
   function showFieldError(fieldId, message) {
     const field = document.getElementById(fieldId);
-    field.classList.add('invalid');
+    if (field) {
+      field.classList.add('invalid');
 
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'field-error';
-    errorDiv.textContent = message;
-    field.parentNode.appendChild(errorDiv);
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'field-error';
+      errorDiv.textContent = message;
+      field.parentNode.appendChild(errorDiv);
+    }
   }
 
   // Clear form errors

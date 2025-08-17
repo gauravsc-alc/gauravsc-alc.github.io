@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const EMAILJS_SERVICE_ID = cfg.SERVICE_ID || '';
   const EMAILJS_TEMPLATE_ID = cfg.TEMPLATE_ID || 'template_qvzl2ie';
 
+  // Check if EmailJS configuration is available
+  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
+    console.warn('Publish form: EmailJS configuration not available');
+    showMessage('error', 'Publishing form is temporarily unavailable. Please email us directly.');
+    return;
+  }
+
   // Initialize EmailJS only if the SDK has loaded and public key exists
   if (window.emailjs && EMAILJS_PUBLIC_KEY) {
     try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (e) { /* noop */ }
@@ -30,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // New: validate email format to avoid empty/invalid Reply-To (prevents Outlook 412)
+    // validate email format to avoid empty/invalid Reply-To (prevents Outlook 412)
     if (!isValidEmail(email)) {
       showMessage('error', 'Please enter a valid email address.');
       return;
@@ -41,14 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const pageTitle = form.dataset.pageTitle || document.title || 'Publish With Us';
     const pageUrl = window.location.href;
 
-    // New: timestamp for template
+    // timestamp for template
     const time = new Date().toLocaleString();
 
     // Prepare data for EmailJS template (keys match your template placeholders)
     const templateParams = {
       from_name: name,
       from_email: email,
-      // New: provide explicit reply fields so EmailJS can set Reply-To header
+      // provide explicit reply fields so EmailJS can set Reply-To header
       reply_to: email,
       reply_to_name: name,
       phone: document.getElementById('pub-phone').value.trim(),
@@ -66,14 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const oldText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
-
-    // Basic check to avoid attempting send without service id
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_PUBLIC_KEY) {
-      showMessage('error', 'EmailJS keys are not configured. Add them to /js/emailjs-config.js.');
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = oldText;
-      return;
-    }
 
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
@@ -100,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function clearMessage() {
-    msgBox.innerHTML = '';
+    if (msgBox) {
+      msgBox.innerHTML = '';
+    }
   }
 });
