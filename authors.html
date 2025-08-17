@@ -12,6 +12,43 @@ permalink: /authors.html
     </div>
 
     <div class="content-section" style="margin-top: 40px;">
+      <!-- Add dynamic stats header -->
+      {% if site.authors and site.authors.size > 0 %}
+        <div style="background: var(--primary-light); padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+            <div>
+              <span style="display: block; font-size: 2rem; font-weight: 800; color: var(--primary-color);">{{ site.authors.size }}+</span>
+              <span style="font-size: 0.9rem; color: var(--text-muted);">Published Authors</span>
+            </div>
+            <div>
+              {% assign total_books = 0 %}
+              {% for author in site.authors %}
+                {% if author.books %}
+                  {% assign total_books = total_books | plus: author.books.size %}
+                {% endif %}
+              {% endfor %}
+              <span style="display: block; font-size: 2rem; font-weight: 800; color: var(--primary-color);">{{ total_books }}+</span>
+              <span style="font-size: 0.9rem; color: var(--text-muted);">Total Books</span>
+            </div>
+            <div>
+              {% assign avg_experience = 0 %}
+              {% assign experience_count = 0 %}
+              {% for author in site.authors %}
+                {% if author.experience_years %}
+                  {% assign avg_experience = avg_experience | plus: author.experience_years %}
+                  {% assign experience_count = experience_count | plus: 1 %}
+                {% endif %}
+              {% endfor %}
+              {% if experience_count > 0 %}
+                {% assign avg_experience = avg_experience | divided_by: experience_count %}
+              {% endif %}
+              <span style="display: block; font-size: 2rem; font-weight: 800; color: var(--primary-color);">{{ avg_experience }}+</span>
+              <span style="font-size: 0.9rem; color: var(--text-muted);">Avg. Experience (Years)</span>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
       <!-- Debug information - remove in production -->
       {% comment %}
       <div style="background: #f0f0f0; padding: 20px; margin-bottom: 20px; border-radius: 10px;">
