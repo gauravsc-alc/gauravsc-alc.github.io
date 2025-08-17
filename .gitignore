@@ -19,4 +19,4 @@ vendor/
 *.log
 
 # Runtime configs
-/js/emailjs-config.js
+# /js/emailjs-config.js
