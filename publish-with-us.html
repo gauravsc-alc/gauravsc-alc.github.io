@@ -186,38 +186,45 @@ permalink: /publish-with-us.html
           <input type="email" id="pub-email" name="email" placeholder="Email *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
         </div>
 
-        <div class="form-group" style="grid-column: 1;">
+        <div class="form-group" style="grid-column: 1 / -1;">
           <label for="pub-phone">Phone Number</label>
-          <input type="tel" id="pub-phone" name="phone" placeholder="Phone (optional)" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
+          <input type="tel" id="pub-phone" name="phone" placeholder="Your phone number" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
         </div>
 
-        <div class="form-group" style="grid-column: 2;">
+        <div class="form-group" style="grid-column: 1 / -1;">
           <label for="pub-package">Publishing Package</label>
           <select id="pub-package" name="package" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;">
-            <option value="">Select Package</option>
+            <option value="">Select a package</option>
             <option value="basic">Basic Publishing</option>
             <option value="premium">Premium Publishing</option>
             <option value="deluxe">Deluxe Publishing</option>
-            <option value="consultation">Consultation Only</option>
+            <option value="custom">Custom Package</option>
           </select>
         </div>
 
-        <div class="form-group" style="grid-column: 1 / span 2;">
+        <div class="form-group" style="grid-column: 1 / -1;">
           <label for="pub-synopsis">Book Synopsis</label>
-          <textarea id="pub-synopsis" name="synopsis" placeholder="Brief description of your book" rows="3" style="grid-column: 1 / -1; padding:10px; border-radius:8px; border:1px solid #e0e0e0;"></textarea>
+          <textarea id="pub-synopsis" name="synopsis" rows="4" placeholder="Brief description of your book" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0; resize:vertical;"></textarea>
         </div>
 
-        <div class="form-group" style="grid-column: 1 / span 2;">
+        <div class="form-group" style="grid-column: 1 / -1;">
           <label for="pub-message">Message *</label>
-          <textarea id="pub-message" name="message" placeholder="Tell us about your publishing goals and any questions you have" rows="4" required style="grid-column: 1 / -1; padding:10px; border-radius:8px; border:1px solid #e0e0e0;"></textarea>
+          <textarea id="pub-message" name="message" rows="6" placeholder="Tell us about your publishing needs *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0; resize:vertical;"></textarea>
         </div>
 
-        <!-- Message display area -->
-        <div id="publish-form-msg" style="grid-column: 1 / span 2;"></div>
+        <div style="grid-column: 1 / -1; text-align: center; margin-top: 15px;">
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4;">
+            By submitting this form, you agree to our
+            <a href="/privacy-policy.html" style="color: var(--primary-color); text-decoration: none;">Privacy Policy</a>
+            and
+            <a href="/terms-and-conditions.html" style="color: var(--primary-color); text-decoration: none;">Terms & Conditions</a>.
+          </div>
+          <button type="submit" id="publish-submit" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: white; padding: 12px 30px; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+            Submit Enquiry
+          </button>
+        </div>
 
-        <button type="submit" id="publish-submit" class="btn btn-primary btn-animated" style="grid-column: auto / span 1; justify-self:center; padding:10px 18px;">
-          <span class="btn-text">Send Enquiry</span>
-        </button>
+        <div id="publish-form-msg" style="grid-column: 1 / -1; margin-top: 15px; text-align: center;"></div>
       </form>
     </div>
 

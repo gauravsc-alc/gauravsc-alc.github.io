@@ -90,22 +90,26 @@ layout: default
       {% if page.books %}
         <div class="author-stats">
           <div class="stat-card">
-            <span class="stat-number">{{ page.books.size }}</span>
+            <span class="stat-number">{{ page.books.size }}+</span>
             <span class="stat-label">Published Books</span>
-            <!-- <span class="stat-label">📚 Published Books</span> -->
           </div>
           {% if page.achievements %}
             <div class="stat-card">
               <span class="stat-number">{{ page.achievements.size }}+</span>
               <span class="stat-label">Major Achievements</span>
-              <!-- <span class="stat-label">🏆 Major Achievements</span> -->
             </div>
           {% endif %}
           {% if page.experience_years %}
             <div class="stat-card">
               <span class="stat-number">{{ page.experience_years }}+</span>
               <span class="stat-label">Years Experience</span>
-              <!-- <span class="stat-label">⭐ Years Experience</span> -->
+            </div>
+          {% endif %}
+          {% assign published_books = site.books | where: "author", page.name %}
+          {% if published_books.size > 0 %}
+            <div class="stat-card">
+              <span class="stat-number">{{ published_books.size }}+</span>
+              <span class="stat-label">Books in Catalog</span>
             </div>
           {% endif %}
         </div>

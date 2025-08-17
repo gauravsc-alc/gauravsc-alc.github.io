@@ -8,10 +8,39 @@ permalink: /authors.html
   <div class="container">
     <div class="hero bg-light text-center rounded-large shadow">
       <h1 class="text-primary">Our Authors</h1>
-      <p>Meet the talented writers behind our exceptional books.</p>
+      <p>
+        Meet the talented writers behind our exceptional books. Our growing community features
+        <strong style="color: white; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
+          {% assign author_count = site.authors.size %}
+          {% if author_count == 0 %}4+{% else %}{{ author_count }}+{% endif %} published authors
+        </strong>
+        who have collectively created
+        <strong style="color: white; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
+          {% assign total_books = site.books.size %}
+          {% if total_books == 0 %}4+{% else %}{{ total_books }}+{% endif %} exceptional books
+        </strong>.
+      </p>
+
+      <!-- Add visual stats in the hero section -->
+      <!-- <div style="display: flex; gap: 30px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+        <div style="text-align: center;">
+          <span style="display: block; font-size: 2rem; font-weight: 800; color: var(--primary-color);">
+            {% if author_count == 0 %}4+{% else %}{{ author_count }}+{% endif %}
+          </span>
+          <span style="font-size: 0.9rem; color: var(--text-muted);">📝 Published Authors</span>
+        </div>
+        <div style="text-align: center;">
+          <span style="display: block; font-size: 2rem; font-weight: 800; color: var(--primary-color);">
+            {% if total_books == 0 %}4+{% else %}{{ total_books }}+{% endif %}
+          </span>
+          <span style="font-size: 0.9rem; color: var(--text-muted);">📚 Total Books</span>
+        </div>
+      </div> -->
     </div>
 
     <div class="content-section" style="margin-top: 40px;">
+      <!-- Remove the separate dynamic stats header section -->
+
       <!-- Debug information - remove in production -->
       {% comment %}
       <div style="background: #f0f0f0; padding: 20px; margin-bottom: 20px; border-radius: 10px;">
@@ -40,7 +69,7 @@ permalink: /authors.html
                   <p class="author-bio">{{ author.bio | truncate: 120 }}</p>
                   {% if author.books %}
                     <div class="author-stats">
-                      <span class="stat">{{ author.books.size }} Books</span>
+                      <span class="stat">{{ author.books.size }}+ Books</span>
                       {% if author.experience_years %}
                         <span class="stat">{{ author.experience_years }}+ Years</span>
                       {% endif %}
