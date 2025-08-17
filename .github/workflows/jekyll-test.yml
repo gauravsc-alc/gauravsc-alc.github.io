@@ -43,11 +43,10 @@ jobs:
           # htmlproofer ./_site --disable-external
           echo "Build completed successfully!"
 
-      # Optional: Upload build as artifact for inspection
-      - name: Archive build
-        uses: actions/upload-artifact@v3
-        with:
-          name: site-build
-          path: _site/
-          retention-days: 3
-```
+      # # Optional: Upload build as artifact for inspection
+      # - name: Archive build
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: site-build
+      #     path: _site/
+      #     retention-days: 3
