@@ -11,7 +11,7 @@ permalink: /
 <section class="hero">
   <div class="container">
     <h1>Delta Publications</h1>
-    <p>Discover the best books and authors from India's leading x`ing house.</p>
+    <p>Discover the best books and authors from India's leading Publications house.</p>
   </div>
 </section>
 
@@ -110,15 +110,35 @@ permalink: /
         <p>Discover the talented writers behind our exceptional books. From bestselling novelists to expert non-fiction authors, our diverse community of writers brings unique perspectives and expertise to every page.</p>
         <div class="authors-stats">
           <div class="stat-item">
-            <span class="stat-number">50+</span>
+            {% assign author_count = site.authors.size %}
+            {% if author_count == 0 %}
+              <span class="stat-number">50+</span>
+            {% else %}
+              <span class="stat-number">{{ author_count }}+</span>
+            {% endif %}
             <span class="stat-label">📝 Published Authors</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">200+</span>
+            {% assign book_count = site.books.size %}
+            {% if book_count == 0 %}
+              <span class="stat-number">200+</span>
+            {% else %}
+              <span class="stat-number">{{ book_count }}+</span>
+            {% endif %}
             <span class="stat-label">📚 Books Published</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">15+</span>
+            {% assign total_achievements = 0 %}
+            {% for author in site.authors %}
+              {% if author.achievements %}
+                {% assign total_achievements = total_achievements | plus: author.achievements.size %}
+              {% endif %}
+            {% endfor %}
+            {% if total_achievements == 0 %}
+              <span class="stat-number">15+</span>
+            {% else %}
+              <span class="stat-number">{{ total_achievements }}+</span>
+            {% endif %}
             <span class="stat-label">🏆 Awards Won</span>
           </div>
         </div>
