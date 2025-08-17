@@ -80,11 +80,36 @@ The website uses consistent iconography throughout:
 
 ## Jekyll Build & Test Guide
 
+### Auto-Fix Platform Issues
+
+If you encounter platform mismatch errors, use these auto-correction commands:
+
+1. **Auto-fix platform compatibility:**
+   ```bash
+   # Remove and regenerate Gemfile.lock
+   rm Gemfile.lock
+   bundle install
+
+   # Or add missing platforms
+   bundle lock --add-platform x86_64-linux
+   bundle lock --add-platform ruby
+   bundle install
+   ```
+
+2. **One-command setup (Windows/macOS/Linux):**
+   ```bash
+   # This works on any platform
+   bundle config set --local force_ruby_platform true
+   bundle install
+   ```
+
 ### Local Development & Testing
 
-1. **Install dependencies first:**
+1. **Quick start (auto-detects platform issues):**
    ```bash
+   # Install dependencies with auto-platform detection
    gem install bundler
+   bundle config set --local force_ruby_platform true
    bundle install
    ```
 
@@ -112,19 +137,67 @@ The website uses consistent iconography throughout:
    ```
    This runs diagnostics on your site.
 
-### Common Jekyll Build Errors
+### Common Jekyll Build Errors & Auto-Fixes
 
+* **Platform mismatch** - Run: `rm Gemfile.lock && bundle install`
 * **Liquid syntax errors** - Check for mismatched quotes, filters, or tags in templates
 * **Front matter issues** - Ensure proper YAML format with correct indentation
 * **Missing dependencies** - Run `bundle install` to ensure all gems are installed
 * **Path problems** - Verify file paths are correct (case-sensitive on some systems)
 * **Plugin errors** - Test without plugins using `--safe` flag if issues persist
 
+### Auto-Setup Script
+
+Create a file `setup.sh` (Linux/macOS) or `setup.bat` (Windows) for automated setup:
+
+**setup.sh:**
+```bash
+#!/bin/bash
+echo "Setting up Jekyll site..."
+gem install bundler
+rm -f Gemfile.lock
+bundle config set --local force_ruby_platform true
+bundle install
+echo "Setup complete! Run: bundle exec jekyll serve"
+```
+
+**setup.bat:**
+```batch
+@echo off
+echo Setting up Jekyll site...
+gem install bundler
+del Gemfile.lock 2>nul
+bundle config set --local force_ruby_platform true
+bundle install
+echo Setup complete! Run: bundle exec jekyll serve
+```
+
 ### Testing in GitHub Safely
 
 1. **Use feature branches** - Never push directly to main
 2. **Check Actions logs** - After push, check Actions tab for build errors
-3. **Create a test workflow** - Use the workflow below to test without deploying
+3. **Auto-recovery**: The workflow now auto-fixes platform issues
+
+### EmailJS Configuration
+
+- **Production**: Automatically configured via GitHub Actions secrets
+- **Development**: Configure via `.env` file (see publish-form.js for details)
+- **Security**: Domain validation prevents unauthorized usage
+
+### Troubleshooting
+
+**If GitHub Actions still fails:**
+
+1. Check that these secrets are set in repository settings:
+   - `EMAILJS_PUBLIC_KEY`
+   - `EMAILJS_SERVICE_ID`
+   - `EMAILJS_TEMPLATE_ID`
+
+2. Verify the platform fix worked by checking the build logs
+
+3. For persistent issues, try forcing a clean build by:
+   - Deleting `Gemfile.lock` from repository
+   - Pushing the change to trigger a fresh build
 
 ### License
 
