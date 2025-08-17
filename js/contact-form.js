@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Read EmailJS config from centralized file
   const cfg = window.EMAILJS_CONFIG || {};
-  const EMAILJS_PUBLIC_KEY = cfg.PUBLIC_KEY || '';
-  const EMAILJS_SERVICE_ID = cfg.SERVICE_ID || '';
-  const EMAILJS_TEMPLATE_ID = cfg.TEMPLATE_ID || '';
+  const EMAILJS_PUBLIC_KEY = cfg.PUBLIC_KEY || 'oftKysdm_C9YNFpcd';
+  const EMAILJS_SERVICE_ID = cfg.SERVICE_ID || 'service_tij9azu';
+  const EMAILJS_TEMPLATE_ID = cfg.TEMPLATE_ID || 'template_qvzl2ie';
 
   // Check if EmailJS configuration is available
   if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
