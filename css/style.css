@@ -9,6 +9,7 @@
 @import url('books.css');
 @import url('book-pages.css');
 @import url('components.css');
+@import url('publish-page.css');
 @import url('footer.css');
 
 /* Legacy compatibility styles - these will be overridden by modular CSS */

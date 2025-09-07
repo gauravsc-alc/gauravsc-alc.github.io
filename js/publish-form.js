@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       reply_to: email,
       reply_to_name: name,
       phone: document.getElementById('pub-phone').value.trim(),
-      interested_package: document.getElementById('pub-package').value,
+      interested_package: getPackageDisplayName(document.getElementById('pub-package').value),
       synopsis: document.getElementById('pub-synopsis').value.trim(),
       message: message,
       page_title: pageTitle,
@@ -95,6 +95,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // New helper: simple email format check
   function isValidEmail(value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  // Helper: convert package value to display name
+  function getPackageDisplayName(value) {
+    const packageNames = {
+      'basic': '📖 Basic Package',
+      'professional': '📚 Professional Package',
+      'premium': '👑 Premium Package',
+      'custom': '🎯 Custom Package'
+    };
+    return packageNames[value] || value;
   }
 
   function showMessage(type, text) {

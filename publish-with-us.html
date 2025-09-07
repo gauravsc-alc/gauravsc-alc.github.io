@@ -4,6 +4,9 @@ title: "Publish With Us"
 permalink: /publish-with-us.html
 ---
 
+<!-- Include page-specific CSS -->
+<link rel="stylesheet" href="/css/publish-page.css" />
+
 <main class="page-content">
   <div class="container">
     <div class="hero bg-light text-center rounded-large shadow">
@@ -11,135 +14,165 @@ permalink: /publish-with-us.html
       <p>Turn your manuscript into a published book with Delta Publications.</p>
     </div>
 
-    <div class="content-section" style="margin-top: 40px;">
-      <div style="background: white; padding: 50px; border-radius: 20px; box-shadow: var(--shadow-medium);">
+    <div class="publish-content-section">
+      <div class="publish-content-wrapper">
 
         <!-- Publishing Process -->
-        <div style="margin-bottom: 50px;">
-          <h2 style="color: var(--primary-color); margin-bottom: 30px; font-size: 2.2rem; text-align: center;">
+        <div class="publishing-journey">
+          <h2 class="journey-title">
             📚 Your Publishing Journey
           </h2>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
-            <div style="text-align: center; padding: 25px; border-radius: 15px; background: var(--primary-light);">
-              <div style="font-size: 3rem; margin-bottom: 15px;">📝</div>
-              <h3 style="color: var(--primary-color); margin-bottom: 15px;">Submit Manuscript</h3>
-              <p style="color: var(--text-secondary);">Send us your completed manuscript for initial review and evaluation.</p>
+          <div class="journey-grid">
+            <div class="journey-step">
+              <div class="journey-step-icon">📝</div>
+              <h3>Submit Manuscript</h3>
+              <p>Send us your completed manuscript for initial review and evaluation.</p>
             </div>
 
-            <div style="text-align: center; padding: 25px; border-radius: 15px; background: var(--primary-light);">
-              <div style="font-size: 3rem; margin-bottom: 15px;">🔍</div>
-              <h3 style="color: var(--primary-color); margin-bottom: 15px;">Editorial Review</h3>
-              <p style="color: var(--text-secondary);">Our editorial team reviews your work for quality and market potential.</p>
+            <div class="journey-step">
+              <div class="journey-step-icon">🔍</div>
+              <h3>Editorial Review</h3>
+              <p>Our editorial team reviews your work for quality and market potential.</p>
             </div>
 
-            <div style="text-align: center; padding: 25px; border-radius: 15px; background: var(--primary-light);">
-              <div style="font-size: 3rem; margin-bottom: 15px;">✏️</div>
-              <h3 style="color: var(--primary-color); margin-bottom: 15px;">Professional Editing</h3>
-              <p style="color: var(--text-secondary);">Work with our editors to refine and polish your manuscript.</p>
+            <div class="journey-step">
+              <div class="journey-step-icon">✏️</div>
+              <h3>Professional Editing</h3>
+              <p>Work with our editors to refine and polish your manuscript.</p>
             </div>
 
-            <div style="text-align: center; padding: 25px; border-radius: 15px; background: var(--primary-light);">
-              <div style="font-size: 3rem; margin-bottom: 15px;">🎨</div>
-              <h3 style="color: var(--primary-color); margin-bottom: 15px;">Design & Layout</h3>
-              <p style="color: var(--text-secondary);">Professional cover design and interior formatting for your book.</p>
+            <div class="journey-step">
+              <div class="journey-step-icon">🎨</div>
+              <h3>Design & Layout</h3>
+              <p>Professional cover design and interior formatting for your book.</p>
             </div>
 
-            <div style="text-align: center; padding: 25px; border-radius: 15px; background: var(--primary-light);">
-              <div style="font-size: 3rem; margin-bottom: 15px;">🚀</div>
-              <h3 style="color: var(--primary-color); margin-bottom: 15px;">Publication</h3>
-              <p style="color: var(--text-secondary);">Your book is published and made available across multiple platforms.</p>
+            <div class="journey-step">
+              <div class="journey-step-icon">🚀</div>
+              <h3>Publication</h3>
+              <p>Your book is published and made available across multiple platforms.</p>
             </div>
 
-            <div style="text-align: center; padding: 25px; border-radius: 15px; background: var(--primary-light);">
-              <div style="font-size: 3rem; margin-bottom: 15px;">📈</div>
-              <h3 style="color: var(--primary-color); margin-bottom: 15px;">Marketing Support</h3>
-              <p style="color: var(--text-secondary);">Ongoing marketing and promotional support for your published work.</p>
+            <div class="journey-step">
+              <div class="journey-step-icon">📈</div>
+              <h3>Marketing Support</h3>
+              <p>Ongoing marketing and promotional support for your published work.</p>
             </div>
           </div>
         </div>
 
         <!-- Publishing Packages -->
-        <div style="margin-bottom: 50px;">
-          <h2 style="color: var(--primary-color); margin-bottom: 30px; font-size: 2.2rem; text-align: center;">
+        <div class="packages-section">
+          <h2 class="packages-title">
             💎 Publishing Packages
           </h2>
+          <p class="packages-subtitle">
+            Choose the perfect package for your publishing journey. Click on any package to see detailed features.
+          </p>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
-            <div style="background: var(--background-primary); padding: 30px; border-radius: 15px; box-shadow: var(--shadow-medium); border: 2px solid #e0e0e0;">
-              <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.5rem;">📖 Basic Package</h3>
-              <ul class="features-list" style="margin-bottom: 25px;">
-                <li>Editorial review and feedback</li>
-                <li>Basic copy editing</li>
-                <li>Simple cover design</li>
-                <li>Digital publication</li>
-                <li>Author copies (5)</li>
-              </ul>
-              <div style="text-align: center;">
-                <a href="/contact.html" class="btn btn-secondary btn-animated">
-                  <span class="btn-text">Get Quote</span>
-                </a>
+          <div class="packages-grid">
+            <!-- Basic Package -->
+            <div class="package-card" data-package="basic">
+              <div class="package-header">
+                <h3>📖 Basic Package</h3>
+                <p class="package-subtitle">Perfect for first-time authors</p>
+              </div>
+              <div class="package-content">
+                <ul class="features-list">
+                  <li>✓ Editorial review and feedback</li>
+                  <li>✓ Basic copy editing</li>
+                  <li>✓ Simple cover design</li>
+                  <li>✓ Digital publication</li>
+                  <li>✓ Author copies (5)</li>
+                </ul>
+                <div class="package-cta">
+                  <a href="/contact.html" class="btn btn-secondary btn-animated">
+                    <span class="btn-text">Get Quote</span>
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div style="padding: 30px; border-radius: 15px; box-shadow: var(--shadow-heavy); border: 3px solid var(--primary-color); position: relative;">
-              <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 8px 20px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
-                🌟 POPULAR
+            <!-- Professional Package -->
+            <div class="package-card featured" data-package="professional">
+              <div class="package-badge">🌟 POPULAR</div>
+              <div class="package-header">
+                <h3>📚 Professional Package</h3>
+                <p class="package-subtitle">Most comprehensive solution</p>
               </div>
-              <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.5rem;">📚 Professional Package</h3>
-              <ul class="features-list" style="margin-bottom: 25px;">
-                <li>Comprehensive editing</li>
-                <li>Professional cover design</li>
-                <li>Interior formatting</li>
-                <li>Print & digital publication</li>
-                <li>Author copies (25)</li>
-                <li>Basic marketing support</li>
-                <li>ISBN assignment</li>
-              </ul>
-              <div style="text-align: center;">
-                <a href="/contact.html" class="btn btn-primary btn-animated">
-                  <span class="btn-text">Get Quote</span>
-                </a>
+              <div class="package-content">
+                <ul class="features-list">
+                  <li>✓ Comprehensive editing</li>
+                  <li>✓ Professional cover design</li>
+                  <li>✓ Interior formatting</li>
+                  <li>✓ Print & digital publication</li>
+                  <li>✓ Author copies (25)</li>
+                  <li>✓ Basic marketing support</li>
+                  <li>✓ ISBN assignment</li>
+                </ul>
+                <div class="package-cta">
+                  <a href="/contact.html" class="btn btn-primary btn-animated">
+                    <span class="btn-text">Get Quote</span>
+                  </a>
+                </div>
               </div>
             </div>
 
-            <!-- <div style="background: var(--background-primary); padding: 30px; border-radius: 15px; box-shadow: var(--shadow-medium); border: 2px solid #e0e0e0;"> -->
-            <div style="padding: 30px; border-radius: 15px; box-shadow: var(--shadow-medium); border: 2px solid #e0e0e0;">
-              <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.5rem;">👑 Premium Package</h3>
-              <ul class="features-list" style="margin-bottom: 25px;">
-                <li>Developmental editing</li>
-                <li>Premium cover design</li>
-                <li>Professional formatting</li>
-                <li>Multi-format publication</li>
-                <li>Author copies (50)</li>
-                <li>Full marketing campaign</li>
-                <li>Author website setup</li>
-                <li>Distribution support</li>
-              </ul>
-              <div style="text-align: center;">
-                <a href="/contact.html" class="btn btn-secondary btn-animated">
-                  <span class="btn-text">Get Quote</span>
-                </a>
+            <!-- Premium Package -->
+            <div class="package-card" data-package="premium">
+              <div class="package-header">
+                <h3>👑 Premium Package</h3>
+                <p class="package-subtitle">Complete publishing experience</p>
+              </div>
+              <div class="package-content">
+                <ul class="features-list">
+                  <li>✓ Developmental editing</li>
+                  <li>✓ Premium cover design</li>
+                  <li>✓ Professional formatting</li>
+                  <li>✓ Multi-format publication</li>
+                  <li>✓ Author copies (50)</li>
+                  <li>✓ Full marketing campaign</li>
+                  <li>✓ Author website setup</li>
+                  <li>✓ Distribution support</li>
+                </ul>
+                <div class="package-cta">
+                  <a href="/contact.html" class="btn btn-secondary btn-animated">
+                    <span class="btn-text">Get Quote</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Comparison Modal -->
+          <div id="package-modal" class="package-modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <button class="modal-close">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div id="modal-features"></div>
+                <div class="modal-cta">
+                  <a href="/contact.html" class="btn btn-primary btn-animated">
+                    <span class="btn-text">Contact Us for This Package</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Submission Guidelines -->
-        <div style="margin-bottom: 40px;">
-          <h2 style="color: var(--primary-color); margin-bottom: 30px; font-size: 2.2rem; text-align: center;">
+        <div class="submission-guidelines">
+          <h2 class="guidelines-title">
             📋 Submission Guidelines
           </h2>
 
-          <div style="background: var(--primary-light); padding: 30px; border-radius: 15px; border-left: 5px solid var(--primary-color);">
-            <h3 style="color: var(--primary-color); margin-bottom: 20px;">📄 Manuscript Requirements</h3>
+          <div class="guidelines-content">
+            <h3>📄 Manuscript Requirements</h3>
             <ul class="features-list">
-              <!-- <li>📝 Completed manuscript (minimum 20,000 words)</li>
-              <li>📄 Document format: .doc, .docx, or .pdf</li>
-              <li>🔤 Font: Times New Roman, 12pt, double-spaced</li>
-              <li>📊 Include word count and genre information</li>
-              <li>📖 Brief author bio and book synopsis</li>
-              <li>📧 Contact information and preferred communication method</li> -->
               <li>Completed manuscript (minimum 20,000 words)</li>
               <li>Document format: .doc, .docx, or .pdf</li>
               <li>Font: Times New Roman, 12pt, double-spaced</li>
@@ -151,17 +184,17 @@ permalink: /publish-with-us.html
         </div>
 
         <!-- Contact CTA -->
-        <div style="text-align: center; background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: white; padding: 40px; border-radius: 20px;">
-          <h2 style="margin-bottom: 20px; font-size: 2rem;">🚀 Ready to Get Started?</h2>
-          <p style="margin-bottom: 30px; font-size: 1.1rem; opacity: 0.9;">
+        <div class="contact-cta">
+          <h2>🚀 Ready to Get Started?</h2>
+          <p>
             Take the first step towards becoming a published author. Contact us today to discuss your manuscript and publishing goals.
           </p>
-          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="/contact.html" class="btn btn-secondary btn-animated" style="background: white; color: var(--primary-color);">
+          <div class="contact-cta-buttons">
+            <a href="/contact.html" class="btn btn-secondary btn-animated cta-btn-light">
               <span class="btn-icon">📧</span>
               <span class="btn-text">Contact Us</span>
             </a>
-            <a href="mailto:{{ site.email }}" class="btn btn-primary btn-animated" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">
+            <a href="mailto:{{ site.email }}" class="btn btn-primary btn-animated cta-btn-outline">
               <span class="btn-icon">✉️</span>
               <span class="btn-text">Email Manuscript</span>
             </a>
@@ -171,60 +204,60 @@ permalink: /publish-with-us.html
     </div>
 
     <!-- Publish inquiry form -->
-    <div style="margin-top: 30px; background: white; padding: 30px; border-radius: 16px; box-shadow: var(--shadow-medium);">
-      <h3 style="color: var(--primary-color); margin-bottom: 18px; text-align: center;">Submit a Publishing Enquiry</h3>
+    <div class="publish-form-section">
+      <h3 class="form-title">Submit a Publishing Enquiry</h3>
       <!-- expose site email and page title to JS via data attributes -->
-      <form id="publish-form" data-site-email="{{ site.email }}" data-page-title="{{ page.title }}" style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; max-width:900px; margin:0 auto;">
+      <form id="publish-form" class="publish-form" data-site-email="{{ site.email }}" data-page-title="{{ page.title }}">
 
-        <div class="form-group" style="grid-column: 1;">
+        <div class="form-group">
           <label for="pub-name">Full Name *</label>
-          <input type="text" id="pub-name" name="name" placeholder="Your name *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
+          <input type="text" id="pub-name" name="name" placeholder="Your name *" required />
         </div>
 
-        <div class="form-group" style="grid-column: 2;">
+        <div class="form-group">
           <label for="pub-email">Email Address *</label>
-          <input type="email" id="pub-email" name="email" placeholder="Email *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
+          <input type="email" id="pub-email" name="email" placeholder="Email *" required />
         </div>
 
-        <div class="form-group" style="grid-column: 1 / -1;">
+        <div class="form-group form-full-width">
           <label for="pub-phone">Phone Number</label>
-          <input type="tel" id="pub-phone" name="phone" placeholder="Your phone number" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;" />
+          <input type="tel" id="pub-phone" name="phone" placeholder="Your phone number" />
         </div>
 
-        <div class="form-group" style="grid-column: 1 / -1;">
+        <div class="form-group form-full-width">
           <label for="pub-package">Publishing Package</label>
-          <select id="pub-package" name="package" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0;">
+          <select id="pub-package" name="package">
             <option value="">Select a package</option>
-            <option value="basic">Basic Publishing</option>
-            <option value="premium">Premium Publishing</option>
-            <option value="deluxe">Deluxe Publishing</option>
-            <option value="custom">Custom Package</option>
+            <option value="basic">📖 Basic Package</option>
+            <option value="professional">📚 Professional Package</option>
+            <option value="premium">👑 Premium Package</option>
+            <option value="custom">🎯 Custom Package</option>
           </select>
         </div>
 
-        <div class="form-group" style="grid-column: 1 / -1;">
+        <div class="form-group form-full-width">
           <label for="pub-synopsis">Book Synopsis</label>
-          <textarea id="pub-synopsis" name="synopsis" rows="4" placeholder="Brief description of your book" style="padding:10px; border-radius:8px; border:1px solid #e0e0e0; resize:vertical;"></textarea>
+          <textarea id="pub-synopsis" name="synopsis" rows="4" placeholder="Brief description of your book"></textarea>
         </div>
 
-        <div class="form-group" style="grid-column: 1 / -1;">
+        <div class="form-group form-full-width">
           <label for="pub-message">Message *</label>
-          <textarea id="pub-message" name="message" rows="6" placeholder="Tell us about your publishing needs *" required style="padding:10px; border-radius:8px; border:1px solid #e0e0e0; resize:vertical;"></textarea>
+          <textarea id="pub-message" name="message" rows="6" placeholder="Tell us about your publishing needs *" required></textarea>
         </div>
 
-        <div style="grid-column: 1 / -1; text-align: center; margin-top: 15px;">
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4;">
+        <div class="form-footer">
+          <div class="form-disclaimer">
             By submitting this form, you agree to our
-            <a href="/privacy-policy.html" style="color: var(--primary-color); text-decoration: none;">Privacy Policy</a>
+            <a href="/privacy-policy.html">Privacy Policy</a>
             and
-            <a href="/terms-and-conditions.html" style="color: var(--primary-color); text-decoration: none;">Terms & Conditions</a>.
+            <a href="/terms-and-conditions.html">Terms & Conditions</a>.
           </div>
-          <button type="submit" id="publish-submit" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: white; padding: 12px 30px; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+          <button type="submit" id="publish-submit" class="submit-btn">
             Submit Enquiry
           </button>
         </div>
 
-        <div id="publish-form-msg" style="grid-column: 1 / -1; margin-top: 15px; text-align: center;"></div>
+        <div id="publish-form-msg" class="form-message-container"></div>
       </form>
     </div>
 
@@ -235,87 +268,232 @@ permalink: /publish-with-us.html
 <script src="/js/emailjs-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script src="/js/publish-form.js"></script>
+<script>
+// Enhanced publish page functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Package interaction functionality
+  const packageCards = document.querySelectorAll('.package-card');
+  const packageModal = document.getElementById('package-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalFeatures = document.getElementById('modal-features');
+  const modalClose = document.querySelector('.modal-close');
+  const packageSelect = document.getElementById('pub-package');
 
-<style>
-/* Form styling */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
+  // Package data for modal display
+  const packageData = {
+    basic: {
+      title: '📖 Basic Package',
+      subtitle: 'Perfect for first-time authors',
+      features: [
+        'Editorial review and detailed feedback on your manuscript',
+        'Basic copy editing to improve grammar and readability',
+        'Simple but professional cover design',
+        'Digital publication on major platforms',
+        'Author copies (5 printed books)',
+        'Basic author guidelines and support'
+      ],
+      description: 'Our Basic Package is designed for first-time authors who want to get their book published with essential services at an affordable price.'
+    },
+    professional: {
+      title: '📚 Professional Package',
+      subtitle: 'Most comprehensive solution',
+      features: [
+        'Comprehensive editing including structural and copy editing',
+        'Professional cover design with multiple concepts',
+        'Interior formatting and layout design',
+        'Print & digital publication across all major platforms',
+        'Author copies (25 printed books)',
+        'Basic marketing support and promotion guidance',
+        'ISBN assignment and registration',
+        'Distribution to libraries and bookstores'
+      ],
+      description: 'Our most popular package provides comprehensive publishing services with professional quality at every step.'
+    },
+    premium: {
+      title: '👑 Premium Package',
+      subtitle: 'Complete publishing experience',
+      features: [
+        'Developmental editing with detailed manuscript analysis',
+        'Premium cover design with custom artwork',
+        'Professional formatting for all formats (print, ebook, audiobook)',
+        'Multi-format publication including specialty editions',
+        'Author copies (50 printed books)',
+        'Full marketing campaign with social media support',
+        'Author website setup and maintenance',
+        'Distribution support and bookstore placement',
+        'Ongoing author support and consultation'
+      ],
+      description: 'Our Premium Package offers the complete publishing experience with maximum support and professional marketing.'
+    }
+  };
 
-.form-group label {
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
+  // Add click handlers to package cards
+  packageCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const packageType = this.dataset.package;
+      if (packageData[packageType]) {
+        showPackageModal(packageData[packageType]);
+        // Auto-select in form
+        if (packageSelect) {
+          packageSelect.value = packageType;
+          // Trigger change event for any listeners
+          packageSelect.dispatchEvent(new Event('change'));
+        }
+      }
+    });
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 10px 12px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
+    // Add keyboard support
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(203, 152, 25, 0.1);
-}
+    // Make cards focusable
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `View details for ${card.querySelector('h3').textContent}`);
+  });
 
-/* Form messages */
-.form-message {
-  padding: 12px;
-  border-radius: 8px;
-  margin: 10px 0;
-}
+  // Show package modal
+  function showPackageModal(data) {
+    modalTitle.textContent = data.title;
 
-.form-message.success {
-  background-color: rgba(40, 167, 69, 0.1);
-  border-left: 4px solid #28a745;
-  color: #28a745;
-}
+    modalFeatures.innerHTML = `
+      <p style="color: var(--text-secondary); font-style: italic; margin-bottom: 20px;">
+        ${data.subtitle}
+      </p>
+      <p style="margin-bottom: 25px; line-height: 1.6;">
+        ${data.description}
+      </p>
+      <h4 style="color: var(--primary-color); margin-bottom: 15px;">Package Includes:</h4>
+      <ul style="list-style: none; padding: 0;">
+        ${data.features.map(feature => `
+          <li style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: var(--text-primary);">
+            ✓ ${feature}
+          </li>
+        `).join('')}
+      </ul>
+    `;
 
-.form-message.error {
-  background-color: rgba(220, 53, 69, 0.1);
-  border-left: 4px solid #dc3545;
-  color: #dc3545;
-}
+    packageModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
 
-/* Loading spinner */
-.loading-spinner {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgba(255,255,255,0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s linear infinite;
-  margin-right: 8px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Small responsive fix for the form grid */
-@media (max-width: 720px) {
-  #publish-form {
-    grid-template-columns: 1fr !important;
+    // Focus management
+    modalClose.focus();
   }
 
-  #publish-form .form-group {
-    grid-column: 1 !important;
+  // Close modal functionality
+  function closeModal() {
+    packageModal.style.display = 'none';
+    document.body.style.overflow = '';
   }
 
-  #publish-form button {
-    width: 100%;
-    grid-column: 1 !important;
+  modalClose.addEventListener('click', closeModal);
+
+  // Close modal on backdrop click
+  packageModal.addEventListener('click', function(e) {
+    if (e.target === packageModal) {
+      closeModal();
+    }
+  });
+
+  // Close modal on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && packageModal.style.display === 'block') {
+      closeModal();
+    }
+  });
+
+  // Package select change handler
+  if (packageSelect) {
+    packageSelect.addEventListener('change', function() {
+      const selectedValue = this.value;
+
+      // Highlight corresponding package card
+      packageCards.forEach(card => {
+        card.classList.remove('selected');
+        if (card.dataset.package === selectedValue) {
+          card.classList.add('selected');
+
+          // Scroll to the selected package (smooth scroll)
+          card.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
+      });
+    });
   }
-}
-</style>
+
+  // Form validation enhancements
+  const form = document.getElementById('publish-form');
+  if (form) {
+    const inputs = form.querySelectorAll('input, select, textarea');
+
+    inputs.forEach(input => {
+      // Real-time validation feedback
+      input.addEventListener('blur', function() {
+        validateField(this);
+      });
+
+      input.addEventListener('input', function() {
+        // Clear error state on input
+        this.classList.remove('error');
+      });
+    });
+
+    function validateField(field) {
+      const value = field.value.trim();
+      const isRequired = field.hasAttribute('required');
+
+      if (isRequired && !value) {
+        field.classList.add('error');
+        return false;
+      }
+
+      if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          field.classList.add('error');
+          return false;
+        }
+      }
+
+      field.classList.remove('error');
+      return true;
+    }
+  }
+
+  // Performance optimization: Lazy load modal content
+  let modalContentLoaded = false;
+  packageCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      if (!modalContentLoaded) {
+        // Preload modal content on first hover
+        modalContentLoaded = true;
+      }
+    }, { once: true });
+  });
+
+  // Accessibility: Announce package selection
+  if (packageSelect) {
+    packageSelect.addEventListener('change', function() {
+      const selectedText = this.options[this.selectedIndex].text;
+      const announcement = document.createElement('div');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.setAttribute('aria-atomic', 'true');
+      announcement.style.position = 'absolute';
+      announcement.style.left = '-10000px';
+      announcement.textContent = `Selected package: ${selectedText}`;
+      document.body.appendChild(announcement);
+
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    });
+  }
+});
+</script>
+
