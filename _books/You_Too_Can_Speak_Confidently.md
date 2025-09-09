@@ -5,7 +5,7 @@ author: "Pradip Varankar"
 cover: "/books/you_too_can_Speak_confidently.jpeg"
 book_category: "Self Help" # Self Help, Children
 # isbn: "978-0123456712"
-pages: "187"
+pages: "350"
 publication_date: "2024"
 language: "English"
 # amazon_link: "https://amzn.in/d/2y47SW3"
