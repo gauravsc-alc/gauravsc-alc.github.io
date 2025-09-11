@@ -1,6 +1,6 @@
 ---
-title: "मेरा बच्चा सबसे अच्छा (Mera Bacha Sabse Achha): पेरेंटिंग के आधारभूत सूत्र"
-author: "Sushma Bhartiya"
+title: "मेरा बच्चा सबसे अच्छा"
+author: "Sushma Bharatiya"
 pages: "46 pages"
 cover: "/books/Mera_Bacha_Sabse_Achha.jpg"
 book_category: "Children"
@@ -21,17 +21,15 @@ A concise, practical guide for parents and caregivers offering fundamental paren
 
 ## Book Overview
 
-मेरा बच्चा सबसे अच्छा (Mera Bacha Sabse Achha) by Sushma Bhartiya presents easy-to-follow, research-informed parenting basics. This short handbook focuses on everyday strategies parents can use to support healthy development, positive behavior, and strong family relationships.
+मेरा बच्चा सबसे अच्छा (Mera Bacha Sabse Achha) by Sushma Bharatiya presents easy-to-follow, research-informed parenting basics. This short handbook focuses on everyday strategies parents can use to support healthy development, positive behavior, and strong family relationships.
 
 ## What's Inside
 
-- Foundations of child development and age-appropriate expectations
-- Effective routines for sleep, feeding, and study time
-- Positive discipline techniques and setting healthy boundaries
-- Nutrition and simple meal ideas for young children
-- Play-based activities that support learning and emotional growth
-- Tips for managing tantrums, separation anxiety, and sibling rivalry
-- Communication strategies to build trust and confidence in children
+* आपकी जिम्मेदारी, जो बच्चों के प्रति है।
+* बाल मनोविज्ञान की समझ।
+* बच्चों के व्यावहारिक पैटर्न को देखने की सजगता।
+* पोषण, परिवार, प्रशंसा और प्रोत्साहन के द्वारा उनमें सकारात्मक परिवर्तन।
+* उचित पर्यावरण
 
 ## Who Should Read This Book?
 
@@ -42,7 +40,7 @@ A concise, practical guide for parents and caregivers offering fundamental paren
 
 ## About the Author
 
-Sushma Bhartiya is a parenting educator and author who writes practical guides to support families in early childhood. Her work emphasizes accessible routines, positive reinforcement, and activities that foster healthy emotional and cognitive development.
+Sushma Bharatiya is a parenting educator, author and teacher who writes practical guides to support families in early childhood. Her work emphasizes accessible routines, positive reinforcement, and activities that foster healthy emotional and cognitive development.
 
 ## Publication Details
 
