@@ -32,15 +32,45 @@ layout: default
           <span class="btn-icon">📤</span>
           <span class="btn-text">Share Book</span>
         </button>
+        {%- assign numeric_price = page.price | replace: '₹', '' | replace: ',', '' | strip | default: 0 -%}
+        {%- assign discount = page.discount | default: 0 -%}
+        {%- if discount > 0 -%}
+          {%- assign discount_amount = numeric_price | times: discount | divided_by: 100 -%}
+          {%- assign final_price = numeric_price | minus: discount_amount -%}
+        {%- else -%}
+          {%- assign final_price = numeric_price -%}
+        {%- endif -%}
+
+        {%- comment -%}
+          Removed inline-styled price display. Price will be shown in the specs table below
+          with proper CSS classes for consistent styling across devices.
+        {%- endcomment -%}
+
+        {%- assign price_valid = false -%}
+        {%- if numeric_price and numeric_price != 0 and numeric_price != '' -%}
+          {%- assign price_valid = true -%}
+        {%- endif -%}
+
         {% if page.amazon_link %}
           <a href="{{ page.amazon_link }}" class="btn btn-primary btn-animated" target="_blank">
-            <span class="btn-icon">🛒</span>
+            <span class="btn-icon">�</span>
             <span class="btn-text">Buy on Amazon</span>
           </a>
           <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: center; line-height: 1.3;">
             External purchase subject to retailer's
             <a href="/terms-and-conditions.html" style="color: var(--primary-color); text-decoration: none;">terms</a>
           </div>
+        {% elsif price_valid %}
+          <a href="/payment.html?book={{ page.title | url_encode }}&price={{ final_price }}&original_price={{ numeric_price }}&discount={{ discount }}&author={{ page.author | url_encode }}"
+             class="btn btn-primary btn-animated">
+            <span class="btn-icon">�</span>
+            <span class="btn-text">Buy Now – ₹{{ final_price }}</span>
+          </a>
+        {% else %}
+          <button class="btn btn-disabled btn-animated" disabled>
+            <span class="btn-icon">🕒</span>
+            <span class="btn-text">Coming Soon</span>
+          </button>
         {% endif %}
       </div>
     </div>
@@ -71,48 +101,62 @@ layout: default
         {% endif %}
       </div>
 
-      <div class="book-meta">
-        {% if page.book_category %}
-          <div class="meta-item">
-            <span class="meta-label">Category:</span>
-            <a href="/books/category/{{ page.book_category | slugify }}.html" class="category-link">{{ page.book_category }}</a>
-          </div>
-        {% endif %}
+      <div class="book-specs">
+        <table class="specs-table" role="table">
+          <tbody>
+            {% if page.book_category %}
+            <tr>
+              <th class="specs-label" scope="row">Category</th>
+              <td class="specs-value">
+                <a href="/books/category/{{ page.book_category | slugify }}.html" class="category-link inline">{{ page.book_category }}</a>
+              </td>
+            </tr>
+            {% endif %}
 
-        {% if page.price %}
-          <div class="meta-item">
-            <span class="meta-label">Price:</span>
-            <span class="book-price-display">{{ page.price }}</span>
-          </div>
-        {% endif %}
+            {%- if price_valid -%}
+            <tr>
+              <th class="specs-label" scope="row">Price</th>
+              <td class="specs-value">
+                {%- if discount > 0 -%}
+                  <span class="price-old">₹{{ numeric_price }}</span>
+                  <span class="discount-badge">{{ discount }}% OFF</span>
+                  <span class="price-now">₹{{ final_price }}</span>
+                {%- else -%}
+                  <span class="price-now">₹{{ final_price }}</span>
+                {%- endif -%}
+              </td>
+            </tr>
+            {%- endif -%}
 
-        {% if page.isbn %}
-          <div class="meta-item">
-            <span class="meta-label">ISBN:</span>
-            <span>{{ page.isbn }}</span>
-          </div>
-        {% endif %}
+            {% if page.isbn %}
+            <tr>
+              <th class="specs-label" scope="row">ISBN</th>
+              <td class="specs-value">{{ page.isbn }}</td>
+            </tr>
+            {% endif %}
 
-        {% if page.pages %}
-          <div class="meta-item">
-            <span class="meta-label">Pages:</span>
-            <span>{{ page.pages }}</span>
-          </div>
-        {% endif %}
+            {% if page.pages %}
+            <tr>
+              <th class="specs-label" scope="row">Pages</th>
+              <td class="specs-value">{{ page.pages }}</td>
+            </tr>
+            {% endif %}
 
-        {% if page.publication_date %}
-          <div class="meta-item">
-            <span class="meta-label">Published:</span>
-            <span>{{ page.publication_date }}</span>
-          </div>
-        {% endif %}
+            {% if page.publication_date %}
+            <tr>
+              <th class="specs-label" scope="row">Published</th>
+              <td class="specs-value">{{ page.publication_date }}</td>
+            </tr>
+            {% endif %}
 
-        {% if page.language %}
-          <div class="meta-item">
-            <span class="meta-label">Language:</span>
-            <span>{{ page.language }}</span>
-          </div>
-        {% endif %}
+            {% if page.language %}
+            <tr>
+              <th class="specs-label" scope="row">Language</th>
+              <td class="specs-value">{{ page.language }}</td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
       </div>
 
       <div class="book-description">
@@ -125,11 +169,7 @@ layout: default
       {% if page.key_features %}
         <div class="book-features">
           <h3>Key Features</h3>
-          <ul class="features-list">
-            {% for feature in page.key_features %}
-              <li>{{ feature }}</li>
-            {% endfor %}
-          </ul>
+          <ul class="features-list">{%- for feature in page.key_features -%}<li>{{ feature }}</li>{%- endfor -%}</ul>
         </div>
       {% endif %}
 
@@ -177,17 +217,8 @@ layout: default
     <div class="floating-menu-header">
       <h4>Categories</h4>
     </div>
-    <ul class="floating-category-list">
-      <li><a href="/books.html">All Books</a></li>
-      {% assign categories = site.books | map: "book_category" | uniq | sort %}
-      {% for category in categories %}
-        <li>
-          <a href="/books/category/{{ category | slugify }}.html">
-            {{ category }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+    {% assign categories = site.books | map: "book_category" | uniq | sort %}
+    <ul class="floating-category-list"><li><a href="/books.html">All Books</a></li>{%- for category in categories -%}<li><a href="/books/category/{{ category | slugify }}.html">{{ category }}</a></li>{%- endfor -%}</ul>
   </div>
 </div>
 

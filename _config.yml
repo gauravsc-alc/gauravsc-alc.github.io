@@ -22,6 +22,12 @@ theme: minima
 plugins:
   - jekyll-feed
 
+# Sass configuration to suppress deprecation warnings from theme
+sass:
+  quiet_deps: true
+  silence_deprecations:
+    - import
+
 collections:
   books:
     output: true

@@ -1,0 +1,86 @@
+---
+layout: default
+---
+<main class="page-content">
+  <div class="container">
+    <article class="post-article">
+      {%- comment -%}
+        Auto-pick image: if front matter 'image' provided use it; else derive /images/blogs/<slug>.jpg.
+        We always render the figure; if image fails to load JS-less fallback shows animated placeholder.
+      {%- endcomment -%}
+      {% if page.image and page.image != '' %}
+        {%- assign raw_image = page.image | strip -%}
+        {%- comment -%}Normalize: absolute URL passes through; otherwise ensure leading slash{%- endcomment -%}
+        {% if raw_image contains '://' %}
+          {% assign effective_image = raw_image %}
+        {% else %}
+          {%- assign first_char = raw_image | slice: 0 -%}
+          {% if first_char == '/' %}
+            {% assign effective_image = raw_image %}
+          {% else %}
+            {% assign effective_image = '/' | append: raw_image %}
+          {% endif %}
+        {% endif %}
+      {% else %}
+        {% assign effective_image = '/images/blogs/' | append: page.title | slugify | append: '.jpg' %}
+      {% endif %}
+      <figure class="post-hero">
+        <img src="{{ effective_image }}" alt="{{ page.title | escape }} featured image" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('no-img');" />
+        <div class="hero-fallback" aria-hidden="true">
+          <div class="icon-stack">
+            <svg class="icon layer1" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h11a3 3 0 0 1 3 3v13.25a.75.75 0 0 1-1.146.629L14 17.21l-3.854 2.669A.75.75 0 0 1 9 19.25V6a3 3 0 0 0-3-3Z" opacity="0.85"/></svg>
+            <svg class="icon layer2" viewBox="0 0 24 24"><path fill="currentColor" d="M6 4h9a2 2 0 0 1 2 2v10.9l-2.8-1.94a1 1 0 0 0-1.12 0L10 17.1V6a2 2 0 0 0-2-2Z"/></svg>
+            <svg class="icon layer3" viewBox="0 0 24 24"><path fill="currentColor" d="M8 6h5v2H8zm0 4h5v2H8zm0 4h3v2H8z"/></svg>
+          </div>
+          <span class="vh">Decorative publishing icon</span>
+        </div>
+      </figure>
+      <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        {% if page.date %}
+        <p class="post-meta">Published {{ page.date | date: "%B %d, %Y" }}{% if page.author %} • {{ page.author | capitalize }}{% endif %}</p>
+        {% endif %}
+      </header>
+      <div class="post-content">
+        {{ content }}
+      </div>
+    </article>
+  </div>
+</main>
+
+<style>
+  .post-article { background:#fff; padding:40px; border-radius:20px; box-shadow:var(--shadow-medium); max-width:900px; margin:40px auto; }
+  .post-hero { margin: -40px -40px 30px; overflow:hidden; border-top-left-radius:20px; border-top-right-radius:20px; position:relative; background:linear-gradient(135deg,#dbe9ff,#f8fbff); min-height:220px; display:flex; align-items:center; justify-content:center; }
+  .post-hero img { width:100%; height:360px; object-fit:cover; display:block; }
+  .post-hero .hero-fallback { position:absolute; inset:0; display:none; align-items:center; justify-content:center; background:linear-gradient(120deg,#f0f4ff,#eef9f2,#fff5ec); background-size:200% 200%; animation: blogGradient 6s ease-in-out infinite; }
+  .post-hero.no-img .hero-fallback { display:flex; }
+  .post-hero .icon-stack { position:relative; width:150px; height:150px; display:flex; align-items:center; justify-content:center; }
+  .post-hero .icon { position:absolute; width:95px; height:95px; color:#2d6cdf; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.15)); }
+  .post-hero .layer1 { animation: float1 5s ease-in-out infinite; }
+  .post-hero .layer2 { animation: float2 4.2s ease-in-out infinite; color:#4c8df5; }
+  .post-hero .layer3 { animation: pulseText 3.6s ease-in-out infinite; color:#1b4f99; }
+  .vh { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); border:0; }
+  .post-header { margin-bottom:25px; }
+  .post-title { margin:0 0 10px; color:var(--primary-color); line-height:1.2; font-size:2rem; }
+  .post-meta { color:var(--text-muted); font-size:0.9rem; margin:0; }
+  .post-content { line-height:1.7; color:var(--text-secondary); }
+  .post-content img { max-width:100%; height:auto; border-radius:8px; }
+  .post-content pre { background:#111; color:#f5f5f5; padding:16px; border-radius:8px; overflow:auto; font-size:0.9rem; }
+  .post-content code { background:#f4f4f4; padding:2px 4px; border-radius:4px; font-family:monospace; }
+  .post-content h2 { margin-top:2.2em; margin-bottom:0.75em; line-height:1.25; }
+  .post-content h3 { margin-top:1.8em; margin-bottom:0.6em; }
+  .post-content blockquote { border-left:4px solid var(--primary-color); padding:0.5em 1em; background:#f7faff; border-radius:6px; font-style:italic; }
+  .post-content table { width:100%; border-collapse:collapse; margin:1.5em 0; }
+  .post-content table th, .post-content table td { border:1px solid #e4e7ec; padding:8px 10px; font-size:0.9rem; }
+  .post-content table th { background:#f5f8fb; text-align:left; }
+  @keyframes blogGradient { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+  @keyframes float1 { 0%,100%{ transform:translateY(0) rotate(-2deg);} 50%{transform:translateY(-10px) rotate(2deg);} }
+  @keyframes float2 { 0%,100%{ transform:translateY(0) rotate(3deg);} 50%{transform:translateY(-6px) rotate(-3deg);} }
+  @keyframes pulseText { 0%,100%{ opacity:0.9; transform:scale(1);} 50%{opacity:0.5; transform:scale(0.95);} }
+  @media (max-width: 768px) {
+    .post-article { padding:28px; margin:25px auto; }
+    .post-hero { margin:-28px -28px 24px; }
+    .post-hero img { height:220px; }
+    .post-title { font-size:1.6rem; }
+  }
+</style>

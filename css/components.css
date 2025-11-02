@@ -76,6 +76,24 @@
   transform: translateY(-3px) scale(1.05);
 }
 
+.btn-disabled {
+  background: linear-gradient(135deg, #cccccc, #999999);
+  color: #666666;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-disabled:hover {
+  transform: none;
+  box-shadow: none;
+  background: linear-gradient(135deg, #cccccc, #999999);
+}
+
+.btn-disabled::before {
+  display: none;
+}
+
 .book-quick-actions {
   margin-top: 25px;
   display: flex;
@@ -307,6 +325,7 @@
   justify-content: center;
   z-index: 9999;
   animation: fadeIn 0.5s;
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 }
 
@@ -400,7 +419,7 @@
   gap: 20px;
   padding-bottom: 15px;
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
+  /* -webkit-overflow-scrolling removed due to linter incompatibility; modern smooth scroll suffices */
 }
 
 .authors-slider::-webkit-scrollbar {

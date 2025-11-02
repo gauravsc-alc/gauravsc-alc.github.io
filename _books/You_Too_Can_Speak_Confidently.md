@@ -2,6 +2,7 @@
 title: "You Too Can Speak Confidently"
 author: "Pradip Varankar"
 # price: "₹499"
+discount: 15
 cover: "/books/you_too_can_Speak_confidently.jpeg"
 book_category: "Self Help" # Self Help, Children
 # isbn: "978-0123456712"

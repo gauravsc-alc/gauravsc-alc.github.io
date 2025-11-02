@@ -2,6 +2,7 @@
 title: "You Too Can Speak"
 author: "Pradip Varankar"
 # price: "₹399"
+discount: 20
 cover: "/books/You_Too_Can_Speak.jpg"
 book_category: "Self Help"
 # isbn: "978-0123456790"

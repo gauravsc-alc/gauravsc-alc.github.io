@@ -2,6 +2,7 @@
 title: "मेरा बच्चा सबसे अच्छा"
 author: "Sushma Bharatiya"
 pages: "46 pages"
+discount: 20
 cover: "/books/Mera_Bacha_Sabse_Achha.jpg"
 book_category: "Children"
 pages: "46"

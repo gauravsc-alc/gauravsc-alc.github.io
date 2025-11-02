@@ -1,7 +1,8 @@
 ---
 title: "How To Start A Real Estate Business Without Money?"
 author: "Vijay Meshram"
-price: "₹999"
+# price: "999"
+# discount: 20
 cover: "/books/REAL_ESTATE_BUSINESS_WITHOUT_MONEY.jpg"
 book_category: "Self Help"
 isbn: ""

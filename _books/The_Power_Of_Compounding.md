@@ -2,6 +2,7 @@
 title: "The Power Of Compounding"
 author: "Dr. Sandeep Gupta"
 # price: "₹1199"
+discount: 15
 cover: "/books/The_Power_Of_Compounding.jpeg"
 book_category: "Self Help"
 isbn: "978-819983614-6"

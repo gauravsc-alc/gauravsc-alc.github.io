@@ -1,7 +1,8 @@
 ---
 title: "Awaken the Inner Yogi in You"
-author: "Rajesh Mishra ‘Ramanand’"
+author: "Rajesh Mishra 'Ramanand'"
 # price: "₹399"
+discount: 15
 cover: "/books/Awaken_the_Inner_Yogi_in_You.jpeg"
 book_category: "Self Help"
 # isbn: "978-0123456790"

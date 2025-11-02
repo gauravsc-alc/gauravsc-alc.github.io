@@ -1,6 +1,7 @@
 ---
 title: "Why Can't You Win?"
 author: "Indrapal Singh Rawat"
+discount: 20
 cover: "/books/why_cant_you_win.jpeg"
 book_category: "Self Help"
 pages: ""

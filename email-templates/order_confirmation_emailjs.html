@@ -1,0 +1,99 @@
+<!-- EmailJS Customer Order Confirmation Template (HTML) -->
+<!-- Paste this into your EmailJS template editor (set Content Type = HTML) -->
+<!-- Recommended Subject: Order Confirmed – {{book_title}} (Payment {{payment_id}}) -->
+
+<div style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#f8fafc; padding:24px; color:#0f172a;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:680px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 6px 20px rgba(15,23,42,0.08)">
+    <tr>
+      <td style="padding:24px 24px 0 24px;">
+        <h1 style="margin:0 0 8px; font-size:20px; color:#111827;">Thank you for your order, {{customer_name}}!</h1>
+        <p style="margin:0; color:#374151;">Weve received your payment. Your book will be shipped to the address below.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:16px 24px 0 24px;">
+        <h2 style="margin:0 0 8px; font-size:16px; color:#111827;">Order Summary</h2>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden;">
+          <tr style="background:#f9fafb;">
+            <td style="padding:12px 16px; width:30%; color:#6b7280;">Book</td>
+            <td style="padding:12px 16px; font-weight:600;">{{book_title}}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 16px; color:#6b7280;">Author</td>
+            <td style="padding:12px 16px;">{{author}}</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:12px 16px; color:#6b7280;">Original Price</td>
+            <td style="padding:12px 16px;">₹{{original_price}}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 16px; color:#6b7280;">Discount</td>
+            <td style="padding:12px 16px;">{{discount}}% OFF</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:12px 16px; color:#6b7280;">You Saved</td>
+            <td style="padding:12px 16px;">₹{{savings}}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 16px; color:#6b7280;">Final Price</td>
+            <td style="padding:12px 16px; font-weight:700; color:#b91c1c;">₹{{final_price}}</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:12px 16px; color:#6b7280;">Payment ID</td>
+            <td style="padding:12px 16px;">{{payment_id}}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 16px; color:#6b7280;">Order Date</td>
+            <td style="padding:12px 16px;">{{order_date}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:16px 24px 0 24px;">
+        <h2 style="margin:0 0 8px; font-size:16px; color:#111827;">Delivery Address</h2>
+        <pre style="margin:0; white-space:pre-wrap; background:#f8fafc; border:1px solid #e5e7eb; border-radius:10px; padding:12px 16px; color:#111827;">{{delivery_address}}</pre>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:16px 24px 0 24px;">
+        <h2 style="margin:0 0 8px; font-size:16px; color:#111827;">Customer Details</h2>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden;">
+          <tr style="background:#f9fafb;">
+            <td style="padding:12px 16px; width:30%; color:#6b7280;">Name</td>
+            <td style="padding:12px 16px;">{{customer_name}}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 16px; color:#6b7280;">Email</td>
+            <td style="padding:12px 16px;">{{email}}</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:12px 16px; color:#6b7280;">Phone</td>
+            <td style="padding:12px 16px;">{{phone}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:16px 24px 0 24px;">
+        <h2 style="margin:0 0 8px; font-size:16px; color:#111827;">Pricing Details (Raw)</h2>
+        <pre style="margin:0; white-space:pre-wrap; background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 16px; color:#7c2d12;">{{pricing_details}}</pre>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:24px;">
+        <p style="margin:0 0 8px; color:#111827; font-weight:600;">Next Steps</p>
+        <ul style="margin:0; padding-left:18px; color:#374151;">
+          <li>Well ship your order to the address above.</li>
+          <li>Questions? Reply to this email and well get back to you.</li>
+        </ul>
+        <p style="margin:16px 0 0; color:#6b7280; font-size:12px;">© Delta Publications</p>
+      </td>
+    </tr>
+  </table>
+</div>

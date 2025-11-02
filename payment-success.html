@@ -1,0 +1,548 @@
+---
+layout: default
+title: Payment Successful - Delta Publications
+description: Your payment has been processed successfully
+---
+<main class="page-content">
+  <div class="container">
+    <div class="success-container">
+      <!-- Success Icon -->
+      <div class="success-icon-wrapper">
+        <div class="success-icon">✓</div>
+        <div class="success-circle"></div>
+      </div>
+
+      <!-- Success Message -->
+      <h1>Payment Successful!</h1>
+      <p class="success-message">Thank you for your purchase. Your order has been confirmed and you will receive a confirmation email shortly.</p>
+
+      <!-- Payment Details -->
+      <div class="payment-details">
+        <h3>📋 Payment Details</h3>
+        <div id="payment-info">
+          <p class="loading-text">Loading payment information...</p>
+        </div>
+      </div>
+
+      <!-- Download Section removed as this store delivers physical books -->
+
+      <!-- Next Steps -->
+      <div class="next-steps">
+        <h3>What's Next?</h3>
+        <ul>
+          <li>✉️ Check your email for order confirmation and receipt</li>
+          <li> Contact support if you need any assistance</li>
+        </ul>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a href="/books.html" class="btn-primary">
+          📚 Browse More Books
+        </a>
+        <a href="/contact.html" class="btn-secondary">
+          💬 Contact Support
+        </a>
+      </div>
+
+      <!-- Invoice Link -->
+      <div class="invoice-section">
+        <p>
+          <a href="#" id="download-invoice" class="invoice-link">
+            🧾 Download Invoice
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get payment details from URL
+    const params = new URLSearchParams(window.location.search);
+    const paymentId = params.get('payment_id');
+    const status = params.get('status');
+
+    // Get saved payment data from localStorage
+    const savedPayment = localStorage.getItem('lastPayment');
+    let paymentData = null;
+
+    if (savedPayment) {
+      try {
+        paymentData = JSON.parse(savedPayment);
+      } catch (e) {
+        console.error('Error parsing payment data:', e);
+      }
+    }
+
+    // Display payment information
+    const paymentInfoDiv = document.getElementById('payment-info');
+
+    if (paymentId && status === 'success') {
+      const addr = paymentData?.delivery_address;
+      const displayHtml = `
+        <div class="info-row">
+          <span class="info-label">Payment ID:</span>
+          <span class="info-value">${paymentId}</span>
+        </div>
+        ${paymentData ? `
+          <div class="info-row">
+            <span class="info-label">Book:</span>
+            <span class="info-value">${paymentData.book_title}</span>
+          </div>
+            ${paymentData.discount > 0 ? `
+              <div class="info-row">
+                <span class="info-label">Original Price:</span>
+                <span class="info-value" style="text-decoration: line-through; color: #888;">₹${paymentData.original_price}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Discount:</span>
+                <span class="info-value" style="color: #28a745; font-weight: bold;">${paymentData.discount}% OFF</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">You Saved:</span>
+                <span class="info-value" style="color: #28a745;">₹${paymentData.original_price - paymentData.amount}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Final Price Paid:</span>
+                <span class="info-value" style="font-size: 1.2rem; color: #d9534f; font-weight: bold;">₹${paymentData.amount}</span>
+              </div>
+            ` : `
+              <div class="info-row">
+                <span class="info-label">Amount Paid:</span>
+                <span class="info-value">₹${paymentData.amount}</span>
+              </div>
+            `}
+          <div class="info-row">
+            <span class="info-label">Date:</span>
+            <span class="info-value">${new Date(paymentData.timestamp).toLocaleString('en-IN')}</span>
+          </div>
+        ` : ''}
+        <div class="info-row">
+          <span class="info-label">Status:</span>
+          <span class="info-value status-completed">✓ Completed</span>
+        </div>
+        ${addr ? `
+          <div class="info-section-header">📦 Delivery Details</div>
+          <div class="info-row">
+            <span class="info-label">Name:</span>
+            <span class="info-value">${addr.name}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Phone:</span>
+            <span class="info-value">${addr.phone}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Email:</span>
+            <span class="info-value">${addr.email}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Address:</span>
+            <span class="info-value">${addr.address}, ${addr.city}, ${addr.state} - ${addr.pincode}, ${addr.country}</span>
+          </div>
+          <div class="delivery-note">
+            📮 Your book will be shipped to the above address within 3-5 business days.
+          </div>
+        ` : ''}
+      `;
+
+      paymentInfoDiv.innerHTML = displayHtml;
+
+      // Show download section if book data exists
+      if (paymentData && paymentData.book_title) {
+        const downloadSection = document.getElementById('download-section');
+        if (downloadSection) {
+          downloadSection.style.display = 'block';
+        }
+      }
+
+      // Handle download button
+      const downloadButton = document.getElementById('download-button');
+      if (downloadButton) {
+        downloadButton.addEventListener('click', function() {
+          alert('📧 Download link has been sent to your email!\n\nPlease check your inbox and spam folder.');
+          // TODO: Implement actual download logic or email trigger
+        });
+      }
+
+      // Handle invoice download
+      const invoiceLink = document.getElementById('download-invoice');
+      if (invoiceLink) {
+        invoiceLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          generateInvoice(paymentData);
+        });
+      }
+
+    } else {
+      paymentInfoDiv.innerHTML = `
+        <div class="error-message">
+          <p>⚠️ Unable to retrieve payment details.</p>
+          <p>Please check your email for confirmation or contact support.</p>
+        </div>
+      `;
+    }
+
+    // Clear stored payment data after displaying
+    // Uncomment after testing: localStorage.removeItem('lastPayment');
+  });
+
+  /**
+   * Generate and download invoice (basic implementation)
+   */
+  function generateInvoice(paymentData) {
+    if (!paymentData) {
+      alert('Invoice data not available');
+      return;
+    }
+
+    // Create invoice content
+    const invoiceContent = `
+DELTA PUBLICATIONS
+Invoice / Receipt
+
+Payment ID: ${paymentData.payment_id}
+Order ID: ${paymentData.order_id}
+Date: ${new Date(paymentData.timestamp).toLocaleString('en-IN')}
+
+-----------------------------------
+ITEM DETAILS
+-----------------------------------
+Book: ${paymentData.book_title}
+Quantity: 1
+Price: ₹${paymentData.amount}
+
+-----------------------------------
+TOTAL: ₹${paymentData.amount}
+-----------------------------------
+
+Status: PAID
+
+Thank you for your purchase!
+For support: contact@deltapublications.com
+    `.trim();
+
+    // Create blob and download
+    const blob = new Blob([invoiceContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `invoice-${paymentData.payment_id}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // TODO: Replace with proper PDF invoice generation
+    console.log('Invoice downloaded');
+  }
+</script>
+
+<style>
+  .success-container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 50px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .success-icon-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+  }
+
+  .success-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+  }
+
+  .success-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border: 3px solid #10b981;
+    border-radius: 50%;
+    animation: ripple 1.5s ease-out infinite;
+  }
+
+  .success-container h1 {
+    color: #10b981;
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  .success-message {
+    color: #6b7280;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .payment-details,
+  .download-section,
+  .next-steps {
+    background: #f9fafb;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 25px 0;
+    text-align: left;
+    border: 1px solid #e5e7eb;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+
+  .payment-details h3,
+  .download-section h3,
+  .next-steps h3 {
+    margin: 0 0 15px 0;
+    color: #374151;
+    font-size: 1.2rem;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .info-row:last-child {
+    border-bottom: none;
+  }
+
+  .info-label {
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .info-value {
+    color: #111827;
+    font-weight: 600;
+    word-break: break-all;
+  }
+
+  .status-completed {
+    color: #10b981;
+  }
+
+  .info-section-header {
+    font-weight: 700;
+    color: #1e40af;
+    font-size: 1.05rem;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #e5e7eb;
+  }
+
+  .delivery-note {
+    margin-top: 15px;
+    padding: 12px;
+    background: #f0f9ff;
+    border-left: 4px solid #3b82f6;
+    border-radius: 6px;
+    color: #1e40af;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .loading-text {
+    text-align: center;
+    color: #9ca3af;
+    font-style: italic;
+  }
+
+  .error-message {
+    padding: 20px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    color: #991b1b;
+  }
+
+  .error-message p {
+    margin: 8px 0;
+  }
+
+  .next-steps ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .next-steps li {
+    padding: 10px 0;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .btn-download {
+    width: 100%;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+  }
+
+  .btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    padding: 14px 28px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 180px;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: #6366f1;
+    border: 2px solid #6366f1;
+  }
+
+  .btn-secondary:hover {
+    background: #f5f3ff;
+    transform: translateY(-2px);
+  }
+
+  .invoice-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+  }
+
+  .invoice-link {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .invoice-link:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+  }
+
+  /* Animations */
+  @keyframes successPop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .success-container {
+      padding: 35px 25px;
+      margin: 30px auto;
+    }
+
+    .success-container h1 {
+      font-size: 1.8rem;
+    }
+
+    .success-message {
+      font-size: 0.95rem;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+    }
+
+    .info-row {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+</style>

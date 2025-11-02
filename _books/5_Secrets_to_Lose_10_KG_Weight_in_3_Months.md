@@ -1,7 +1,8 @@
 ---
 title: "5 Secrets to Lose 10 KG Weight in 3 Months"
 author: "Khushboo Agrawal"
-# price: "₹399"
+price: "379"
+discount: 25
 cover: "/books/5_Secrets_to_Lose_10_KG_Weight_in_3_Months.jpeg"
 book_category: "Health"
 # isbn: "978-9351234570"

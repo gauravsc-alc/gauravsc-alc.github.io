@@ -1,6 +1,7 @@
 ---
 title: "The Art of Design Thinking"
 author: "Dr. Sanjay Jindal"
+discount: 10
 cover: "/books/The_Art_of_design_thinking.jpg"
 book_category: "Self Help"
 publication_date: "2024"

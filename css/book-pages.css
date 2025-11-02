@@ -203,6 +203,7 @@
   line-height: 1.2;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -433,6 +434,84 @@
   font-weight: 800;
   color: var(--primary-color);
   text-shadow: 0 1px 2px rgba(203, 152, 25, 0.2);
+}
+
+/* Book specs table */
+.book-specs {
+  margin-bottom: 35px;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--background-accent);
+  border: 1px solid #e9ecef;
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+}
+
+.specs-table th,
+.specs-table td {
+  padding: 14px 18px;
+  text-align: left;
+}
+
+.specs-table tr:nth-child(odd) td,
+.specs-table tr:nth-child(odd) th {
+  background: rgba(0,0,0,0.02);
+}
+
+.specs-label {
+  width: 32%;
+  color: var(--text-secondary);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.specs-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Price styles within specs */
+.price-old {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.price-now {
+  color: #d32f2f;
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin-left: 10px;
+}
+
+.discount-badge {
+  background: #22a447;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* Responsive table behavior */
+@media (max-width: 768px) {
+  .specs-table th, .specs-table td { padding: 12px 14px; }
+  .specs-label { width: 40%; }
+  .price-now { font-size: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .specs-table { display: block; }
+  .specs-table tbody { display: block; }
+  .specs-table tr { display: grid; grid-template-columns: 1fr; border-bottom: 1px solid #eee; }
+  .specs-table th { border-bottom: none; padding-bottom: 6px; }
+  .specs-table td { padding-top: 0; }
+  .specs-label { width: 100%; }
 }
 
 /* Mobile Floating Category Menu */

@@ -1,6 +1,8 @@
 ---
 title: "11 Effective Ways of Parenting"
 author: "Harshada Tichkule"
+price: "599"
+discount: 15
 cover: "/books/11_Effective_Ways_of_Parenting.jpeg"
 book_category: "Parenting"
 isbn: "978-8197656903"

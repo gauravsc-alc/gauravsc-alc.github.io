@@ -2,6 +2,7 @@
 title: "15 Scientific Secrets Of Your Extraordinary Mind"
 author: "Kedar Panda (KP)"
 # price: "₹499"
+discount: 10
 cover: "/books/15_Scientific_Secrets_of_Your_Extraordinary_Mind.png"
 book_category: "Self Help"
 isbn: "978-93-94808-38-6"

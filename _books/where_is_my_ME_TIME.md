@@ -2,6 +2,7 @@
 title: "Where Is My Me Time?"
 author: "Gaurav Singh Chauhan"
 # price: "₹499"
+discount: 0
 cover: "/books/where_is_my_ME_TIME.jpeg"
 book_category: "Self Help" # Self Help, Children
 # isbn: "978-0123456712"

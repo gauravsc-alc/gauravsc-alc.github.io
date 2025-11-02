@@ -12,6 +12,7 @@
   max-height: 500px;
   box-sizing: border-box;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   touch-action: pan-y;
   background: var(--text-muted);
@@ -62,6 +63,7 @@
   max-width: 400px;
   z-index: 3;
   pointer-events: none;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.1);
 }
